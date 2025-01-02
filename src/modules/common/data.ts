@@ -40,7 +40,7 @@ const getCachedPageData = cache(
     console.log(`Cache Miss at: ${pathname}`)
     return getPageData(pathname, false)
   },
-  { tags: (pathname) => [pathname] },
+  { tags: (pathname) => ['page', pathname] },
 )
 
 export const getPageByPathname = async (pathname: string) => {

@@ -1,0 +1,8 @@
+.background {
+  background: radial-gradient(
+      31.64% 31.64% at 50% 0%,
+      rgba(12, 60, 255, 0.4) 0%,
+      rgba(0, 0, 19, 0) 100%
+    ),
+    linear-gradient(0deg, rgba(12, 60, 255, 0.2) 0%, rgba(12, 60, 255, 0) 28.61%), #010126;
+}

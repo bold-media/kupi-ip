@@ -13,6 +13,9 @@ export interface Config {
   collections: {
     media: Media;
     page: Page;
+    post: Post;
+    category: Category;
+    download: Download;
     user: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -22,6 +25,9 @@ export interface Config {
   collectionsSelect: {
     media: MediaSelect<false> | MediaSelect<true>;
     page: PageSelect<false> | PageSelect<true>;
+    post: PostSelect<false> | PostSelect<true>;
+    category: CategorySelect<false> | CategorySelect<true>;
+    download: DownloadSelect<false> | DownloadSelect<true>;
     user: UserSelect<false> | UserSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -31,7 +37,7 @@ export interface Config {
     defaultIDType: string;
   };
   globals: {
-    settings: Setting;
+    settings: Settings;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
@@ -90,46 +96,6 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
-    sq?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    sm?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    md?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    lg?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    xl?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
     og?: {
       url?: string | null;
       width?: number | null;
@@ -150,7 +116,369 @@ export interface Page {
   pathname?: string | null;
   parent?: (string | null) | Page;
   title: string;
+  hero: {
+    type: 'none' | 'wave' | 'standard' | 'minimal';
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  blocks?:
+    | (
+        | AccordionBlock
+        | CallToActionBlock
+        | DownloadsBlock
+        | FeaturesBlock
+        | StepsBlock
+        | TariffsBlock
+        | RecentPostsBlock
+      )[]
+    | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Page;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AccordionBlock".
+ */
+export interface AccordionBlock {
+  background: {
+    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
+  };
+  prefix?: ('none' | 'smiley' | 'richText') | null;
+  smileyTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  items?:
+    | {
+        title?: string | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'accordion';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock".
+ */
+export interface CallToActionBlock {
+  background: {
+    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
+  };
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?: {
+            relationTo: 'page';
+            value: string | Page;
+          } | null;
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered
+           */
+          appearance?: ('default' | 'secondary' | 'outline' | 'ghost' | 'link') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  withSublink?: boolean | null;
+  sublink?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?: {
+      relationTo: 'page';
+      value: string | Page;
+    } | null;
+    url?: string | null;
+    label: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'callToAction';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DownloadsBlock".
+ */
+export interface DownloadsBlock {
+  background: {
+    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'downloads';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturesBlock".
+ */
+export interface FeaturesBlock {
+  background: {
+    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
+  };
+  prefix?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  features?:
+    | {
+        icon?:
+          | (
+              | 'globe'
+              | 'rocketship'
+              | 'signal'
+              | 'smiley'
+              | 'shield'
+              | 'battery'
+              | 'piggyBank'
+              | 'lightning'
+              | 'documentShield'
+            )
+          | null;
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  suffix?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsBlock".
+ */
+export interface StepsBlock {
+  background: {
+    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
+  };
+  withPrefix?: boolean | null;
+  prefix?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  items?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'steps';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TariffsBlock".
+ */
+export interface TariffsBlock {
+  background: {
+    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
+  };
+  withPrefix?: boolean | null;
+  prefix?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'tariffs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RecentPostsBlock".
+ */
+export interface RecentPostsBlock {
+  background: {
+    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
+  };
+  prefix?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  settings?: {
+    limit?: number | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'recent-posts';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "post".
+ */
+export interface Post {
+  id: string;
+  title: string;
+  cover?: (string | null) | Media;
+  /**
+   * Short description of the article, for content previews.
+   */
+  excerpt?: string | null;
+  article?: {
     root: {
       type: string;
       children: {
@@ -168,16 +496,89 @@ export interface Page {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Media;
   };
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | Page;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  slug?: string | null;
+  categories?: (string | Category)[] | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "category".
+ */
+export interface Category {
+  id: string;
+  name?: string | null;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "download".
+ */
+export interface Download {
+  id: string;
+  name: string;
+  slug?: string | null;
+  platforms?: ('windows' | 'macos' | 'linux' | 'android' | 'ios')[] | null;
+  links?: {
+    windows?: string | null;
+    macos?: string | null;
+    linux?: string | null;
+    android?: string | null;
+    ios?: string | null;
+  };
+  intro?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  icon?: (string | null) | Media;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * This is used for Card elements, to summarize the application.
+   */
+  previewText?: string | null;
+  mockup?: (string | null) | Media;
+  buyLink?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?: {
+      relationTo: 'page';
+      value: string | Page;
+    } | null;
+    url?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -214,6 +615,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'page';
         value: string | Page;
+      } | null)
+    | ({
+        relationTo: 'post';
+        value: string | Post;
+      } | null)
+    | ({
+        relationTo: 'category';
+        value: string | Category;
+      } | null)
+    | ({
+        relationTo: 'download';
+        value: string | Download;
       } | null)
     | ({
         relationTo: 'user';
@@ -291,56 +704,6 @@ export interface MediaSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
-        sq?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        sm?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        md?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        lg?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        xl?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
         og?:
           | T
           | {
@@ -362,7 +725,23 @@ export interface PageSelect<T extends boolean = true> {
   pathname?: T;
   parent?: T;
   title?: T;
-  content?: T;
+  hero?:
+    | T
+    | {
+        type?: T;
+        richText?: T;
+      };
+  blocks?:
+    | T
+    | {
+        accordion?: T | AccordionBlockSelect<T>;
+        callToAction?: T | CallToActionBlockSelect<T>;
+        downloads?: T | DownloadsBlockSelect<T>;
+        features?: T | FeaturesBlockSelect<T>;
+        steps?: T | StepsBlockSelect<T>;
+        tariffs?: T | TariffsBlockSelect<T>;
+        'recent-posts'?: T | RecentPostsBlockSelect<T>;
+      };
   meta?:
     | T
     | {
@@ -377,6 +756,239 @@ export interface PageSelect<T extends boolean = true> {
         url?: T;
         label?: T;
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AccordionBlock_select".
+ */
+export interface AccordionBlockSelect<T extends boolean = true> {
+  background?:
+    | T
+    | {
+        paddingTop?: T;
+        paddingBottom?: T;
+        type?: T;
+      };
+  prefix?: T;
+  smileyTitle?: T;
+  content?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock_select".
+ */
+export interface CallToActionBlockSelect<T extends boolean = true> {
+  background?:
+    | T
+    | {
+        paddingTop?: T;
+        paddingBottom?: T;
+        type?: T;
+      };
+  content?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  withSublink?: T;
+  sublink?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DownloadsBlock_select".
+ */
+export interface DownloadsBlockSelect<T extends boolean = true> {
+  background?:
+    | T
+    | {
+        paddingTop?: T;
+        paddingBottom?: T;
+        type?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturesBlock_select".
+ */
+export interface FeaturesBlockSelect<T extends boolean = true> {
+  background?:
+    | T
+    | {
+        paddingTop?: T;
+        paddingBottom?: T;
+        type?: T;
+      };
+  prefix?: T;
+  features?:
+    | T
+    | {
+        icon?: T;
+        text?: T;
+        id?: T;
+      };
+  suffix?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsBlock_select".
+ */
+export interface StepsBlockSelect<T extends boolean = true> {
+  background?:
+    | T
+    | {
+        paddingTop?: T;
+        paddingBottom?: T;
+        type?: T;
+      };
+  withPrefix?: T;
+  prefix?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TariffsBlock_select".
+ */
+export interface TariffsBlockSelect<T extends boolean = true> {
+  background?:
+    | T
+    | {
+        paddingTop?: T;
+        paddingBottom?: T;
+        type?: T;
+      };
+  withPrefix?: T;
+  prefix?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RecentPostsBlock_select".
+ */
+export interface RecentPostsBlockSelect<T extends boolean = true> {
+  background?:
+    | T
+    | {
+        paddingTop?: T;
+        paddingBottom?: T;
+        type?: T;
+      };
+  prefix?: T;
+  settings?:
+    | T
+    | {
+        limit?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "post_select".
+ */
+export interface PostSelect<T extends boolean = true> {
+  title?: T;
+  cover?: T;
+  excerpt?: T;
+  article?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  slug?: T;
+  categories?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "category_select".
+ */
+export interface CategorySelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "download_select".
+ */
+export interface DownloadSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  platforms?: T;
+  links?:
+    | T
+    | {
+        windows?: T;
+        macos?: T;
+        linux?: T;
+        android?: T;
+        ios?: T;
+      };
+  intro?: T;
+  icon?: T;
+  content?: T;
+  previewText?: T;
+  mockup?: T;
+  buyLink?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -434,12 +1046,194 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings".
  */
-export interface Setting {
+export interface Settings {
   id: string;
-  company?: {
-    name?: string | null;
+  tariffs?: {
+    month?: {
+      term?: string | null;
+      benefit?: string | null;
+      limit?: string | null;
+      description?: {
+        root: {
+          type: string;
+          children: {
+            type: string;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+      price?: string | null;
+      link?: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?: {
+          relationTo: 'page';
+          value: string | Page;
+        } | null;
+        url?: string | null;
+      };
+      trialLink?: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?: {
+          relationTo: 'page';
+          value: string | Page;
+        } | null;
+        url?: string | null;
+      };
+    };
+    quarter?: {
+      term?: string | null;
+      benefit?: string | null;
+      limit?: string | null;
+      description?: {
+        root: {
+          type: string;
+          children: {
+            type: string;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+      price?: string | null;
+      link?: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?: {
+          relationTo: 'page';
+          value: string | Page;
+        } | null;
+        url?: string | null;
+      };
+      trialLink?: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?: {
+          relationTo: 'page';
+          value: string | Page;
+        } | null;
+        url?: string | null;
+      };
+    };
+    year?: {
+      term?: string | null;
+      benefit?: string | null;
+      limit?: string | null;
+      description?: {
+        root: {
+          type: string;
+          children: {
+            type: string;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+      price?: string | null;
+      link?: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?: {
+          relationTo: 'page';
+          value: string | Page;
+        } | null;
+        url?: string | null;
+      };
+      trialLink?: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?: {
+          relationTo: 'page';
+          value: string | Page;
+        } | null;
+        url?: string | null;
+      };
+    };
   };
-  navigation?: {};
+  navigation?: {
+    header?: {
+      links?:
+        | {
+            link: {
+              type?: ('reference' | 'custom') | null;
+              newTab?: boolean | null;
+              reference?: {
+                relationTo: 'page';
+                value: string | Page;
+              } | null;
+              url?: string | null;
+              label: string;
+            };
+            id?: string | null;
+          }[]
+        | null;
+      withSupportLink?: boolean | null;
+      supportLink?: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?: {
+          relationTo: 'page';
+          value: string | Page;
+        } | null;
+        url?: string | null;
+        label: string;
+      };
+    };
+    footer?: {
+      copyText?: string | null;
+      links?:
+        | {
+            link: {
+              type?: ('reference' | 'custom') | null;
+              newTab?: boolean | null;
+              reference?: {
+                relationTo: 'page';
+                value: string | Page;
+              } | null;
+              url?: string | null;
+              label: string;
+            };
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
+  downloads?: {
+    content?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    title?: string | null;
+    description?: string | null;
+  };
   seo?: {
     title?: string | null;
     description?: string | null;
@@ -452,12 +1246,143 @@ export interface Setting {
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
-  company?:
+  tariffs?:
     | T
     | {
-        name?: T;
+        month?:
+          | T
+          | {
+              term?: T;
+              benefit?: T;
+              limit?: T;
+              description?: T;
+              price?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                  };
+              trialLink?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                  };
+            };
+        quarter?:
+          | T
+          | {
+              term?: T;
+              benefit?: T;
+              limit?: T;
+              description?: T;
+              price?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                  };
+              trialLink?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                  };
+            };
+        year?:
+          | T
+          | {
+              term?: T;
+              benefit?: T;
+              limit?: T;
+              description?: T;
+              price?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                  };
+              trialLink?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                  };
+            };
       };
-  navigation?: T | {};
+  navigation?:
+    | T
+    | {
+        header?:
+          | T
+          | {
+              links?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                        };
+                    id?: T;
+                  };
+              withSupportLink?: T;
+              supportLink?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+            };
+        footer?:
+          | T
+          | {
+              copyText?: T;
+              links?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                        };
+                    id?: T;
+                  };
+            };
+      };
+  downloads?:
+    | T
+    | {
+        content?: T;
+        title?: T;
+        description?: T;
+      };
   seo?:
     | T
     | {
@@ -467,31 +1392,6 @@ export interface SettingsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BannerBlock".
- */
-export interface BannerBlock {
-  style: 'info' | 'warning' | 'error' | 'success';
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'banner';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

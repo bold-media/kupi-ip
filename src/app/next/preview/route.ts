@@ -21,6 +21,7 @@ export const GET = async (
   const { searchParams } = new URL(req.url)
   const pathname = searchParams.get('pathname')
   const collection = searchParams.get('collection') as CollectionSlug
+  const slug = searchParams.get('slug')
 
   const previewSecret = searchParams.get('previewSecret')
 
@@ -69,9 +70,7 @@ export const GET = async (
         depth: 0,
         select: {},
         where: {
-          pathname: {
-            equals: pathname,
-          },
+          ...(slug ? { slug: { equals: slug } } : { pathname: { equals: pathname } }),
         },
       })
 
@@ -79,7 +78,7 @@ export const GET = async (
         return new Response('Document not found', { status: 404 })
       }
     } catch (error) {
-      payload.logger.error(`Error verifying token for live preview:`, error)
+      payload.logger.error(`Error finding document for live preview:`, error)
     }
 
     draft.enable()

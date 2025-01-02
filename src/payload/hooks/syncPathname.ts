@@ -1,6 +1,6 @@
 import { FieldHook } from 'payload'
 
-export const syncPathname: FieldHook = async ({ req, data, value, operation }) => {
+export const syncPathname: FieldHook = async ({ data, value, operation }) => {
   if (
     (operation === 'create' || operation === 'update') &&
     data?.breadcrumbs?.at(-1)?.url !== value &&

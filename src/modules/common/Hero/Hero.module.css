@@ -1,0 +1,21 @@
+.heroWave {
+  & h1 {
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: 2rem;
+
+    @screen lg {
+      font-size: 6rem;
+    }
+  }
+
+  & p {
+    color: var(--muted-foreground);
+    font-size: 1.25rem;
+    line-height: 1.4;
+
+    @screen lg {
+      font-size: 1.75rem;
+    }
+  }
+}

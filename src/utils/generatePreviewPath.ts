@@ -1,14 +1,16 @@
 import { getServerSideURL } from './getURL'
 
 type Args = {
-  collection: 'page' | 'post'
+  collection: 'page' | 'post' | 'download' | 'guide'
   pathname: string
+  slug?: string
 }
 
-export const generatePreviewPath = ({ collection, pathname }: Args) => {
+export const generatePreviewPath = ({ collection, pathname, slug }: Args) => {
   const params = {
     collection,
     pathname,
+    ...(slug && { slug }),
   }
 
   const encodedParams = new URLSearchParams()

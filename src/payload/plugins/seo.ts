@@ -15,6 +15,8 @@ const generateURL: GenerateURL<Page> = ({ doc, collectionSlug }) => {
         /^\/+/,
         '/',
       )
+    case 'post':
+      return `${process.env.NEXT_PUBLIC_APP_URL}/statii/${doc?.slug}`
     default:
       return ``
   }

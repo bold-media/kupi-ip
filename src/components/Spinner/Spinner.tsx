@@ -13,8 +13,8 @@ export const spinnerVariants = cva('animate-spin', {
       '2xl': 'w-12 h-12',
     },
     variant: {
-      default: 'fill-primary',
-      white: 'fill-primary-foreground',
+      default: 'fill-background',
+      white: 'fill-foreground',
     },
   },
   defaultVariants: {

@@ -12,11 +12,17 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { createBreadcrumbsField, createParentField } from '@payloadcms/plugin-nested-docs'
-import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
-import { Banner } from '@/payload/blocks/Banner/Banner.config'
 import { access } from '@/payload/access'
 import { generatePreviewPath } from '@/utils/generatePreviewPath'
 import { revalidatePage, revalidatePageDelete } from './hooks/revalidatePage'
+import { hero } from '@/payload/collections/Page/fields/hero'
+import { CallToAction } from '@/payload/blocks/CallToAction/CallToAction.config'
+import { Accordion } from '@/payload/blocks/Accordion/Accordion.config'
+import { RecentPosts } from '@/payload/blocks/RecentPosts/RecentPosts.config'
+import { Downloads } from '@/payload/blocks/Downloads/Downloads.config'
+import { Features } from '@/payload/blocks/Features/Features.config'
+import { Tariffs } from '@/payload/blocks/Tariffs/Tariffs.config'
+import { Steps } from '@/payload/blocks/Steps/Steps.config'
 
 export const Page: CollectionConfig = {
   slug: 'page',
@@ -109,23 +115,19 @@ export const Page: CollectionConfig = {
                 ru: ru.common.title.singular,
               },
             },
+            hero,
+          ],
+        },
+        {
+          label: {
+            en: en.common.content,
+            ru: ru.common.content,
+          },
+          fields: [
             {
-              name: 'content',
-              type: 'richText',
-              label: {
-                en: en.common.content,
-                ru: ru.common.content,
-              },
-              editor: lexicalEditor({
-                features({ rootFeatures }) {
-                  return [
-                    ...rootFeatures,
-                    BlocksFeature({
-                      blocks: [Banner],
-                    }),
-                  ]
-                },
-              }),
+              name: 'blocks',
+              type: 'blocks',
+              blocks: [Accordion, CallToAction, Downloads, Features, Steps, Tariffs, RecentPosts],
             },
           ],
         },

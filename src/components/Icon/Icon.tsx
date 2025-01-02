@@ -68,3 +68,81 @@ export const Icon = ({
 }
 
 Icon.displayName = 'Icon'
+
+// const iconVariants = cva('', {
+//   variants: {
+//     variant: {
+//       default: 'text-inherit',
+//       primary: 'text-primary',
+//       secondary: 'text-secondary',
+//       muted: 'text-muted-foreground',
+//       success: 'text-emerald-500',
+//       destructive: 'text-destructive',
+//       warning: 'text-yellow-500',
+//       gradientPrimary: '',
+//       gradientSecondary: '',
+//     },
+//     size: {
+//       sm: 'size-4',
+//       md: 'size-5',
+//       lg: 'size-6',
+//       xl: 'size-8',
+//       '2xl': 'size-10',
+//     },
+//   },
+//   defaultVariants: {
+//     variant: 'default',
+//     size: 'md',
+//   },
+// })
+
+// type IconSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+
+// interface BaseIconProps extends Omit<VariantProps<typeof iconVariants>, 'size'> {
+//   size?: IconSize
+//   className?: string
+//   muted?: boolean
+// }
+
+// type IconProps = BaseIconProps & {
+//   type?: 'lucide' | 'heroicons' | 'tabler'
+//   children: ReactElement
+// }
+
+// export const Icon = ({
+//   children,
+//   type = 'lucide',
+//   variant,
+//   size = 'md',
+//   className,
+//   muted = false,
+// }: IconProps) => {
+//   const sizeInPixels = {
+//     sm: 16,
+//     md: 20,
+//     lg: 24,
+//     xl: 32,
+//     '2xl': 40,
+//   }[size]
+
+//   const props = {
+//     className: cn(iconVariants({ variant, size }), muted && 'opacity-60', className),
+//     ...(type !== 'heroicons' && {
+//       size: sizeInPixels,
+//       strokeWidth: 1.5,
+//     }),
+//   }
+
+//   if (variant === 'gradientPrimary' || variant === 'gradientSecondary') {
+//     return React.cloneElement(children, {
+//       ...props,
+//       style: {
+//         stroke: `url(#brand-gradient-${variant === 'gradientPrimary' ? 'primary' : 'secondary'})`,
+//       },
+//     })
+//   }
+
+//   return React.cloneElement(children, props)
+// }
+
+// Icon.displayName = 'Icon'
