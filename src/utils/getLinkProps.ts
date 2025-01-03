@@ -1,11 +1,11 @@
-import { Page, Post } from '@payload-types'
+import { Download, Guide, Page, Post } from '@payload-types'
 
 interface LinkProps {
   type?: ('reference' | 'custom') | null | undefined
   newTab?: boolean | null
   reference?: {
-    relationTo: 'page' | 'post' | 'guide'
-    value: string | Page | Post
+    relationTo: 'page' | 'post' | 'download' | 'guide'
+    value: string | Page | Post | Download | Guide
   } | null
   url?: string | null
   label?: string
@@ -30,8 +30,15 @@ export const getLinkProps = (link: LinkProps): ReturnLinkProps => {
         url = typeof value === 'string' ? `/${value}` : `/${(value as Page)?.pathname}`
         break
       case 'post':
-        url = typeof value === 'string' ? `statii/${value}` : `statii/${(value as Post)?.slug}`
+        url = typeof value === 'string' ? `/post/${value}` : `post/${(value as Post)?.slug}`
         break
+      case 'download':
+        url =
+          typeof value === 'string'
+            ? `/download/${value}`
+            : `/download/${(value as Download)?.slug}`
+      case 'guide':
+        url = typeof value === 'string' ? `/guide/${value}` : `/guide/${(value as Guide)?.slug}`
       default:
         url = '/'
     }

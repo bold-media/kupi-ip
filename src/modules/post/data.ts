@@ -2,6 +2,7 @@ import { BasePayload, getPayload } from 'payload'
 import config from '@payload-config'
 import { cache } from '@/utils/cache'
 import { draftMode } from 'next/headers'
+import { Category, PostSelect } from '@payload-types'
 
 const getPostData = async (slug: string, draft: boolean) => {
   const payload = await getPayload({ config })
@@ -69,10 +70,15 @@ type PaginatedPostsProps = {
   category: string | null
 }
 
+type PostsQueryOptions = Parameters<BasePayload['find']>[0] & {
+  collection: 'post'
+  select: PostSelect
+}
+
 export const getPaginatedPostsData = async ({ category, page }: PaginatedPostsProps) => {
   const payload = await getPayload({ config })
 
-  const queryOptions: Parameters<BasePayload['find']>[0] = {
+  const queryOptions: PostsQueryOptions = {
     collection: 'post',
     disableErrors: false,
     select: {
@@ -114,15 +120,20 @@ export const getPaginatedPosts = async ({ category, page }: PaginatedPostsProps)
 
     return getCachedPaginatedPosts({ category, page })
   } catch (error) {
-    console.error('Error fetching page:', error)
+    console.error('Error fetching posts:', error)
     return null
   }
 }
 
-const getRecentPostsData = async (limit: number, draft: boolean) => {
+interface GetRecentPostsArgs {
+  limit: number
+  categories: (string | Category)[]
+}
+const getRecentPostsData = async ({ limit, categories }: GetRecentPostsArgs, draft: boolean) => {
   const payload = await getPayload({ config })
 
-  const result = await payload.find({
+  // Base query options
+  const queryOptions: PostsQueryOptions = {
     collection: 'post',
     limit,
     overrideAccess: draft,
@@ -133,28 +144,48 @@ const getRecentPostsData = async (limit: number, draft: boolean) => {
       slug: true,
     },
     disableErrors: true,
-  })
+  }
 
+  // If categories are provided and it's an array, add the OR condition
+  if (categories && Array.isArray(categories) && categories.length > 0) {
+    const categoryConditions = categories.map((category) => ({
+      categories: {
+        equals: typeof category === 'string' ? category : category.id,
+      },
+    }))
+
+    return payload
+      .find({
+        ...queryOptions,
+        where: {
+          or: categoryConditions,
+        },
+      })
+      .then((result) => result?.docs ?? [])
+  }
+
+  // If no categories filter, return original query
+  const result = await payload.find(queryOptions)
   return result?.docs ?? []
 }
 
 const getCachedRecentPostsData = cache(
-  async (limit: number) => {
+  async ({ limit, categories }: GetRecentPostsArgs) => {
     console.log(`Cache miss for recent posts...`)
-    return getRecentPostsData(limit, false)
+    return getRecentPostsData({ limit, categories }, false)
   },
   { tags: ['post'] },
 )
 
-export const getRecentPosts = async (limit: number = 5) => {
+export const getRecentPosts = async ({ limit = 5, categories }: GetRecentPostsArgs) => {
   try {
     const { isEnabled: draft } = await draftMode()
 
     if (draft) {
-      return getRecentPostsData(limit, true)
+      return getRecentPostsData({ limit, categories }, true)
     }
 
-    return getCachedRecentPostsData(limit)
+    return getCachedRecentPostsData({ limit, categories })
   } catch (error) {
     console.error('Error fetching recent posts:', error)
     return []

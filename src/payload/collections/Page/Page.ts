@@ -55,6 +55,7 @@ export const Page: CollectionConfig = {
   defaultPopulate: {
     title: true,
     slug: true,
+    pathname: true,
   },
   versions: {
     drafts: {

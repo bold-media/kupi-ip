@@ -6,6 +6,14 @@ import { generatePreviewPath } from '@/utils/generatePreviewPath'
 import { CollectionConfig } from 'payload'
 import { access } from '@/payload/access'
 import { revalidatePost, revalidatePostDelete } from './hooks/revalidatePost'
+import { CallToAction } from '@/payload/blocks/CallToAction/CallToAction.config'
+import { Accordion } from '@/payload/blocks/Accordion/Accordion.config'
+import { RecentPosts } from '@/payload/blocks/RecentPosts/RecentPosts.config'
+import { Downloads } from '@/payload/blocks/Downloads/Downloads.config'
+import { Features } from '@/payload/blocks/Features/Features.config'
+import { Tariffs } from '@/payload/blocks/Tariffs/Tariffs.config'
+import { Steps } from '@/payload/blocks/Steps/Steps.config'
+
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -23,14 +31,14 @@ export const Post: CollectionConfig = {
       url: ({ data }) =>
         generatePreviewPath({
           collection: 'post',
-          pathname: typeof data?.slug === 'string' ? `/statii/${data?.slug}` : '',
+          pathname: typeof data?.slug === 'string' ? `/post/${data?.slug}` : '',
           slug: data?.slug,
         }),
     },
     preview: (data) =>
       generatePreviewPath({
         collection: 'post',
-        pathname: typeof data?.slug === 'string' ? `/statii/${data?.slug}` : '',
+        pathname: typeof data?.slug === 'string' ? `/post/${data?.slug}` : '',
         slug: data?.slug as string,
       }),
   },
@@ -90,6 +98,11 @@ export const Post: CollectionConfig = {
               name: 'article',
               type: 'richText',
               editor: postEditor,
+            },
+            {
+              name: 'blocks',
+              type: 'blocks',
+              blocks: [Accordion, CallToAction, Downloads, Features, Steps, Tariffs, RecentPosts],
             },
           ],
         },

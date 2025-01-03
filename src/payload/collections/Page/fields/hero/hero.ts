@@ -1,3 +1,4 @@
+import { basicEditor } from '@/payload/fields/lexical'
 import { Field } from 'payload'
 
 export const hero: Field = {
@@ -17,22 +18,19 @@ export const hero: Field = {
           value: 'none',
         },
         {
-          label: 'Wave',
-          value: 'wave',
-        },
-        {
           label: 'Standard',
           value: 'standard',
         },
         {
-          label: 'Minimal',
-          value: 'minimal',
+          label: 'Wave',
+          value: 'wave',
         },
       ],
     },
     {
       name: 'richText',
       type: 'richText',
+      editor: basicEditor({ headingSizes: ['h1'] }),
     },
   ],
 }

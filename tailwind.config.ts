@@ -46,6 +46,7 @@ const config = {
       },
       colors: {
         background: 'hsl(var(--background))',
+        'background-light': 'hsl(var(--background-light))',
         foreground: 'hsl(var(--foreground))',
         card: {
           DEFAULT: 'hsl(var(--card))',
@@ -111,14 +112,41 @@ const config = {
           end: '#00205A',
         },
       },
-      typography: () => ({
+      typography: ({ theme }: { theme: (path: string) => string }) => ({
         DEFAULT: {
           css: {
             fontWeight: 300,
             'h1, h2, h3, h4, h5, h6': {
               fontWeight: 300,
             },
-            maxWidth: null,
+            a: {
+              fontWeight: 400,
+            },
+            maxWidth: '62.5rem',
+            blockquote: {
+              backgroundColor: 'hsl(var(--background-light))',
+              borderLeftWidth: '0',
+              borderRadius: theme('borderRadius.lg'),
+              padding: theme('spacing.5'),
+              margin: `${theme('spacing.8')} 0`,
+              color: 'hsl(var(--foreground))',
+              fontWeight: '300',
+              fontSize: '1.125rem', // 18px
+              'p:first-of-type::before': {
+                content: 'none',
+              },
+              'p:last-of-type::after': {
+                content: 'none',
+              },
+            },
+          },
+        },
+        invert: {
+          css: {
+            blockquote: {
+              backgroundColor: 'hsl(var(--background-light))',
+              color: 'hsl(var(--foreground))',
+            },
           },
         },
         xs: {
@@ -127,6 +155,11 @@ const config = {
             h2: { fontSize: '1.5rem', lineHeight: '1.2' },
             h3: { fontSize: '1.25rem', lineHeight: '1.3' },
             h4: { fontSize: '1.125rem', lineHeight: '1.4' },
+            marginBottom: '1.125rem',
+            blockquote: {
+              fontSize: '1.125rem',
+              padding: theme('spacing.5'),
+            },
           },
         },
         sm: {
@@ -153,6 +186,10 @@ const config = {
             h3: { fontSize: '2rem', lineHeight: '1.2' },
             h4: { fontSize: '1.75rem', lineHeight: '1.3' },
             marginBottom: '2rem',
+            blockquote: {
+              fontSize: '1.25rem',
+              padding: theme('spacing.12'),
+            },
           },
         },
         xl: {

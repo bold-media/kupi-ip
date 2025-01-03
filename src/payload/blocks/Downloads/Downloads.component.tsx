@@ -7,21 +7,14 @@ import { DownloadsBlock } from '@payload-types'
 import React from 'react'
 
 export const Downloads = async (props: DownloadsBlock) => {
-  const { background } = props
-  const settings = await getSettings()
+  const { background, prefix } = props
   const downloads = await getAllDownloads()
 
-  if (!settings) return null
   if (!downloads || downloads?.length < 1) return null
 
   return (
     <BackgroundField {...background}>
-      {settings?.downloads?.content && (
-        <RichText
-          data={settings?.downloads?.content}
-          className="text-center prose-md md:prose-lg"
-        />
-      )}
+      <RichText data={prefix} enableGutter={false} size="mdScale" />
       <FilteredDownloads data={downloads} />
     </BackgroundField>
   )

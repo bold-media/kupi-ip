@@ -4,20 +4,24 @@ import { revalidatePath, revalidateTag } from 'next/cache'
 import { CollectionAfterChangeHook, CollectionAfterDeleteHook, Payload } from 'payload'
 
 const revalidate = async (slug: string, payload: Payload) => {
-  revalidateTag('download')
   revalidateTag(slug)
-  revalidatePath(`/skachat/${slug}`)
-  revalidatePath(`/skachat`)
+  revalidateTag('download')
+  revalidatePath('(app)/download', 'page')
+  revalidatePath('(app)/[[...segments]]', 'page')
+  // revalidateTag('download')
+  // revalidateTag(slug)
+  // revalidatePath(`/download/${slug}`)
+  // revalidatePath(`/download`)
 
-  const [pages, posts] = await Promise.all([
-    payload.find({ ...queryAllRoutes({ collection: 'page', type: 'pathname' }) }),
-    payload.find({ ...queryAllRoutes({ collection: 'post', type: 'slug' }) }),
-  ])
+  // const [pages, posts] = await Promise.all([
+  //   payload.find({ ...queryAllRoutes({ collection: 'page', type: 'pathname' }) }),
+  //   payload.find({ ...queryAllRoutes({ collection: 'post', type: 'slug' }) }),
+  // ])
 
-  pages.docs.forEach((doc) => doc?.pathname && revalidatePath(doc?.pathname))
-  posts.docs.forEach((doc) => doc?.slug && revalidatePath(`/statii/${doc?.slug}`))
+  // pages.docs.forEach((doc) => doc?.pathname && revalidatePath(doc?.pathname))
+  // posts.docs.forEach((doc) => doc?.slug && revalidatePath(`/post/${doc?.slug}`))
 
-  return
+  // return
 }
 
 export const revalidateDownload: CollectionAfterChangeHook<Download> = async ({

@@ -9,12 +9,14 @@ const AllDownloadsPage = async () => {
   const downloads = await getAllDownloads()
 
   return (
-    <div className="min-h-svh mt-header py-12 sm:py-20 md:py-24">
+    <div className="min-h-svh mt-header py-12 sm:py-20 md:py-24 min-h-svh">
       <div className="container">
         {settings?.downloads?.content && (
           <RichText
             data={settings?.downloads?.content}
-            className="text-center prose-md md:prose-lg"
+            size="pageTitle"
+            enableGutter={false}
+            className="text-center"
           />
         )}
       </div>

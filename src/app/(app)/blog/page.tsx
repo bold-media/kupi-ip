@@ -11,27 +11,25 @@ type AllPostsPageProps = {
 }
 
 const AllPostsPage = async ({ searchParams }: AllPostsPageProps) => {
-  const { stranitsa, kategoriya } = await postsSearchParamsCache.parse(searchParams)
+  const { page, category } = await postsSearchParamsCache.parse(searchParams)
   const categories = await getAllCategories()
 
-  const categoryId = kategoriya
-    ? categories.find((cat) => cat.slug === kategoriya)?.id || null
-    : null
+  const categoryId = category ? categories.find((cat) => cat.slug === category)?.id || null : null
 
   const posts = await getPaginatedPosts({
-    page: stranitsa,
+    page,
     category: categoryId,
   })
 
   return (
     <>
-      <div className="container py-header">
-        <div className="text-center prose prose-md md:prose-lg prose-slate dark:prose-invert mt-12 mb-10 sm:mt-20 sm:mb-16 md:mt-24 md:mb-20">
+      <div className="container py-header min-h-svh">
+        <div className="text-center prose prose-md md:prose-lg prose-slate dark:prose-invert max-w-none mt-12 mb-10 sm:mt-20 sm:mb-16 md:mt-24 md:mb-20">
           <h1>Статьи</h1>
         </div>
         <PostCategories categories={categories} />
         {posts && Array.isArray(posts?.docs) && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4">
             {posts?.docs?.map((post: any) => <PostPreviewCard key={post.id} {...post} />)}
           </div>
         )}

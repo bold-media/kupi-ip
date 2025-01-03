@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import React from 'react'
 import { RichText } from '@/modules/common/RichText'
+import { AspectRatio } from '@/components/AspectRatio'
+import { RenderBlocks } from '@/modules/common/Blocks/RenderBlocks'
 
 interface Props {
   params: Promise<{
@@ -25,29 +27,33 @@ const PostPage = async ({ params }: Props) => {
 
   return (
     <>
-      <div className="container relative mt-header">
+      <div className="container relative mt-header min-h-svh">
         <PostBreadcrumbs title={title} />
         {image && image?.url && image?.height && image?.width && (
-          <Image
-            src={image?.url}
-            alt={image?.alt}
-            width={image.width}
-            height={image.height}
-            className="w-full h-auto object-contain"
-            draggable={false}
-          />
+          <AspectRatio className="relative w-full" ratio={16 / 9}>
+            <Image
+              src={image?.url}
+              alt={image?.alt}
+              fill={true}
+              className="object-cover rounded-xl select-none"
+              draggable={false}
+            />
+          </AspectRatio>
         )}
       </div>
-      <div className="container prose prose-md md:prose-lg dark:prose-invert md:max-w-4xl mt-6 xs:mt-8 sm:mt-12">
+      <div className="prose prose-xs sm:prose-sm md:prose-md lg:prose-lg dark:prose-invert mt-6 xs:mt-8 sm:mt-12 italic mx-auto max-w-[62.5rem] px-4 md:px-6">
         <h1>{title}</h1>
       </div>
-      <article>
+      <article className="w-full overflow-x-hidden">
         <RichText
           data={article}
-          enableGutter={true}
-          className="md:max-w-4xl pb-8 xs:pb-12 sm:pb-20"
+          enableGutter="empty"
+          withPadding={true}
+          size="blog"
+          className="pb-8 xs:pb-12 sm:pb-20 mx-auto"
         />
       </article>
+      <RenderBlocks blocks={post?.blocks} />
     </>
   )
 }

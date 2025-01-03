@@ -25,14 +25,14 @@ export const Download: CollectionConfig = {
       url: ({ data }) =>
         generatePreviewPath({
           collection: 'download',
-          pathname: typeof data?.slug === 'string' ? `/skachat/${data?.slug}` : '',
+          pathname: typeof data?.slug === 'string' ? `/download/${data?.slug}` : '',
           slug: data?.slug,
         }),
     },
     preview: (data) =>
       generatePreviewPath({
         collection: 'download',
-        pathname: typeof data?.slug === 'string' ? `/skachat/${data?.slug}` : '',
+        pathname: typeof data?.slug === 'string' ? `/download/${data?.slug}` : '',
         slug: data?.slug as string,
       }),
   },

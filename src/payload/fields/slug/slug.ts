@@ -16,14 +16,11 @@ const formatSlug =
 
       //slug was manually entered, format it.
       if (typeof value === 'string' && value?.length > 0) {
-        console.log('value is string')
         return format(value)
       }
     }
 
     if ((operation === 'create' || operation === 'update') && !value && data?.[field]) {
-      console.log('operating is...')
-      console.log(`data?.[field]: ${data?.[field]}`)
       return format(data?.[field])
     }
   }

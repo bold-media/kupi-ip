@@ -2,9 +2,12 @@ import { Post } from '@payload-types'
 import { revalidatePath, revalidateTag } from 'next/cache'
 import { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'payload'
 
-// const revalidate = (slug: string) => {
-
-// }
+const revalidate = (slug: string) => {
+  revalidateTag(slug)
+  revalidateTag('post')
+  revalidatePath('(app)/post/[slug]', 'page')
+  revalidatePath('(app)/[[...segments]]', 'page')
+}
 
 export const revalidatePost: CollectionAfterChangeHook<Post> = ({
   doc,
@@ -15,15 +18,13 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
     if (doc._status === 'published') {
       payload.logger.info(`Revalidating post by slug: ${doc?.slug}`)
 
-      revalidateTag(doc?.slug)
-      revalidatePath(`/statii/${doc?.slug}`)
+      revalidate(doc?.slug)
     }
 
     if (previousDoc?._status === 'published' && doc?._status !== 'published' && previousDoc?.slug) {
       payload.logger.info(`Revalidating post by slug: ${doc.slug}`)
 
-      revalidateTag(doc.slug)
-      revalidatePath(`/statii/${doc?.slug}`)
+      revalidate(previousDoc?.slug)
     }
   }
 
@@ -35,8 +36,7 @@ export const revalidatePostDelete: CollectionAfterDeleteHook<Post> = ({
   req: { context },
 }) => {
   if (!context.disableRevalidate && doc?.slug) {
-    revalidateTag(doc?.slug)
-    revalidatePath(`/statii/${doc?.slug}`)
+    revalidate(doc?.slug)
   }
 
   return doc

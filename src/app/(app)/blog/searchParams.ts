@@ -1,7 +1,7 @@
 import { createSearchParamsCache, parseAsInteger, parseAsString } from 'nuqs/server'
 
-export const categoryParamName = 'kategoriya'
-export const pageParamName = 'stranitsa'
+export const categoryParamName = 'category'
+export const pageParamName = 'page'
 
 export const postParsers = {
   [categoryParamName]: parseAsString

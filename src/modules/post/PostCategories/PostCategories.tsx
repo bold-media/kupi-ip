@@ -1,8 +1,8 @@
 'use client'
 import { Category } from '@payload-types'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useQueryState, useQueryStates } from 'nuqs'
-import { categoryParamName, postParsers } from '@/app/(app)/statii/searchParams'
+import { postParsers } from '@/app/(app)/blog/searchParams'
 import { Button } from '@/components/Button'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useResizeObserver } from '@react-hookz/web'
@@ -13,7 +13,7 @@ interface PostCategoriesProps {
 
 export const PostCategories = ({ categories }: PostCategoriesProps) => {
   // const [category, setCategory] = useQueryState(categoryParamName, postParsers[categoryParamName])
-  const [{ kategoriya: category }, setQuery] = useQueryStates(postParsers)
+  const [{ category }, setQuery] = useQueryStates(postParsers)
   const [isScrollable, setIsScrollable] = useState(false)
   const viewportRef = useRef<HTMLDivElement>(null)
 
@@ -24,7 +24,7 @@ export const PostCategories = ({ categories }: PostCategoriesProps) => {
     active: isScrollable,
   })
 
-  const checkScrollable = () => {
+  const checkScrollable = useCallback(() => {
     if (!emblaApi) return
 
     const viewport = emblaApi.rootNode()
@@ -34,7 +34,7 @@ export const PostCategories = ({ categories }: PostCategoriesProps) => {
     if (needsScroll !== isScrollable) {
       setIsScrollable(needsScroll)
     }
-  }
+  }, [emblaApi, isScrollable, setIsScrollable])
 
   useResizeObserver(viewportRef.current, checkScrollable)
 
@@ -42,7 +42,7 @@ export const PostCategories = ({ categories }: PostCategoriesProps) => {
     if (emblaApi) {
       checkScrollable()
     }
-  }, [emblaApi])
+  }, [emblaApi, checkScrollable])
 
   return (
     <div className="overflow-hidden w-full pb-4" ref={viewportRef}>
@@ -52,9 +52,7 @@ export const PostCategories = ({ categories }: PostCategoriesProps) => {
             size="xs"
             uppercase={false}
             variant={category === '' ? 'tertiary' : 'outline'}
-            onClick={() =>
-              category !== '' ? setQuery({ kategoriya: '', stranitsa: 1 }) : undefined
-            }
+            onClick={() => (category !== '' ? setQuery({ category: '', page: 1 }) : undefined)}
             className="shrink-0"
           >
             Все
@@ -67,7 +65,7 @@ export const PostCategories = ({ categories }: PostCategoriesProps) => {
                 variant={category === item.slug ? 'tertiary' : 'outline'}
                 onClick={() =>
                   category !== item.slug && typeof item?.slug === 'string'
-                    ? setQuery({ kategoriya: item.slug, stranitsa: 1 })
+                    ? setQuery({ category: item.slug, page: 1 })
                     : undefined
                 }
                 size="xs"

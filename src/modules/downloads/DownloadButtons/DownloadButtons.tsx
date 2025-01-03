@@ -5,8 +5,9 @@ import { Button } from '@/components/Button'
 import { OperatingSystem, OS_DISPLAY_NAMES, useOS } from '@/hooks/useOS'
 import { osIconMap } from './osIconMap'
 import { cn } from '@/utils/cn'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import { getLinkProps } from '@/utils/getLinkProps'
+import { Link } from '@/components/Link'
 
 interface Props {
   name: string
@@ -32,7 +33,7 @@ export const DownloadButtons = ({ name, platforms, links, buyLink }: Props) => {
     if (currentOS === os) return
 
     setCurrentOS(os)
-  }, [isLoading, os, setCurrentOS])
+  }, [isLoading, os, currentOS, setCurrentOS, platforms])
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -60,7 +61,7 @@ export const DownloadButtons = ({ name, platforms, links, buyLink }: Props) => {
       )}
       <div className="flex flex-col justify-center">
         <Button asChild>
-          <Link
+          <NextLink
             href={
               currentOS && currentOS !== OperatingSystem.Unknown
                 ? (links?.[
@@ -72,7 +73,7 @@ export const DownloadButtons = ({ name, platforms, links, buyLink }: Props) => {
             rel="noopener noreferrer"
           >
             Скачать для {typeof currentOS === 'string' ? OS_DISPLAY_NAMES[currentOS] : ''}
-          </Link>
+          </NextLink>
         </Button>
         {buyLink && (
           <Button variant="link" asChild>

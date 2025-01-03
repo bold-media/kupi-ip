@@ -1,8 +1,8 @@
 'use client'
 import { cn } from '@/utils/cn'
 import React, { useCallback } from 'react'
-import Logo from '@/data/Logo.svg'
-import Link from 'next/link'
+import Logo from '@/assets/Logo.svg'
+import NextLink from 'next/link'
 import { Settings } from '@payload-types'
 import { getLinkProps } from '@/utils/getLinkProps'
 import { usePathname } from 'next/navigation'
@@ -18,6 +18,7 @@ import {
 import { VisuallyHidden } from '@/components/VisuallyHidden'
 import { MenuIcon } from 'lucide-react'
 import { Button } from '@/components/Button'
+import { Link } from '@/components/Link'
 
 export const Header = ({
   data,
@@ -49,9 +50,9 @@ export const Header = ({
       <div className="container flex h-full">
         {/* Left side */}
         <div className="grow basis-1/2 md:basis-1/4 flex justify-start items-center">
-          <Link href="/" aria-label="Вернуться на главную страницу">
+          <NextLink href="/" aria-label="Вернуться на главную страницу">
             <Logo className="h-8 md:h-9" role="img" aria-labelledby="logoTitle" />
-          </Link>
+          </NextLink>
         </div>
         {/* Desktop / middle nav */}
         <nav className="hidden md:flex md:basis-1/2 justify-center items-center">
@@ -100,13 +101,13 @@ export const Header = ({
                 <div className="flex flex-col h-full">
                   <SheetHeader>
                     <SheetClose asChild>
-                      <Link
+                      <NextLink
                         href="/"
                         aria-label="Вернуться на главную страницу"
                         className="mb-4 mr-auto"
                       >
                         <Logo className="h-8" role="img" aria-labelledby="logoTitle" />
-                      </Link>
+                      </NextLink>
                     </SheetClose>
 
                     <VisuallyHidden>

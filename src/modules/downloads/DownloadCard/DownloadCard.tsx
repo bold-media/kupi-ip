@@ -37,7 +37,7 @@ export const DownloadCard = ({
           <p className="text-xl md:text-2xl font-light">{previewText}</p>
           <div>
             <Button className="w-full md:w-auto" asChild>
-              <Link href={`/skachat/${slug}`}>СКАЧАТЬ</Link>
+              <Link href={`/download/${slug}`}>СКАЧАТЬ</Link>
             </Button>
           </div>
         </div>

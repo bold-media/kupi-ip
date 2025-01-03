@@ -9,15 +9,18 @@ import {
   PaginationPrevious,
 } from '@/components/Pagination'
 import React from 'react'
-import Link from 'next/link'
+
 import { useQueryState } from 'nuqs'
-import { pageParamName, postParsers } from '@/app/(app)/statii/searchParams'
+import { pageParamName, postParsers } from '@/app/(app)/blog/searchParams'
+import { guideParsers } from '@/app/(app)/guide/searchParams'
+
 interface PostPaginationProps {
   hasPrevPage: boolean
   hasNextPage: boolean
   totalPages: number
   prevPage: number | null | undefined
   nextPage: number | null | undefined
+  type?: 'post' | 'guide'
 }
 
 export const PostPagination = ({
@@ -26,8 +29,12 @@ export const PostPagination = ({
   totalPages,
   prevPage,
   nextPage,
+  type = 'post',
 }: PostPaginationProps) => {
-  const [page, setPage] = useQueryState(pageParamName, postParsers[pageParamName])
+  const [page, setPage] = useQueryState(
+    pageParamName,
+    type === 'post' ? postParsers[pageParamName] : guideParsers[pageParamName],
+  )
 
   const getPageNumbers = (currentPage: number) => {
     const pages: (number | 'ellipsis')[] = [1]

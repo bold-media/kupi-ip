@@ -5,17 +5,19 @@ import { Icon } from '@/components/Icon'
 import { Post } from '@payload-types'
 import { ArrowUpRight, ImageIcon } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import React from 'react'
 
-type PostPreviewCardProps = Pick<Post, 'title' | 'cover' | 'excerpt' | 'slug'>
+type PostPreviewCardProps = Pick<Post, 'title' | 'cover' | 'excerpt' | 'slug'> & {
+  type?: 'post' | 'guide'
+}
 
 export const PostPreviewCard = (props: PostPreviewCardProps) => {
-  const { title, cover, excerpt, slug } = props
+  const { title, cover, excerpt, slug, type = 'post' } = props
 
   return (
-    <Card>
-      <Link href={`/statii/${slug}`}>
+    <Card className="flex flex-col h-full">
+      <NextLink href={`/${type === 'post' ? 'post' : 'guide'}/${slug}`}>
         <AspectRatio ratio={16 / 9}>
           {cover && typeof cover === 'object' && typeof cover?.url === 'string' ? (
             <Image
@@ -33,20 +35,20 @@ export const PostPreviewCard = (props: PostPreviewCardProps) => {
             </div>
           )}
         </AspectRatio>
-      </Link>
+      </NextLink>
       <CardHeader className="flex items-start">
-        <Link href={`/statii/${slug}`}>
-          <CardTitle className="line-clamp-1">{title}</CardTitle>
-        </Link>
+        <NextLink href={`/${type === 'post' ? 'post' : 'guide'}/${slug}`}>
+          <CardTitle className="line-clamp-2 text-lg md:text-xl">{title}</CardTitle>
+        </NextLink>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col flex-1 gap-4">
         <p className="line-clamp-3 text-muted-foreground">{excerpt}</p>
-        <Button variant="ghost" size="icon" className="mt-2">
-          <Link href={`/statii/${slug}`}>
+        <Button variant="ghost" size="icon" className="mt-auto">
+          <NextLink href={`/${type === 'post' ? 'post' : 'guide'}/${slug}`}>
             <Icon size="xl">
               <ArrowUpRight />
             </Icon>
-          </Link>
+          </NextLink>
         </Button>
       </CardContent>
     </Card>

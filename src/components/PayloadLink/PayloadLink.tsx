@@ -2,9 +2,9 @@ import React from 'react'
 import { Button } from '@/components/Button'
 import type { ButtonProps } from '@/components/Button'
 import { cn } from '@/utils/cn'
-import Link from 'next/link'
 import { Page } from '@payload-types'
 import { getLinkProps } from '@/utils/getLinkProps'
+import { Link } from '@/components/Link'
 
 type PayloadLinkType = {
   appearance?: 'inline' | ButtonProps['variant']

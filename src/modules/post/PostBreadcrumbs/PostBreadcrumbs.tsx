@@ -5,7 +5,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/components/Breadcrumbs/Breadcrumbs'
+} from '@/components/Breadcrumbs'
 import React from 'react'
 
 type PostBreadcrumbsProps = {
@@ -21,7 +21,7 @@ export const PostBreadcrumbs = ({ title }: PostBreadcrumbsProps) => {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href={'/statii'}>Статьи</BreadcrumbLink>
+          <BreadcrumbLink href={'/blog'}>Статьи</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>

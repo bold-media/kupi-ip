@@ -14,16 +14,22 @@ import { PostPreviewCard } from '@/modules/post/PostPreviewCard'
 import { BackgroundField } from '@/payload/fields/background/Background.component'
 import { RecentPostsBlock } from '@payload-types'
 import { ArrowRight, FileQuestion } from 'lucide-react'
-import Link from 'next/link'
+import NextLink from 'next/link'
 
 export const RecentPosts = async (props: RecentPostsBlock) => {
   const { background, prefix, settings } = props
-  const recentPosts = await getRecentPosts(settings?.limit ?? undefined)
+  const recentPosts = await getRecentPosts({
+    limit: settings?.limit!,
+    categories: settings?.categories!,
+  })
+
   return (
     <BackgroundField {...background}>
       <RichText
         data={prefix}
-        className="prose-md md:prose-lg lg:prose-xl xl:prose-2xl mb-4 sm:mb-8 lg:mb-12"
+        size="mdScale"
+        enableGutter={false}
+        className="mb-4 sm:mb-8 lg:mb-12"
       />
       {recentPosts?.length > 0 ? (
         <Carousel
@@ -44,18 +50,18 @@ export const RecentPosts = async (props: RecentPostsBlock) => {
           </div>
           <div className="mt-6 md:mt-8 flex justify-center">
             <Button variant="ghost" asChild>
-              <Link href="/statii">
+              <NextLink href="/post">
                 Смотреть все
                 <Icon>
                   <ArrowRight />
                 </Icon>
-              </Link>
+              </NextLink>
             </Button>
           </div>
         </Carousel>
       ) : (
         <div className="text-center text-lg md:text-xl flex flex-col items-center gap-2 my-12 md:my-24">
-          <Icon size="xl">
+          <Icon className="opacity-80 w-16 h-16 stroke-1">
             <FileQuestion />
           </Icon>
           <div className="text-muted-foreground font-light">Нет последних публикаций...</div>

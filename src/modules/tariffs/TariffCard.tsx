@@ -4,7 +4,7 @@ import { Settings } from '@payload-types'
 import React, { ComponentPropsWithRef } from 'react'
 import { RichText } from '../common/RichText'
 import { Button } from '@/components/Button'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import { getLinkProps } from '@/utils/getLinkProps'
 
 type TariffProps = NonNullable<NonNullable<Settings['tariffs']>['month' | 'quarter' | 'year']> &
@@ -38,12 +38,12 @@ export const TariffCard = ({
       <div className="flex flex-col items-stretch">
         {link && (
           <Button asChild>
-            <Link {...getLinkProps(link)}>Купить ключ</Link>
+            <NextLink {...getLinkProps(link)}>Купить ключ</NextLink>
           </Button>
         )}
         {trialLink && (
           <Button variant="link" className="text-slate-200 hover:text-slate-50 self-center" asChild>
-            <Link {...getLinkProps(trialLink)}>Протестировать бесплатно</Link>
+            <NextLink {...getLinkProps(trialLink)}>Протестировать бесплатно</NextLink>
           </Button>
         )}
       </div>

@@ -2,6 +2,13 @@ import { Page } from '@payload-types'
 import { revalidatePath, revalidateTag } from 'next/cache'
 import { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'payload'
 
+const revalidate = (pathname: string) => {
+  revalidateTag(pathname)
+  revalidateTag('page')
+  // revalidatePath('(app)/[[...segments]]', 'page')
+  revalidatePath(pathname)
+}
+
 export const revalidatePage: CollectionAfterChangeHook<Page> = ({
   doc,
   previousDoc,
@@ -11,8 +18,7 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
     if (doc._status === 'published') {
       payload.logger.info(`Revalidating page at path: ${doc.pathname}`)
 
-      revalidateTag(doc.pathname)
-      revalidatePath(doc.pathname)
+      revalidate(doc?.pathname)
     }
 
     if (
@@ -20,8 +26,7 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
       doc._status !== 'published' &&
       previousDoc?.pathname
     ) {
-      revalidateTag(previousDoc.pathname)
-      revalidatePath(doc.pathname)
+      revalidate(previousDoc?.pathname)
     }
   }
 
@@ -33,8 +38,7 @@ export const revalidatePageDelete: CollectionAfterDeleteHook<Page> = ({
   req: { context },
 }) => {
   if (!context.disableRevalidate && doc?.pathname) {
-    revalidateTag(doc.pathname)
-    revalidatePath(doc.pathname)
+    revalidate(doc?.pathname)
   }
 
   return doc

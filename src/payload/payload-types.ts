@@ -16,6 +16,7 @@ export interface Config {
     post: Post;
     category: Category;
     download: Download;
+    guide: Guide;
     user: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -28,6 +29,7 @@ export interface Config {
     post: PostSelect<false> | PostSelect<true>;
     category: CategorySelect<false> | CategorySelect<true>;
     download: DownloadSelect<false> | DownloadSelect<true>;
+    guide: GuideSelect<false> | GuideSelect<true>;
     user: UserSelect<false> | UserSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -117,7 +119,7 @@ export interface Page {
   parent?: (string | null) | Page;
   title: string;
   hero: {
-    type: 'none' | 'wave' | 'standard' | 'minimal';
+    type: 'none' | 'standard' | 'wave';
     richText?: {
       root: {
         type: string;
@@ -300,6 +302,21 @@ export interface DownloadsBlock {
     paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
   };
+  prefix?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'downloads';
@@ -461,10 +478,22 @@ export interface RecentPostsBlock {
   } | null;
   settings?: {
     limit?: number | null;
+    categories?: (string | Category)[] | null;
   };
   id?: string | null;
   blockName?: string | null;
   blockType: 'recent-posts';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "category".
+ */
+export interface Category {
+  id: string;
+  name?: string | null;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -493,6 +522,17 @@ export interface Post {
     };
     [k: string]: unknown;
   } | null;
+  blocks?:
+    | (
+        | AccordionBlock
+        | CallToActionBlock
+        | DownloadsBlock
+        | FeaturesBlock
+        | StepsBlock
+        | TariffsBlock
+        | RecentPostsBlock
+      )[]
+    | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -506,17 +546,6 @@ export interface Post {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "category".
- */
-export interface Category {
-  id: string;
-  name?: string | null;
-  slug?: string | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -585,6 +614,57 @@ export interface Download {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guide".
+ */
+export interface Guide {
+  id: string;
+  title: string;
+  cover?: (string | null) | Media;
+  /**
+   * Short description of the guide, for content previews.
+   */
+  excerpt?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  blocks?:
+    | (
+        | AccordionBlock
+        | CallToActionBlock
+        | DownloadsBlock
+        | FeaturesBlock
+        | StepsBlock
+        | TariffsBlock
+        | RecentPostsBlock
+      )[]
+    | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+  };
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "user".
  */
 export interface User {
@@ -627,6 +707,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'download';
         value: string | Download;
+      } | null)
+    | ({
+        relationTo: 'guide';
+        value: string | Guide;
       } | null)
     | ({
         relationTo: 'user';
@@ -839,6 +923,7 @@ export interface DownloadsBlockSelect<T extends boolean = true> {
         paddingBottom?: T;
         type?: T;
       };
+  prefix?: T;
   id?: T;
   blockName?: T;
 }
@@ -924,6 +1009,7 @@ export interface RecentPostsBlockSelect<T extends boolean = true> {
     | T
     | {
         limit?: T;
+        categories?: T;
       };
   id?: T;
   blockName?: T;
@@ -937,6 +1023,17 @@ export interface PostSelect<T extends boolean = true> {
   cover?: T;
   excerpt?: T;
   article?: T;
+  blocks?:
+    | T
+    | {
+        accordion?: T | AccordionBlockSelect<T>;
+        callToAction?: T | CallToActionBlockSelect<T>;
+        downloads?: T | DownloadsBlockSelect<T>;
+        features?: T | FeaturesBlockSelect<T>;
+        steps?: T | StepsBlockSelect<T>;
+        tariffs?: T | TariffsBlockSelect<T>;
+        'recent-posts'?: T | RecentPostsBlockSelect<T>;
+      };
   meta?:
     | T
     | {
@@ -990,6 +1087,38 @@ export interface DownloadSelect<T extends boolean = true> {
         reference?: T;
         url?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guide_select".
+ */
+export interface GuideSelect<T extends boolean = true> {
+  title?: T;
+  cover?: T;
+  excerpt?: T;
+  content?: T;
+  blocks?:
+    | T
+    | {
+        accordion?: T | AccordionBlockSelect<T>;
+        callToAction?: T | CallToActionBlockSelect<T>;
+        downloads?: T | DownloadsBlockSelect<T>;
+        features?: T | FeaturesBlockSelect<T>;
+        steps?: T | StepsBlockSelect<T>;
+        tariffs?: T | TariffsBlockSelect<T>;
+        'recent-posts'?: T | RecentPostsBlockSelect<T>;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1392,6 +1521,26 @@ export interface SettingsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock".
+ */
+export interface CarouselBlock {
+  images?: (string | Media)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageBlock".
+ */
+export interface ImageBlock {
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'image';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

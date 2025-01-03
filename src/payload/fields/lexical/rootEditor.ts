@@ -31,7 +31,7 @@ export const rootEditor = lexicalEditor({
       IndentFeature(),
       UnorderedListFeature(),
       OrderedListFeature(),
-      LinkFeature(),
+      LinkFeature({ enabledCollections: ['page', 'post', 'download', 'guide'] }),
       BlockquoteFeature(),
       HorizontalRuleFeature(),
       InlineToolbarFeature(),

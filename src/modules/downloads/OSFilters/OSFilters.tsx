@@ -1,6 +1,6 @@
 'use client'
 import { OperatingSystem, useOS } from '@/hooks/useOS'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useResizeObserver } from '@react-hookz/web'
 import { Button } from '@/components/Button'
@@ -54,7 +54,7 @@ export const OSFilters = ({ filter, setFilter }: OSFiltersProps) => {
     active: isScrollable,
   })
 
-  const checkScrollable = () => {
+  const checkScrollable = useCallback(() => {
     if (!emblaApi) return
 
     const viewport = emblaApi.rootNode()
@@ -64,7 +64,7 @@ export const OSFilters = ({ filter, setFilter }: OSFiltersProps) => {
     if (needsScroll !== isScrollable) {
       setIsScrollable(needsScroll)
     }
-  }
+  }, [emblaApi, setIsScrollable, isScrollable])
 
   useResizeObserver(viewportRef.current, checkScrollable)
 
@@ -72,7 +72,7 @@ export const OSFilters = ({ filter, setFilter }: OSFiltersProps) => {
     if (emblaApi) {
       checkScrollable()
     }
-  }, [emblaApi])
+  }, [emblaApi, checkScrollable])
 
   useEffect(() => {
     if (!isLoading && os && os !== OperatingSystem.Unknown) {

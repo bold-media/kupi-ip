@@ -20,7 +20,7 @@ const DownloadPage = async ({ params }: Props) => {
   const { name, intro, icon, content, platforms, links, buyLink } = download
   return (
     <>
-      <div className="container relative mt-header py-12 sm:py-20 md:py-24">
+      <div className="container relative mt-header py-12 sm:py-20 md:py-24 min-h-svh">
         <div className="flex flex-col gap-10 md:gap-20">
           <RichText
             data={intro}

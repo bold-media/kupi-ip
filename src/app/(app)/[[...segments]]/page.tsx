@@ -26,8 +26,7 @@ const Pages = async ({ params }: Props) => {
   }
 
   return (
-    <div>
-      {/* <RichText content={page?.content} /> */}
+    <div className="min-h-svh">
       <Hero {...page.hero} />
       <RenderBlocks blocks={page.blocks} />
     </div>
