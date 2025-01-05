@@ -17,7 +17,7 @@ export const Accordion = (props: AccordionBlock) => {
       {prefix === 'smiley' && (
         <div className="flex items-start gap-4 text-4xl font-light leading-normal mb-4 sm:mb-8 lg:mb-12">
           <div className="flex-none mt-3">{':)'}</div>
-          <Title level="h2" className="flex-1 text-right leading-none">
+          <Title level="h2" className="flex-1 text-right leading-none italic">
             <RichText data={smileyTitle} enableProse={false} enableGutter={false} />
           </Title>
         </div>
