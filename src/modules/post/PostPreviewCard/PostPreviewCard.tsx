@@ -38,7 +38,7 @@ export const PostPreviewCard = (props: PostPreviewCardProps) => {
       </NextLink>
       <CardHeader className="flex items-start">
         <NextLink href={`/${type === 'post' ? 'post' : 'guide'}/${slug}`}>
-          <CardTitle className="line-clamp-2 text-lg md:text-xl">{title}</CardTitle>
+          <CardTitle className="line-clamp-2 text-xl md:text-2xl">{title}</CardTitle>
         </NextLink>
       </CardHeader>
       <CardContent className="flex flex-col flex-1 gap-4">
