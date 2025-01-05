@@ -27,7 +27,7 @@ export const getLinkProps = (link: LinkProps): ReturnLinkProps => {
 
     switch (relationTo) {
       case 'page':
-        url = typeof value === 'string' ? `/${value}` : `/${(value as Page)?.pathname}`
+        url = typeof value === 'string' ? `/${value}` : `${(value as Page)?.pathname}`
         break
       case 'post':
         url = typeof value === 'string' ? `/post/${value}` : `post/${(value as Post)?.slug}`
