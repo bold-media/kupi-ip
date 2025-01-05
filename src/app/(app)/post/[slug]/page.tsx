@@ -31,7 +31,7 @@ const PostPage = async ({ params }: Props) => {
 
   return (
     <>
-      <div className="container relative mt-header min-h-svh">
+      <div className="container relative mt-header">
         <PostBreadcrumbs title={title} />
         {image && image?.url && image?.height && image?.width && (
           <AspectRatio className="relative w-full" ratio={16 / 9}>
