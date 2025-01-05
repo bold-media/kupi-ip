@@ -118,6 +118,7 @@ const config = {
             fontWeight: 300,
             'h1, h2, h3, h4, h5, h6': {
               fontWeight: 300,
+              fontStyle: 'italic',
             },
             a: {
               fontWeight: 400,
@@ -172,19 +173,19 @@ const config = {
         },
         md: {
           css: {
-            h1: { fontSize: '2.5rem', lineHeight: '1.1' },
-            h2: { fontSize: '2rem', lineHeight: '1.2' },
-            h3: { fontSize: '1.75rem', lineHeight: '1.3' },
-            h4: { fontSize: '1.5rem', lineHeight: '1.4' },
+            h1: { fontSize: '2.5rem', lineHeight: '1.1', marginBottom: '1.4rem' },
+            h2: { fontSize: '2rem', lineHeight: '1.2', marginBottom: '1.3rem' },
+            h3: { fontSize: '1.75rem', lineHeight: '1.3', marginBottom: '1.2rem' },
+            h4: { fontSize: '1.5rem', lineHeight: '1.4', marginBottom: '1rem' },
             marginBottom: '1.5rem',
           },
         },
         lg: {
           css: {
-            h1: { fontSize: '3.75rem', lineHeight: '1' },
-            h2: { fontSize: '2.75rem', lineHeight: '1.1' },
-            h3: { fontSize: '2rem', lineHeight: '1.2' },
-            h4: { fontSize: '1.75rem', lineHeight: '1.3' },
+            h1: { fontSize: '3.75rem', lineHeight: '1', marginBottom: '1.5rem' },
+            h2: { fontSize: '2.75rem', lineHeight: '1.1', marginBottom: '1.3rem' },
+            h3: { fontSize: '2rem', lineHeight: '1.2', marginBottom: '1.2rem' },
+            h4: { fontSize: '1.75rem', lineHeight: '1.3', marginBottom: '1rem' },
             marginBottom: '2rem',
             blockquote: {
               fontSize: '1.25rem',
@@ -204,12 +205,12 @@ const config = {
         '2xl': {
           css: {
             h1: {
-              fontSize: '6.25rem', // Your target size
+              fontSize: '6.25rem',
               lineHeight: '1',
               marginBottom: '2rem',
             },
             h2: {
-              fontSize: '4.125rem', // Your target size
+              fontSize: '4.125rem',
               lineHeight: '1.1',
               marginBottom: '1.75rem',
             },
