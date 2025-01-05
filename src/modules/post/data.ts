@@ -87,7 +87,7 @@ export const getPaginatedPostsData = async ({ category, page }: PaginatedPostsPr
       excerpt: true,
       slug: true,
     },
-    limit: 12,
+    limit: 10,
     page,
   }
 
