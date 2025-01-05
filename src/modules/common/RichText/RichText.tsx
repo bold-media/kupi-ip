@@ -27,6 +27,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
   ...LinkJSXConverter({ internalDocToHref }),
   blocks: {
     carousel: ({ node }) => <Carousel {...node.fields} className="max-w-none" />,
+    // eslint-disable-next-line jsx-a11y/alt-text
     image: ({ node }) => <Image {...node.fields} />,
   },
   inlineBlocks: {
