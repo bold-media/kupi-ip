@@ -28,8 +28,8 @@ export const PostPreviewCard = (props: PostPreviewCardProps) => {
               draggable={false}
             />
           ) : (
-            <div className="bg-gradient-to-br from-slate-900/10 to-slate-900/50 h-full w-full flex items-center justify-center">
-              <Icon size="xl">
+            <div className="bg-gradient-to-br from-background-light/80 to-background-light/10 h-full w-full flex items-center justify-center">
+              <Icon size="xl" className="opacity-80 stroke-1 size-12">
                 <ImageIcon />
               </Icon>
             </div>
