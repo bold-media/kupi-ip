@@ -45,8 +45,10 @@ export const RecentPosts = async (props: RecentPostsBlock) => {
                   </CarouselItem>
                 ))}
             </CarouselContent>
-            <CarouselPrevious absolute />
-            <CarouselNext absolute />
+            <CarouselControls className="hidden sm:flex">
+              <CarouselPrevious />
+              <CarouselNext />
+            </CarouselControls>
           </div>
           {/* <div className="mt-6 md:mt-8 flex justify-center">
             <Button variant="ghost" asChild>
