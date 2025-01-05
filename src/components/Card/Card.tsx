@@ -18,7 +18,7 @@ export const CardHeader = ({ className, ...props }: ComponentPropsWithRef<'div'>
 CardHeader.displayName = 'CardHeader'
 
 export const CardTitle = ({ className, ...props }: ComponentPropsWithRef<'div'>) => (
-  <div className={cn('font-normal leading-none tracking-tight', className)} {...props} />
+  <h3 className={cn('font-normal leading-none tracking-tight italic', className)} {...props} />
 )
 CardTitle.displayName = 'CardTitle'
 
