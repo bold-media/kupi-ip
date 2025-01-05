@@ -20,8 +20,8 @@ export const richTextVariants = cva('', {
     size: {
       manual: '',
       baseScale: 'md:prose-md xl:prose-lg',
-      mdScale: 'prose-md md:prose-lg lg:prose-xl xl:prose-2xl',
-      pageTitle: 'prose-md md:prose-lg',
+      mdScale: 'prose-md md:prose-lg lg:prose-xl xl:prose-2xl prose-p:max-w-4xl prose-p:mx-auto',
+      pageTitle: 'prose-md md:prose-lg prose-p:max-w-4xl prose-p:mx-auto',
       lgScale: 'prose-md sm:prose-lg md:prose-xl lg:prose-2xl',
       blog: 'prose-xs sm:prose-sm md:prose-md lg:prose-lg',
     },
