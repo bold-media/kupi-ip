@@ -14,7 +14,7 @@ import { messages } from './i18n'
 import { plugins } from './plugins'
 import { rootEditor } from './fields/lexical/rootEditor'
 import { globals } from './globals'
-// import { migrations } from '@/migrations'
+import { migrations } from '@/migrations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -86,7 +86,7 @@ export default buildConfig({
         return schema
       },
     ],
-    // prodMigrations: migrations,
+    prodMigrations: migrations,
   }),
   sharp,
   plugins,
