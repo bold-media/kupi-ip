@@ -26,7 +26,6 @@ export const Header = ({
   data: Partial<NonNullable<Settings['navigation']>['header']>
 }) => {
   const pathname = usePathname()
-  // const [opened, toggle] = useToggle(false)
 
   const isActiveLink = useCallback(
     (href: string) => {
