@@ -28,7 +28,9 @@ const DownloadPage = async ({ params }: Props) => {
         <div className="flex flex-col gap-10 md:gap-20">
           <RichText
             data={intro}
-            className="text-center prose-md md:prose-lg lg:prose-xl xl:prose-2xl !mb-0"
+            size="pageTitle"
+            className="text-center"
+            // className="text-center prose-md md:prose-lg lg:prose-xl xl:prose-2xl !mb-0"
           />
           {icon && typeof icon === 'object' && icon?.url && (
             <Image
