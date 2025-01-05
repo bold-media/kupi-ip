@@ -48,16 +48,16 @@ export const RecentPosts = async (props: RecentPostsBlock) => {
             <CarouselPrevious absolute />
             <CarouselNext absolute />
           </div>
-          <div className="mt-6 md:mt-8 flex justify-center">
+          {/* <div className="mt-6 md:mt-8 flex justify-center">
             <Button variant="ghost" asChild>
-              <NextLink href="/post">
+              <NextLink href="/blog">
                 Смотреть все
                 <Icon>
                   <ArrowRight />
                 </Icon>
               </NextLink>
             </Button>
-          </div>
+          </div> */}
         </Carousel>
       ) : (
         <div className="text-center text-lg md:text-xl flex flex-col items-center gap-2 my-12 md:my-24">
