@@ -77,6 +77,22 @@ export const Page: CollectionConfig = {
     afterDelete: [revalidatePageDelete],
   },
   fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+      label: {
+        en: en.common.title.singular,
+        ru: ru.common.title.singular,
+      },
+      admin: {
+        position: 'sidebar',
+        description: {
+          en: 'This is for internal identification only. It is not shown to users.',
+          ru: 'Это только для использования в админ-панели. Пользователям не отображается.',
+        },
+      },
+    },
     slug(),
     {
       name: 'pathname',
@@ -103,31 +119,28 @@ export const Page: CollectionConfig = {
       tabs: [
         {
           label: {
-            en: 'Main',
-            ru: 'Основное',
-          },
-          fields: [
-            {
-              name: 'title',
-              type: 'text',
-              required: true,
-              label: {
-                en: en.common.title.singular,
-                ru: ru.common.title.singular,
-              },
-            },
-            hero,
-          ],
-        },
-        {
-          label: {
             en: en.common.content,
             ru: ru.common.content,
           },
           fields: [
+            hero,
             {
               name: 'blocks',
               type: 'blocks',
+              label: {
+                en: en.common.block.plural,
+                ru: ru.common.block.plural,
+              },
+              labels: {
+                singular: {
+                  en: en.common.block.singular,
+                  ru: ru.common.block.singular,
+                },
+                plural: {
+                  en: en.common.block.plural,
+                  ru: ru.common.block.plural,
+                },
+              },
               blocks: [Accordion, CallToAction, Downloads, Features, Steps, Tariffs, RecentPosts],
             },
           ],
@@ -150,8 +163,23 @@ export const Page: CollectionConfig = {
                 },
               },
             }),
-            MetaDescriptionField({}),
-            MetaImageField({ relationTo: 'media' }),
+            MetaDescriptionField({
+              overrides: {
+                label: {
+                  en: en.common.description.singular,
+                  ru: ru.common.description.singular,
+                },
+              },
+            }),
+            MetaImageField({
+              relationTo: 'media',
+              overrides: {
+                label: {
+                  en: en.common.image.singular,
+                  ru: ru.common.image.singular,
+                },
+              },
+            }),
             PreviewField({
               hasGenerateFn: true,
               titlePath: 'meta.title',

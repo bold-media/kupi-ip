@@ -11,7 +11,7 @@ export const variantOptions: Record<
   none: {
     label: {
       en: 'None',
-      ru: '',
+      ru: 'Без фона',
     },
     value: 'none',
   },
@@ -54,6 +54,10 @@ export const background: BackgroundType = ({ variants, overrides = {} } = {}) =>
   const backgroundResult: Field = {
     name: 'background',
     type: 'group',
+    label: {
+      en: 'Background',
+      ru: 'Фон',
+    },
     admin: {
       hideGutter: true,
     },
@@ -61,8 +65,26 @@ export const background: BackgroundType = ({ variants, overrides = {} } = {}) =>
       {
         type: 'row',
         fields: [
-          selectSize({ overrides: { name: 'paddingTop', admin: { width: '50%' } } }),
-          selectSize({ overrides: { name: 'paddingBottom', admin: { width: '50%' } } }),
+          selectSize({
+            overrides: {
+              name: 'paddingTop',
+              label: {
+                en: 'Padding Top',
+                ru: 'Отступ сверху',
+              },
+              admin: { width: '50%' },
+            },
+          }),
+          selectSize({
+            overrides: {
+              name: 'paddingBottom',
+              label: {
+                en: 'Padding Bottom',
+                ru: 'Отступ снизу',
+              },
+              admin: { width: '50%' },
+            },
+          }),
         ],
       },
     ],
@@ -75,6 +97,10 @@ export const background: BackgroundType = ({ variants, overrides = {} } = {}) =>
     required: true,
     admin: {
       isClearable: false,
+    },
+    label: {
+      en: 'Type',
+      ru: 'Тип',
     },
     options: [],
   }

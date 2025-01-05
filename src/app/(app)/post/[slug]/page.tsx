@@ -6,6 +6,10 @@ import React from 'react'
 import { RichText } from '@/modules/common/RichText'
 import { AspectRatio } from '@/components/AspectRatio'
 import { RenderBlocks } from '@/modules/common/Blocks/RenderBlocks'
+import { Metadata, ResolvingMetadata } from 'next'
+import { generateMeta } from '@/utils/generateMeta'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
 interface Props {
   params: Promise<{
@@ -56,6 +60,43 @@ const PostPage = async ({ params }: Props) => {
       <RenderBlocks blocks={post?.blocks} />
     </>
   )
+}
+
+export const generateStaticParams = async () => {
+  try {
+    const payload = await getPayload({ config })
+    const post = await payload.find({
+      collection: 'post',
+      draft: false,
+      limit: 0,
+      overrideAccess: false,
+      select: {
+        slug: true,
+      },
+      where: {
+        slug: {
+          exists: true,
+        },
+      },
+    })
+
+    const params = post?.docs?.map(({ slug }) => ({ slug }))
+    return params
+  } catch (error) {
+    return []
+  }
+}
+
+export const generateMetadata = async (
+  { params }: Props,
+  parentPromise: ResolvingMetadata,
+): Promise<Metadata> => {
+  const { slug } = await params
+  const post = await getPostBySlug(slug)
+
+  const fallback = await parentPromise
+
+  return generateMeta({ meta: post?.meta, fallback, pathname: `/post/${post?.slug}` })
 }
 
 export default PostPage

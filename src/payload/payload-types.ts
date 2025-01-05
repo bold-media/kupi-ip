@@ -114,10 +114,13 @@ export interface Media {
  */
 export interface Page {
   id: string;
+  /**
+   * This is for internal identification only. It is not shown to users.
+   */
+  title: string;
   slug?: string | null;
   pathname?: string | null;
   parent?: (string | null) | Page;
-  title: string;
   hero: {
     type: 'none' | 'standard' | 'wave';
     richText?: {
@@ -501,10 +504,12 @@ export interface Category {
  */
 export interface Post {
   id: string;
+  slug?: string | null;
+  categories?: (string | Category)[] | null;
   title: string;
   cover?: (string | null) | Media;
   /**
-   * Short description of the article, for content previews.
+   * A short preview of the content, typically shown in lists and search results.
    */
   excerpt?: string | null;
   article?: {
@@ -541,8 +546,6 @@ export interface Post {
      */
     image?: (string | null) | Media;
   };
-  slug?: string | null;
-  categories?: (string | Category)[] | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -595,7 +598,7 @@ export interface Download {
     [k: string]: unknown;
   } | null;
   /**
-   * This is used for Card elements, to summarize the application.
+   * Text summarizing the application. It is used in preview elements, such as the cards on the "/download" page.
    */
   previewText?: string | null;
   mockup?: (string | null) | Media;
@@ -607,6 +610,14 @@ export interface Download {
       value: string | Page;
     } | null;
     url?: string | null;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -621,7 +632,7 @@ export interface Guide {
   title: string;
   cover?: (string | null) | Media;
   /**
-   * Short description of the guide, for content previews.
+   * A short preview of the content, typically shown in lists and search results.
    */
   excerpt?: string | null;
   content?: {
@@ -805,10 +816,10 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "page_select".
  */
 export interface PageSelect<T extends boolean = true> {
+  title?: T;
   slug?: T;
   pathname?: T;
   parent?: T;
-  title?: T;
   hero?:
     | T
     | {
@@ -1019,6 +1030,8 @@ export interface RecentPostsBlockSelect<T extends boolean = true> {
  * via the `definition` "post_select".
  */
 export interface PostSelect<T extends boolean = true> {
+  slug?: T;
+  categories?: T;
   title?: T;
   cover?: T;
   excerpt?: T;
@@ -1041,8 +1054,6 @@ export interface PostSelect<T extends boolean = true> {
         description?: T;
         image?: T;
       };
-  slug?: T;
-  categories?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1086,6 +1097,13 @@ export interface DownloadSelect<T extends boolean = true> {
         newTab?: T;
         reference?: T;
         url?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1360,12 +1378,41 @@ export interface Settings {
       };
       [k: string]: unknown;
     } | null;
-    title?: string | null;
-    description?: string | null;
   };
   seo?: {
-    title?: string | null;
-    description?: string | null;
+    /**
+     * These settings serve as a fallback for any pages that do not have SEO configured. If a page has SEO configured, these settings will be ignored.
+     */
+    default?: {
+      title?: string | null;
+      description?: string | null;
+      /**
+       * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+       */
+      image?: (string | null) | Media;
+    };
+    /**
+     * For the page "/blog"
+     */
+    posts?: {
+      title?: string | null;
+      description?: string | null;
+      /**
+       * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+       */
+      image?: (string | null) | Media;
+    };
+    /**
+     * For the page "/download"
+     */
+    downloads?: {
+      title?: string | null;
+      description?: string | null;
+      /**
+       * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+       */
+      image?: (string | null) | Media;
+    };
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1509,18 +1556,45 @@ export interface SettingsSelect<T extends boolean = true> {
     | T
     | {
         content?: T;
-        title?: T;
-        description?: T;
       };
   seo?:
     | T
     | {
-        title?: T;
-        description?: T;
+        default?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
+        posts?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
+        downloads?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "YellowTextInlineBlock".
+ */
+export interface YellowTextInlineBlock {
+  text?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'yellowText';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

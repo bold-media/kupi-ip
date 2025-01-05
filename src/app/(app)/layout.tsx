@@ -55,7 +55,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   if (!settings) {
     notFound()
   }
-  return generateMeta({ meta: settings?.seo })
+  return generateMeta({ meta: settings?.seo?.default })
 }
 
 export default RootLayout

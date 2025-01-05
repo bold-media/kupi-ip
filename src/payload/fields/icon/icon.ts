@@ -9,69 +9,69 @@ export const icon: IconType = ({ overrides = {} } = {}) => {
     type: 'select',
     label: {
       en: 'Icon',
-      ru: '',
+      ru: 'Иконка',
     },
     options: [
       {
         label: {
           en: 'Globe',
-          ru: '',
+          ru: 'Глобус',
         },
         value: 'globe',
       },
       {
         label: {
           en: 'Rocketship',
-          ru: '',
+          ru: 'Рокета',
         },
         value: 'rocketship',
       },
       {
         label: {
           en: 'Signal',
-          ru: '',
+          ru: 'Сигнал',
         },
         value: 'signal',
       },
       {
         label: {
           en: 'Happy Face',
-          ru: '',
+          ru: 'Счастливый смайлик',
         },
         value: 'smiley',
       },
       {
         label: {
           en: 'Shield',
-          ru: '',
+          ru: 'Щит',
         },
         value: 'shield',
       },
       {
         label: {
           en: 'Battery',
-          ru: '',
+          ru: 'Батарея',
         },
         value: 'battery',
       },
       {
         label: {
           en: 'Piggy Bank',
-          ru: '',
+          ru: 'Копилка',
         },
         value: 'piggyBank',
       },
       {
         label: {
           en: 'Lightning',
-          ru: '',
+          ru: 'Молния',
         },
         value: 'lightning',
       },
       {
         label: {
           en: 'Document Shield',
-          ru: '',
+          ru: 'Документ защищенный',
         },
         value: 'documentShield',
       },

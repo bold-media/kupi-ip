@@ -2,9 +2,13 @@ import { AspectRatio } from '@/components/AspectRatio'
 import { RenderBlocks } from '@/modules/common/Blocks/RenderBlocks'
 import { RichText } from '@/modules/common/RichText'
 import { getGuideBySlug } from '@/modules/guides/data'
+import { generateMeta } from '@/utils/generateMeta'
+import { Metadata, ResolvingMetadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import { getPayload } from 'payload'
 import React from 'react'
+import config from '@payload-config'
 
 interface Props {
   params: Promise<{
@@ -54,6 +58,43 @@ const GuidePage = async ({ params }: Props) => {
       <RenderBlocks blocks={guide?.blocks} />
     </>
   )
+}
+
+export const generateStaticParams = async () => {
+  try {
+    const payload = await getPayload({ config })
+    const guide = await payload.find({
+      collection: 'guide',
+      draft: false,
+      limit: 0,
+      overrideAccess: false,
+      select: {
+        slug: true,
+      },
+      where: {
+        slug: {
+          exists: true,
+        },
+      },
+    })
+
+    const params = guide?.docs?.map(({ slug }) => ({ slug }))
+    return params
+  } catch {
+    return []
+  }
+}
+
+export const generateMetadata = async (
+  { params }: Props,
+  parentPromise: ResolvingMetadata,
+): Promise<Metadata> => {
+  const { slug } = await params
+  const guide = await getGuideBySlug(slug)
+
+  const fallback = await parentPromise
+
+  return generateMeta({ meta: guide?.meta, fallback, pathname: `/guide/${guide?.slug}` })
 }
 
 export default GuidePage

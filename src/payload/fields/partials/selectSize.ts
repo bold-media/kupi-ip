@@ -3,25 +3,43 @@ import { SelectField } from 'payload'
 
 export type SizeVariants = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
-export const variantOptions: Record<SizeVariants, { label: string; value: string }> = {
+export const variantOptions: Record<
+  SizeVariants,
+  { label: { en: string; ru: string }; value: string }
+> = {
   xs: {
-    label: 'XS',
+    label: {
+      en: 'XS',
+      ru: 'XS',
+    },
     value: 'xs',
   },
   sm: {
-    label: 'SM',
+    label: {
+      en: 'SM',
+      ru: 'S',
+    },
     value: 'sm',
   },
   md: {
-    label: 'MD',
+    label: {
+      en: 'MD',
+      ru: 'M',
+    },
     value: 'md',
   },
   lg: {
-    label: 'LG',
+    label: {
+      en: 'LG',
+      ru: 'L',
+    },
     value: 'lg',
   },
   xl: {
-    label: 'XL',
+    label: {
+      en: 'XL',
+      ru: 'XL',
+    },
     value: 'xl',
   },
 }
@@ -35,6 +53,10 @@ export const selectSize: SizeType = ({ variants, overrides = {} } = {}) => {
   const sizeResult: SelectField = {
     name: 'size',
     type: 'select',
+    label: {
+      en: 'Size',
+      ru: 'Размер',
+    },
     required: true,
     admin: { isClearable: false },
     options: [],

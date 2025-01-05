@@ -4,6 +4,7 @@ import { guidesSearchParamsCache } from './searchParams'
 import { getPaginatedGuides } from '@/modules/guides/data'
 import { PostPreviewCard } from '@/modules/post/PostPreviewCard'
 import { PostPagination } from '@/modules/post/PostPagination'
+import { notFound } from 'next/navigation'
 
 type AllGuidesPageProps = {
   searchParams: Promise<SearchParams>
@@ -11,6 +12,11 @@ type AllGuidesPageProps = {
 
 const AllGuidesPage = async ({ searchParams }: AllGuidesPageProps) => {
   const { page } = await guidesSearchParamsCache.parse(searchParams)
+
+  if (page) {
+    //just return notfound for this page, as it probably should not exist.
+    notFound()
+  }
 
   const guides = await getPaginatedGuides({ page })
 

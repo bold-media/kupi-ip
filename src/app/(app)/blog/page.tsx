@@ -5,6 +5,9 @@ import { getAllCategories, getPaginatedPosts } from '@/modules/post/data'
 import { PostPreviewCard } from '@/modules/post/PostPreviewCard'
 import { PostCategories } from '@/modules/post/PostCategories'
 import { PostPagination } from '@/modules/post/PostPagination'
+import { Metadata, ResolvingMetadata } from 'next'
+import { getSettings } from '@/modules/common/data'
+import { generateMeta } from '@/utils/generateMeta'
 
 type AllPostsPageProps = {
   searchParams: Promise<SearchParams>
@@ -45,6 +48,14 @@ const AllPostsPage = async ({ searchParams }: AllPostsPageProps) => {
       </div>
     </>
   )
+}
+
+export const generateMetadata = async ({}, parentPromise: ResolvingMetadata): Promise<Metadata> => {
+  const settings = await getSettings()
+
+  const fallback = await parentPromise
+
+  return generateMeta({ meta: settings?.seo?.posts, fallback, pathname: `/blog` })
 }
 
 export default AllPostsPage

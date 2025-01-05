@@ -5,7 +5,8 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { en } from 'payload/i18n/en'
-import { ru } from 'payload/i18n/ru'
+//use local overrides for now until we merge updated ru translations in to master of Payload
+import { ru } from './i18n/default-ru'
 
 import { collections } from './collections'
 import { User } from './collections/User'
@@ -65,6 +66,26 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
     idType: 'uuid',
+    /**
+     * Enums currently have many issues when entries are added, or removed.
+     * This opts out of enums and replaces them with varchar columns instead.
+     */
+    beforeSchemaInit: [
+      ({ schema, adapter }) => {
+        for (const tableName in adapter.rawTables) {
+          const table = adapter.rawTables[tableName]
+
+          for (const fieldName in table.columns) {
+            const column = table.columns[fieldName]
+
+            if (column.type === 'enum') {
+              ;(column as any).type = 'varchar'
+            }
+          }
+        }
+        return schema
+      },
+    ],
     // prodMigrations: migrations,
   }),
   sharp,

@@ -23,6 +23,16 @@ import { revalidateGuide, revalidateGuideDelete } from './hooks/revalidateGuide'
 
 export const Guide: CollectionConfig = {
   slug: 'guide',
+  labels: {
+    singular: {
+      en: 'Guide',
+      ru: 'Инструкция',
+    },
+    plural: {
+      en: 'Guides',
+      ru: 'Инструкции',
+    },
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'publishedAt', 'updatedAt'],
@@ -70,36 +80,67 @@ export const Guide: CollectionConfig = {
       tabs: [
         {
           label: {
-            en: 'Main',
-            ru: 'Основное',
+            en: en.common.content,
+            ru: ru.common.content,
           },
           fields: [
             {
               name: 'title',
+              label: {
+                en: en.common.title.singular,
+                ru: ru.common.title.singular,
+              },
               type: 'text',
               required: true,
             },
             {
               name: 'cover',
+              label: {
+                en: en.common.cover,
+                ru: ru.common.cover,
+              },
               type: 'upload',
               relationTo: 'media',
             },
             {
               name: 'excerpt',
+              label: {
+                en: en.common.excerpt,
+                ru: ru.common.excerpt,
+              },
               type: 'textarea',
               admin: {
                 description: {
-                  en: 'Short description of the guide, for content previews.',
+                  en: en.common.excerptDescription,
+                  ru: ru.common.excerptDescription,
                 },
               },
             },
             {
               name: 'content',
+              label: {
+                en: en.common.content,
+                ru: ru.common.content,
+              },
               type: 'richText',
               editor: postEditor,
             },
             {
               name: 'blocks',
+              label: {
+                en: en.common.block.plural,
+                ru: ru.common.block.plural,
+              },
+              labels: {
+                singular: {
+                  en: en.common.block.singular,
+                  ru: ru.common.block.singular,
+                },
+                plural: {
+                  en: en.common.block.plural,
+                  ru: ru.common.block.plural,
+                },
+              },
               type: 'blocks',
               blocks: [Accordion, CallToAction, Downloads, Features, Steps, Tariffs, RecentPosts],
             },
@@ -123,8 +164,23 @@ export const Guide: CollectionConfig = {
                 },
               },
             }),
-            MetaDescriptionField({}),
-            MetaImageField({ relationTo: 'media' }),
+            MetaDescriptionField({
+              overrides: {
+                label: {
+                  en: en.common.description.singular,
+                  ru: ru.common.description.singular,
+                },
+              },
+            }),
+            MetaImageField({
+              relationTo: 'media',
+              overrides: {
+                label: {
+                  en: en.common.image.singular,
+                  ru: ru.common.image.singular,
+                },
+              },
+            }),
             PreviewField({
               hasGenerateFn: true,
               titlePath: 'meta.title',

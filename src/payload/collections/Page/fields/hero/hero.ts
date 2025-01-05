@@ -4,31 +4,50 @@ import { Field } from 'payload'
 export const hero: Field = {
   name: 'hero',
   type: 'group',
-  label: false,
+  label: {
+    en: 'Hero',
+    ru: 'Первый экран',
+  },
   fields: [
     {
       name: 'type',
       type: 'select',
       defaultValue: 'standard',
-      label: 'Type',
+      label: {
+        en: 'Type',
+        ru: 'Тип',
+      },
       required: true,
       options: [
         {
-          label: 'None',
+          label: {
+            en: 'None',
+            ru: 'Нет',
+          },
           value: 'none',
         },
         {
-          label: 'Standard',
+          label: {
+            en: 'Standard',
+            ru: 'Стандартный',
+          },
           value: 'standard',
         },
         {
-          label: 'Wave',
+          label: {
+            en: 'Wave',
+            ru: 'Волна',
+          },
           value: 'wave',
         },
       ],
     },
     {
       name: 'richText',
+      label: {
+        en: 'Rich Text',
+        ru: 'Форматированный текст',
+      },
       type: 'richText',
       editor: basicEditor({ headingSizes: ['h1'] }),
     },

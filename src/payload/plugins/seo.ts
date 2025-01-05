@@ -17,6 +17,10 @@ const generateURL: GenerateURL<Page> = ({ doc, collectionSlug }) => {
       )
     case 'post':
       return `${process.env.NEXT_PUBLIC_APP_URL}/post/${doc?.slug}`
+    case 'download':
+      return `${process.env.NEXT_PUBLIC_APP_URL}/download/${doc?.slug}`
+    case 'guide':
+      return `${process.env.NEXT_PUBLIC_APP_URL}/guide/${doc?.slug}`
     default:
       return ``
   }

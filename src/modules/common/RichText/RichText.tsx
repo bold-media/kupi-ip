@@ -1,47 +1,26 @@
 import {
   DefaultNodeTypes,
   SerializedBlockNode,
-  SerializedLinkNode,
+  SerializedInlineBlockNode,
 } from '@payloadcms/richtext-lexical'
-import { SerializedEditorState, SerializedLexicalNode } from '@payloadcms/richtext-lexical/lexical'
 import {
   JSXConvertersFunction,
   RichText as RichTextWithoutBlocks,
 } from '@payloadcms/richtext-lexical/react'
 
 import { cn } from '@/utils/cn'
-import { cva, VariantProps } from 'class-variance-authority'
-import { CarouselBlock, ImageBlock } from '@payload-types'
+import { CarouselBlock, ImageBlock, YellowTextInlineBlock } from '@payload-types'
 import { Carousel } from '@/payload/blocks/Carousel/Carousel.component'
-import { ComponentPropsWithRef } from 'react'
 import { LinkJSXConverter } from './LinkJSXConverter'
 import { Image } from '@/payload/blocks/Image/Image.component'
+import { RichTextProps, richTextVariants } from './variants'
+import { internalDocToHref } from './internalDocToHref'
 
 type NodeTypes =
   | DefaultNodeTypes
   | SerializedBlockNode<CarouselBlock>
   | SerializedBlockNode<ImageBlock>
-
-const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }): string => {
-  const { value, relationTo } = linkNode.fields.doc!
-
-  if (typeof value !== 'object') {
-    throw new Error('Expected value to be an object')
-  }
-
-  switch (relationTo) {
-    case 'page':
-      return `${value?.pathname}`
-    case 'post':
-      return `/post/${value?.slug}`
-    case 'download':
-      return `/download/${value?.slug}`
-    case 'guide':
-      return `/guide/${value?.slug}`
-    default:
-      return '#'
-  }
-}
+  | SerializedInlineBlockNode<YellowTextInlineBlock>
 
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
@@ -50,45 +29,10 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     carousel: ({ node }) => <Carousel {...node.fields} className="max-w-none" />,
     image: ({ node }) => <Image {...node.fields} />,
   },
-})
-
-const richTextVariants = cva('', {
-  variants: {
-    enableGutter: {
-      true: 'container',
-      false: 'max-w-none',
-      empty: '',
-    },
-    enableProse: {
-      true: 'prose prose-slate dark:prose-invert',
-      false: '',
-    },
-    withPadding: {
-      true: 'px-4 md:px-6',
-      false: '',
-    },
-    size: {
-      manual: '',
-      baseScale: 'md:prose-md xl:prose-lg',
-      mdScale: 'prose-md md:prose-lg lg:prose-xl xl:prose-2xl',
-      pageTitle: 'prose-md md:prose-lg',
-      lgScale: 'prose-md sm:prose-lg md:prose-xl lg:prose-2xl',
-      blog: 'prose-xs sm:prose-sm md:prose-md lg:prose-lg',
-    },
-  },
-  defaultVariants: {
-    size: 'manual',
-    enableGutter: true,
-    enableProse: true,
-    withPadding: false,
+  inlineBlocks: {
+    yellowText: ({ node }) => <span className="text-brand-tertiary">{node?.fields?.text}</span>,
   },
 })
-
-interface RichTextProps
-  extends ComponentPropsWithRef<'div'>,
-    VariantProps<typeof richTextVariants> {
-  data: SerializedEditorState<SerializedLexicalNode> | undefined | null
-}
 
 export const RichText = (props: RichTextProps) => {
   const {

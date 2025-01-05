@@ -1,6 +1,8 @@
+import { YellowText } from '@/payload/inlineBlocks/YellowText'
 import {
   AlignFeature,
   BlockquoteFeature,
+  BlocksFeature,
   BoldFeature,
   HeadingFeature,
   HorizontalRuleFeature,
@@ -35,6 +37,9 @@ export const rootEditor = lexicalEditor({
       BlockquoteFeature(),
       HorizontalRuleFeature(),
       InlineToolbarFeature(),
+      BlocksFeature({
+        inlineBlocks: [YellowText],
+      }),
     ]
   },
 })

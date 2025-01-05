@@ -4,8 +4,8 @@ import { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'payload'
 
 const revalidate = (slug: string) => {
   revalidateTag(slug)
-  revalidateTag('guide'), revalidatePath(`/guide/${slug}`)
-  revalidatePath('(app)/guide', 'page')
+  revalidateTag('guide')
+  revalidatePath(`/guide/${slug}`)
 }
 
 export const revalidateGuide: CollectionAfterChangeHook<Guide> = ({

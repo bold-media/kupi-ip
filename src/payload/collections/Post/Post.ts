@@ -24,6 +24,16 @@ import {
 
 export const Post: CollectionConfig = {
   slug: 'post',
+  labels: {
+    singular: {
+      en: 'Post',
+      ru: 'Статья',
+    },
+    plural: {
+      en: 'Posts',
+      ru: 'Статьи',
+    },
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'pathname', 'publishedAt', 'updatedAt'],
@@ -66,41 +76,86 @@ export const Post: CollectionConfig = {
     afterDelete: [revalidatePostDelete],
   },
   fields: [
+    slug(),
+    {
+      name: 'categories',
+      label: {
+        en: 'Categories',
+        ru: 'Категории',
+      },
+      type: 'relationship',
+      hasMany: true,
+      relationTo: 'category',
+      admin: {
+        position: 'sidebar',
+      },
+    },
     {
       type: 'tabs',
       tabs: [
         {
           label: {
-            en: 'Main',
-            ru: 'Основное',
+            en: en.common.content,
+            ru: ru.common.content,
           },
           fields: [
             {
               name: 'title',
+              label: {
+                en: en.common.title.singular,
+                ru: ru.common.title.singular,
+              },
               type: 'text',
               required: true,
             },
             {
               name: 'cover',
+              label: {
+                en: en.common.cover,
+                ru: ru.common.cover,
+              },
               type: 'upload',
               relationTo: 'media',
             },
             {
               name: 'excerpt',
+              label: {
+                en: en.common.excerpt,
+                ru: ru.common.excerpt,
+              },
               type: 'textarea',
               admin: {
                 description: {
-                  en: 'Short description of the article, for content previews.',
+                  en: en.common.excerptDescription,
+                  ru: ru.common.excerptDescription,
                 },
               },
             },
             {
               name: 'article',
+              label: {
+                en: 'Article',
+                ru: 'Статья',
+              },
               type: 'richText',
               editor: postEditor,
             },
             {
               name: 'blocks',
+              label: {
+                en: en.common.block.plural,
+                ru: ru.common.block.plural,
+              },
+              labels: {
+                singular: {
+                  en: en.common.block.singular,
+                  ru: ru.common.block.singular,
+                },
+                plural: {
+                  en: en.common.block.plural,
+                  ru: ru.common.block.plural,
+                },
+              },
               type: 'blocks',
               blocks: [Accordion, CallToAction, Downloads, Features, Steps, Tariffs, RecentPosts],
             },
@@ -124,8 +179,23 @@ export const Post: CollectionConfig = {
                 },
               },
             }),
-            MetaDescriptionField({}),
-            MetaImageField({ relationTo: 'media' }),
+            MetaDescriptionField({
+              overrides: {
+                label: {
+                  en: en.common.description.singular,
+                  ru: ru.common.description.singular,
+                },
+              },
+            }),
+            MetaImageField({
+              relationTo: 'media',
+              overrides: {
+                label: {
+                  en: en.common.image.singular,
+                  ru: ru.common.image.singular,
+                },
+              },
+            }),
             PreviewField({
               hasGenerateFn: true,
               titlePath: 'meta.title',
@@ -134,16 +204,6 @@ export const Post: CollectionConfig = {
           ],
         },
       ],
-    },
-    slug(),
-    {
-      name: 'categories',
-      type: 'relationship',
-      hasMany: true,
-      relationTo: 'category',
-      admin: {
-        position: 'sidebar',
-      },
     },
   ],
 }

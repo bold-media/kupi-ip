@@ -1,5 +1,7 @@
 import { basicEditor } from '@/payload/fields/lexical'
 import { link } from '@/payload/fields/link'
+import { en } from '@/payload/i18n/en'
+import { ru } from '@/payload/i18n/ru'
 import { Field } from 'payload'
 
 export const tariffFields: Field[] = [
@@ -8,6 +10,10 @@ export const tariffFields: Field[] = [
     fields: [
       {
         name: 'term',
+        label: {
+          en: 'Term',
+          ru: 'Длительность',
+        },
         type: 'text',
         admin: {
           width: '33.333%',
@@ -15,6 +21,10 @@ export const tariffFields: Field[] = [
       },
       {
         name: 'benefit',
+        label: {
+          en: 'Benefit',
+          ru: 'Выгода',
+        },
         type: 'text',
         admin: {
           width: '33.333%',
@@ -22,6 +32,10 @@ export const tariffFields: Field[] = [
       },
       {
         name: 'limit',
+        label: {
+          en: 'Limit',
+          ru: 'Лимит',
+        },
         type: 'text',
         admin: {
           width: '33.333%',
@@ -32,11 +46,19 @@ export const tariffFields: Field[] = [
 
   {
     name: 'description',
+    label: {
+      en: en.common.description.singular,
+      ru: ru.common.description.singular,
+    },
     type: 'richText',
     editor: basicEditor({ disableAlign: true, disableHeadings: true }),
   },
   {
     name: 'price',
+    label: {
+      en: 'Price',
+      ru: 'Цена',
+    },
     type: 'text',
   },
   {
@@ -48,7 +70,7 @@ export const tariffFields: Field[] = [
         overrides: {
           label: {
             en: 'Payment Link',
-            ru: '',
+            ru: 'Ссылка на оплату',
           },
           admin: {
             width: '50%',
@@ -62,7 +84,7 @@ export const tariffFields: Field[] = [
           name: 'trialLink',
           label: {
             en: 'Trial Link',
-            ru: '',
+            ru: 'Ссылка на тестирование',
           },
           admin: {
             width: '50%',

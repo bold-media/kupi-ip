@@ -3,7 +3,11 @@ import { getDownloadBySlug } from '@/modules/downloads/data'
 import { DownloadButtons } from '@/modules/downloads/DownloadButtons'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import { getPayload } from 'payload'
 import React from 'react'
+import config from '@payload-config'
+import { Metadata, ResolvingMetadata } from 'next'
+import { generateMeta } from '@/utils/generateMeta'
 
 interface Props {
   params: Promise<{
@@ -43,6 +47,43 @@ const DownloadPage = async ({ params }: Props) => {
       </div>
     </>
   )
+}
+
+export const generateStaticParams = async () => {
+  try {
+    const payload = await getPayload({ config })
+    const downloads = await payload.find({
+      collection: 'download',
+      draft: false,
+      limit: 0,
+      overrideAccess: false,
+      select: {
+        slug: true,
+      },
+      where: {
+        slug: {
+          exists: true,
+        },
+      },
+    })
+
+    const params = downloads?.docs?.map(({ slug }) => ({ slug }))
+    return params
+  } catch (error) {
+    return []
+  }
+}
+
+export const generateMetadata = async (
+  { params }: Props,
+  parentPromise: ResolvingMetadata,
+): Promise<Metadata> => {
+  const { slug } = await params
+  const download = await getDownloadBySlug(slug)
+
+  const fallback = await parentPromise
+
+  return generateMeta({ meta: download?.meta, fallback, pathname: `/download/${download?.slug}` })
 }
 
 export default DownloadPage

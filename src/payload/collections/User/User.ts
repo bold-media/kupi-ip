@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
-import { access, accessField } from '@/payload/access'
+import { access } from '@/payload/access'
 
 export const User: CollectionConfig = {
   slug: 'user',

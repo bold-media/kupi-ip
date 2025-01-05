@@ -1,0 +1,1 @@
+export { YellowText } from './YellowText'

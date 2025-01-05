@@ -10,35 +10,35 @@ export const appearanceOptions: Record<
   default: {
     label: {
       en: 'Primary',
-      ru: '',
+      ru: 'Основная',
     },
     value: 'default',
   },
   secondary: {
     label: {
       en: 'Secondary',
-      ru: '',
+      ru: 'Второстепенная',
     },
     value: 'secondary',
   },
   outline: {
     label: {
       en: 'Outline',
-      ru: '',
+      ru: 'Контурная',
     },
     value: 'outline',
   },
   ghost: {
     label: {
       en: 'Ghost',
-      ru: '',
+      ru: 'Призрачная',
     },
     value: 'ghost',
   },
   link: {
     label: {
       en: 'Anchor',
-      ru: '',
+      ru: 'Ссылка',
     },
     value: 'link',
   },
@@ -56,7 +56,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
     type: 'group',
     label: {
       en: 'Link',
-      ru: '',
+      ru: 'Ссылка',
     },
     admin: {
       hideGutter: true,
@@ -67,6 +67,10 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
         fields: [
           {
             name: 'type',
+            label: {
+              en: 'Type',
+              ru: 'Тип',
+            },
             type: 'radio',
             admin: {
               layout: 'horizontal',
@@ -77,14 +81,14 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
               {
                 label: {
                   en: 'Internal Link',
-                  ru: '',
+                  ru: 'Внутренняя ссылка',
                 },
                 value: 'reference',
               },
               {
                 label: {
                   en: 'Custom URL',
-                  ru: '',
+                  ru: 'Кастомный URL',
                 },
                 value: 'custom',
               },
@@ -101,7 +105,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
             },
             label: {
               en: 'Open in new tab',
-              ru: '',
+              ru: 'Открыть в новой вкладке',
             },
           },
         ],
@@ -115,10 +119,11 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       type: 'relationship',
       admin: {
         condition: (_, siblingData) => siblingData?.type === 'reference',
+        width: '50%',
       },
       label: {
         en: 'Document to link to',
-        ru: '',
+        ru: 'Ссылка на',
       },
       relationTo: ['page'],
       required: true,
@@ -128,10 +133,11 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       type: 'text',
       admin: {
         condition: (_, siblingData) => siblingData?.type === 'custom',
+        width: '50%',
       },
       label: {
         en: 'Custom URL',
-        ru: '',
+        ru: 'Кастомная ссылка',
       },
       required: true,
     },
@@ -158,7 +164,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
           },
           label: {
             en: 'Label',
-            ru: '',
+            ru: 'Текст',
           },
           required: true,
         },
@@ -183,9 +189,16 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
 
     linkResult.fields.push({
       name: 'appearance',
+      label: {
+        en: 'Appearance',
+        ru: 'Вид',
+      },
       type: 'select',
       admin: {
-        description: 'Choose how the link should be rendered',
+        description: {
+          en: 'Choose how the link should be rendered',
+          ru: 'Выберете, как ссылка будет выглядеть.',
+        },
       },
       defaultValue: 'default',
       options: appearanceOptionsToUse,

@@ -55,7 +55,7 @@ export const generateMeta = async (args: {
       title,
       description,
       images: ogImage ? [{ url: ogImage }] : fallback?.openGraph?.images,
-      url: pathname || undefined,
+      url: pathname ? `${process.env.NEXT_PUBLIC_APP_URL}${pathname}` : undefined,
     }),
   }
 }
