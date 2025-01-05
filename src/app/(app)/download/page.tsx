@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import { getSettings } from '@/modules/common/data'
 import { RichText } from '@/modules/common/RichText'
 import { getAllDownloads } from '@/modules/downloads/data'
