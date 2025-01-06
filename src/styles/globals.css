@@ -45,7 +45,7 @@
     --chart-5: 340 75% 55%;
     --radius: 0.5rem;
 
-    --header-height: rem-convert(56px);
+    --header-height: rem-convert(64px);
     @media (min-width: theme(screens.md)) {
       --header-height: rem-convert(60px);
     }
