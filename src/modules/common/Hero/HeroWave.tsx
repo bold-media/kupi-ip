@@ -25,7 +25,7 @@ export const HeroWave = (props: Page['hero']) => {
         <LensFlare size="2xl" className="top-0 left-1/2" />
         <div className="absolute inset-x-0 bottom-0 h-[50%] bg-gradient-to-t from-background/90 to-background/0" />
       </div>
-      <div className="container mt-24">
+      <div className="container mt-header pt-9  lg:pt-[rem-convert(60px)]">
         {props?.richText && (
           <RichText data={props.richText} enableGutter={false} className="lg-text" />
         )}
