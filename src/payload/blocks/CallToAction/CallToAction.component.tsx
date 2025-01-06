@@ -10,7 +10,7 @@ export const CallToAction = (props: CallToActionBlock) => {
   return (
     <BackgroundField {...background}>
       <RichText data={content} enableGutter={false} className="text-center md-text" />
-      <div className="flex flex-col justify-center items-center gap-2 mt-10 md:mt-20">
+      <div className="flex flex-col justify-center items-center gap-3 mt-10 md:mt-20">
         {Array.isArray(links) && links?.length > 0 && (
           <div className="flex justify-center gap-4">
             {links.map((item) => (
