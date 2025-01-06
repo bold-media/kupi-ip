@@ -7,6 +7,7 @@ import { VideoBackground } from '@/components/VideoBackground'
 
 import posterImg from '@/assets/hero-waves-poster.png'
 import { ScrollDown } from '@/components/ScrollDown'
+import { ScrollDownLottie } from '@/components/ScrollDownLottie/ScrollDownLottie'
 
 export const HeroWave = (props: Page['hero']) => {
   return (
@@ -29,7 +30,8 @@ export const HeroWave = (props: Page['hero']) => {
           <RichText data={props.richText} enableGutter={false} className="lg-text" />
         )}
       </div>
-      <ScrollDown className="absolute left-1/2 bottom-24 md:bottom-16 -translate-x-1/2 opacity-80" />
+      {/* <ScrollDown className="absolute left-1/2 bottom-24 md:bottom-16 -translate-x-1/2 opacity-80" /> */}
+      <ScrollDownLottie className="absolute left-1/2 bottom-24 md:bottom-16 -translate-x-1/2 opacity-80" />
     </section>
   )
 }
