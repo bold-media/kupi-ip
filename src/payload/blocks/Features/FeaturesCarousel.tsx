@@ -6,7 +6,7 @@ import { iconMap } from '@/modules/common/iconMap'
 import { RichText } from '@/modules/common/RichText'
 import { cn } from '@/utils/cn'
 import { useMediaQuery } from '@react-hookz/web'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 export const FeaturesCarousel = ({
   features,
@@ -47,16 +47,23 @@ export const FeaturesCarousel = ({
     | null
     | undefined
 }) => {
+  const [mounted, setMounted] = useState(false)
   const alignStart = useMediaQuery('(min-width: 80em)')
   const [selectedIndex, setSelectedIndex] = useState(0)
 
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const active = useMemo(() => {
+    if (!mounted) return true
+
     if (alignStart && features && features?.length <= 5) {
       return false
     } else {
       return true
     }
-  }, [alignStart, features])
+  }, [alignStart, features, mounted])
 
   const handleFeatureSelect = useCallback(
     (index: number) => {

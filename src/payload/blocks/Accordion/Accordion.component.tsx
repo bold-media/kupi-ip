@@ -1,3 +1,4 @@
+'use client'
 import { RichText } from '@/modules/common/RichText'
 import { BackgroundField } from '@/payload/fields/background/Background.component'
 import { AccordionBlock } from '@payload-types'
@@ -7,10 +8,48 @@ import {
   AccordionTrigger,
   Accordion as BaseAccordion,
 } from '@/components/Accordion'
-import React from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 
 export const Accordion = (props: AccordionBlock) => {
   const { background, prefix, smileyTitle, content, items } = props
+  const [openItem, setOpenItem] = useState(items?.[0]?.id || '')
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
+
+  const handleMouseEnter = useCallback((itemId: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+
+    timeoutRef.current = setTimeout(() => {
+      setOpenItem(itemId)
+    }, 200)
+  }, [])
+
+  const handleMouseLeave = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+  }, [])
+
+  const handleClick = useCallback((itemId: string) => {
+    setOpenItem(itemId)
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+    timeoutRef.current = setTimeout(() => {
+      // Re-enable hover effects after delay
+    }, 1500)
+  }, [])
+
+  // Cleanup timeouts on unmount
+  React.useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [])
+
   return (
     <BackgroundField {...background}>
       {prefix === 'smiley' && (
@@ -24,21 +63,38 @@ export const Accordion = (props: AccordionBlock) => {
       {prefix === 'richText' && (
         <RichText data={content} enableGutter={false} className="mb-4 sm:mb-8 lg:mb-12 md-text" />
       )}
-      <BaseAccordion type="single" collapsible>
+      <BaseAccordion type="single" collapsible value={openItem} onValueChange={setOpenItem}>
         {items &&
           Array.isArray(items) &&
           items?.length > 0 &&
           items?.map(
             (item) =>
               item?.id && (
-                <AccordionItem key={item.id} value={item.id}>
-                  <AccordionTrigger>{item?.title}</AccordionTrigger>
+                <AccordionItem
+                  key={item.id}
+                  value={item.id}
+                  onMouseEnter={() => handleMouseEnter(item.id || '')}
+                  onMouseLeave={handleMouseLeave}
+                  onClick={() => handleClick(item.id || '')}
+                  className="transition-all duration-300"
+                >
+                  <AccordionTrigger className="group">
+                    {/* Version without the indicator */}
+                    <div className="relative flex items-center w-full">
+                      {/* Commented out indicator
+                     <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-1 h-0 bg-brand-tertiary group-hover:h-full transition-all duration-200" />
+                     */}
+                      {item?.title}
+                    </div>
+                  </AccordionTrigger>
                   <AccordionContent>
-                    <RichText
-                      data={item?.content}
-                      enableGutter={false}
-                      className="text-slate-100 text-left"
-                    />
+                    <div className="transition-opacity duration-200">
+                      <RichText
+                        data={item?.content}
+                        enableGutter={false}
+                        className="text-slate-100 text-left"
+                      />
+                    </div>
                   </AccordionContent>
                 </AccordionItem>
               ),
@@ -47,3 +103,5 @@ export const Accordion = (props: AccordionBlock) => {
     </BackgroundField>
   )
 }
+
+Accordion.displayName = 'Accordion'
