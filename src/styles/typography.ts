@@ -26,6 +26,13 @@ export const typographyConfig = ({ theme }: any) => ({
         marginBottom: '0',
         marginLeft: 'auto',
         marginRight: 'auto',
+        color: 'hsl(0 0% 80%)',
+      },
+      li: {
+        color: 'hsl(0 0% 80%)',
+      },
+      strong: {
+        color: 'hsl(0 0% 80%)',
       },
       'p + p': {
         marginTop: rem(16),
@@ -43,6 +50,7 @@ export const typographyConfig = ({ theme }: any) => ({
         fontWeight: 300,
         fontStyle: 'italic',
         textTransform: 'lowercase',
+        color: 'hsl(0 0% 100%)',
       },
       h1: {
         fontSize: rem(60),
@@ -61,7 +69,9 @@ export const typographyConfig = ({ theme }: any) => ({
         marginBottom: rem(24),
       },
       a: {
-        fontWeight: 400,
+        fontWeight: 300,
+        'text-decoration-thickness': '0.5px',
+        'text-underline-offset': rem(5),
       },
       blockquote: {
         backgroundColor: 'hsl(var(--background-light))',

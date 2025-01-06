@@ -59,7 +59,7 @@ export const DownloadButtons = ({ name, platforms, links, buyLink }: Props) => {
           })}
         </div>
       )}
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col gap-3 justify-center">
         <Button asChild>
           <NextLink
             href={
@@ -76,7 +76,7 @@ export const DownloadButtons = ({ name, platforms, links, buyLink }: Props) => {
           </NextLink>
         </Button>
         {buyLink && (
-          <Button variant="link" asChild>
+          <Button variant="link" uppercase={false} asChild>
             <Link {...getLinkProps(buyLink)}>Купить ключ для {name}</Link>
           </Button>
         )}
