@@ -1,4 +1,3 @@
-import { Title } from '@/components/Title'
 import { RichText } from '@/modules/common/RichText'
 import { BackgroundField } from '@/payload/fields/background/Background.component'
 import { AccordionBlock } from '@payload-types'
@@ -16,19 +15,14 @@ export const Accordion = (props: AccordionBlock) => {
     <BackgroundField {...background}>
       {prefix === 'smiley' && (
         <div className="flex items-start gap-4 text-4xl font-light leading-normal mb-4 sm:mb-8 lg:mb-12">
-          <div className="flex-none mt-3">{':)'}</div>
-          <Title level="h2" className="flex-1 text-right leading-none italic">
-            <RichText data={smileyTitle} enableProse={false} enableGutter={false} />
-          </Title>
+          <div className="flex-none lg:mt-3">{':)'}</div>
+          <h2 className="flex-1 text-right leading-[1] mb-8 text-[2rem] sm:text-[3.25rem] lg:text-[4.5625rem] italic">
+            <RichText data={smileyTitle} enableGutter={false} prose={false} />
+          </h2>
         </div>
       )}
       {prefix === 'richText' && (
-        <RichText
-          data={content}
-          enableGutter={false}
-          size="mdScale"
-          className="mb-4 sm:mb-8 lg:mb-12"
-        />
+        <RichText data={content} enableGutter={false} className="mb-4 sm:mb-8 lg:mb-12 md-text" />
       )}
       <BaseAccordion type="single" collapsible>
         {items &&
@@ -43,8 +37,7 @@ export const Accordion = (props: AccordionBlock) => {
                     <RichText
                       data={item?.content}
                       enableGutter={false}
-                      size="baseScale"
-                      className="text-slate-100"
+                      className="text-slate-100 text-left"
                     />
                   </AccordionContent>
                 </AccordionItem>

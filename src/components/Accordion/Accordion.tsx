@@ -22,7 +22,7 @@ export const AccordionTrigger = ({
   <AccordionPrimitive.Header className="flex">
     <AccordionPrimitive.Trigger
       className={cn(
-        'flex flex-1 italic items-start justify-between py-4 transition-all text-left text-slate-200 hover:text-white [&[data-state=open]]:text-white [&[data-state=open]>svg]:rotate-90',
+        'flex flex-1 italic items-start justify-between py-6 transition-all text-left text-slate-200 hover:text-white [&[data-state=open]]:text-white [&[data-state=open]>svg]:rotate-90',
         className,
       )}
       {...props}
@@ -44,7 +44,7 @@ export const AccordionContent = ({
     className="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
     {...props}
   >
-    <div className={cn('pb-4 pt-0', className)}>{children}</div>
+    <div className={cn('pb-6 pt-0', className)}>{children}</div>
   </AccordionPrimitive.Content>
 )
 AccordionContent.displayName = 'AccordionContent'

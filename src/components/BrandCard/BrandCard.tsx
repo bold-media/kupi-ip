@@ -1,4 +1,5 @@
 import { cn } from '@/utils/cn'
+import { Slot } from '@radix-ui/react-slot'
 import { cva, VariantProps } from 'class-variance-authority'
 import { ComponentPropsWithRef } from 'react'
 
@@ -69,34 +70,64 @@ export const brandCardVariants = cva(['rounded-xl', 'w-full h-full', 'overflow-h
         'bg-[radial-gradient(200%_200%_at_-20%_-20%,#1010BC_30%,#2C2CF7_100%)]',
       ],
     },
+    hoverable: {
+      true: 'cursor-pointer',
+      false: '',
+    },
     size: {
       sm: 'p-4',
       md: 'p-6',
       lg: 'p-8',
       xl: 'p-10',
+      feature: 'px-[1.25rem] py-[1.25rem]',
     },
   },
   defaultVariants: {
     variant: 'flareVertical',
     size: 'md',
   },
+  compoundVariants: [
+    {
+      hoverable: true,
+      variant: 'flareHorizontal',
+      className: [
+        'relative',
+        'after:absolute after:inset-0 after:-z-10 after:opacity-0',
+        'after:bg-[radial-gradient(90%_130%_at_85%_110%,rgba(20,9,197,0.5)_0%,transparent_100%)]',
+        'hover:after:opacity-100',
+        'after:transition-opacity after:duration-300',
+      ],
+    },
+  ],
 })
 
 export interface BrandCardProps
   extends ComponentPropsWithRef<'div'>,
-    VariantProps<typeof brandCardVariants> {}
+    VariantProps<typeof brandCardVariants> {
+  asChild?: boolean
+}
 
-export const BrandCard = ({ className, variant, size, ...props }: BrandCardProps) => (
-  <div
-    className={borderGlowVariants({
-      variant: variant?.startsWith('highlighted') ? 'highlighted' : 'default',
-    })}
-  >
+export const BrandCard = ({
+  className,
+  variant,
+  hoverable,
+  asChild = false,
+  size,
+  ...props
+}: BrandCardProps) => {
+  const Comp = asChild ? Slot : 'div'
+  return (
     <div
-      className={cn(brandCardVariants({ variant, size }), 'relative z-10', className)}
-      {...props}
-    />
-  </div>
-)
+      className={borderGlowVariants({
+        variant: variant?.startsWith('highlighted') ? 'highlighted' : 'default',
+      })}
+    >
+      <Comp
+        className={cn(brandCardVariants({ variant, size, hoverable }), 'relative z-10', className)}
+        {...props}
+      />
+    </div>
+  )
+}
 
 BrandCard.displayName = 'BrandCard'

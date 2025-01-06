@@ -25,7 +25,9 @@ export const HeroWave = (props: Page['hero']) => {
         <div className="absolute inset-x-0 bottom-0 h-[50%] bg-gradient-to-t from-background/90 to-background/0" />
       </div>
       <div className="container mt-24">
-        {props?.richText && <RichText data={props.richText} enableGutter={false} size="lgScale" />}
+        {props?.richText && (
+          <RichText data={props.richText} enableGutter={false} className="lg-text" />
+        )}
       </div>
       <ScrollDown className="absolute left-1/2 bottom-24 md:bottom-16 -translate-x-1/2 opacity-80" />
     </section>

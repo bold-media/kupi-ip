@@ -365,24 +365,24 @@ export interface FeaturesBlock {
             )
           | null;
         text?: string | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         id?: string | null;
       }[]
     | null;
-  suffix?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'features';
@@ -956,9 +956,9 @@ export interface FeaturesBlockSelect<T extends boolean = true> {
     | {
         icon?: T;
         text?: T;
+        content?: T;
         id?: T;
       };
-  suffix?: T;
   id?: T;
   blockName?: T;
 }

@@ -52,20 +52,20 @@ export const Features: Block = {
           name: 'text',
           type: 'text',
           label: {
-            en: en.common.text.singular,
-            ru: ru.common.text.singular,
+            en: en.common.title.singular,
+            ru: ru.common.title.singular,
           },
         },
+        {
+          name: 'content',
+          type: 'richText',
+          label: {
+            en: en.common.content,
+            ru: ru.common.content,
+          },
+          editor: basicEditor({ disableHeadings: true, disableAlign: true }),
+        },
       ],
-    },
-    {
-      name: 'suffix',
-      type: 'richText',
-      label: {
-        en: 'Suffix',
-        ru: 'Текст после',
-      },
-      editor: basicEditor({ disableHeadings: true, disableAlign: true }),
     },
   ],
 }

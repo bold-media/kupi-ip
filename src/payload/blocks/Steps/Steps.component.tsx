@@ -12,8 +12,7 @@ export const Steps = (props: StepsBlock) => {
         <RichText
           data={prefix}
           enableGutter={false}
-          size="mdScale"
-          className="text-center mb-4 sm:mb-8 lg:mb-12"
+          className="text-center md-text mb-4 sm:mb-8 lg:mb-12"
         />
       )}
       {items && Array.isArray(items) && (

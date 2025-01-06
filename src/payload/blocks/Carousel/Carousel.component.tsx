@@ -15,7 +15,7 @@ import { AspectRatio } from '@/components/AspectRatio'
 export const Carousel = (props: CarouselBlock & ComponentPropsWithRef<'div'>) => {
   const { images, className } = props
   return (
-    <div className={cn('not-prose', className)}>
+    <div className={cn('not-prose my-10', className)}>
       <BaseCarousel>
         <CarouselContent className="!overflow-visible">
           {images &&

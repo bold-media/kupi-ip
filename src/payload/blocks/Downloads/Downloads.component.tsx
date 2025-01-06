@@ -14,7 +14,7 @@ export const Downloads = async (props: DownloadsBlock) => {
 
   return (
     <BackgroundField {...background}>
-      <RichText data={prefix} enableGutter={false} size="mdScale" />
+      <RichText data={prefix} enableGutter={false} className="md-text mb-10 sm:mb-16 lg:mb-20" />
       <FilteredDownloads data={downloads} />
     </BackgroundField>
   )

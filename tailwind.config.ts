@@ -1,3 +1,4 @@
+import { typographyConfig } from './src/styles/typography'
 import type { Config } from 'tailwindcss'
 import plugin from 'tailwindcss/plugin'
 
@@ -12,17 +13,31 @@ const config = {
       lg: '74em',
       xl: '90em',
     },
+    // container: {
+    //   center: true,
+    //   padding: {
+    //     DEFAULT: '1rem',
+    //   },
+    //   screens: {
+    //     sm: '40rem',
+    //     md: '48rem',
+    //     lg: '64rem',
+    //     xl: '80rem',
+    //     '2xl': '80rem',
+    //   },
+    // },
     container: {
       center: true,
       padding: {
         DEFAULT: '1rem',
+        md: '2rem',
       },
       screens: {
-        sm: '40rem',
-        md: '48rem',
-        lg: '64rem',
-        xl: '80rem',
-        '2xl': '80rem',
+        sm: '77em',
+        md: '77em',
+        lg: '77em',
+        xl: '77em',
+        '2xl': '77em',
       },
     },
     extend: {
@@ -112,122 +127,123 @@ const config = {
           end: '#00205A',
         },
       },
-      typography: ({ theme }: { theme: (path: string) => string }) => ({
-        DEFAULT: {
-          css: {
-            fontWeight: 300,
-            'h1, h2, h3, h4, h5, h6': {
-              fontWeight: 300,
-              fontStyle: 'italic',
-            },
-            a: {
-              fontWeight: 400,
-            },
-            maxWidth: '62.5rem',
-            blockquote: {
-              backgroundColor: 'hsl(var(--background-light))',
-              borderLeftWidth: '0',
-              borderRadius: theme('borderRadius.lg'),
-              padding: theme('spacing.5'),
-              margin: `${theme('spacing.8')} 0`,
-              color: 'hsl(var(--foreground))',
-              fontWeight: '300',
-              fontSize: '1.125rem', // 18px
-              'p:first-of-type::before': {
-                content: 'none',
-              },
-              'p:last-of-type::after': {
-                content: 'none',
-              },
-            },
-          },
-        },
-        invert: {
-          css: {
-            blockquote: {
-              backgroundColor: 'hsl(var(--background-light))',
-              color: 'hsl(var(--foreground))',
-            },
-          },
-        },
-        xs: {
-          css: {
-            h1: { fontSize: '2rem', lineHeight: '1.1' },
-            h2: { fontSize: '1.5rem', lineHeight: '1.2' },
-            h3: { fontSize: '1.25rem', lineHeight: '1.3' },
-            h4: { fontSize: '1.125rem', lineHeight: '1.4' },
-            marginBottom: '1.125rem',
-            blockquote: {
-              fontSize: '1.125rem',
-              padding: theme('spacing.5'),
-            },
-          },
-        },
-        sm: {
-          css: {
-            h1: { fontSize: '2.25rem', lineHeight: '1.1' },
-            h2: { fontSize: '1.75rem', lineHeight: '1.2' },
-            h3: { fontSize: '1.5rem', lineHeight: '1.3' },
-            h4: { fontSize: '1.25rem', lineHeight: '1.4' },
-          },
-        },
-        md: {
-          css: {
-            h1: { fontSize: '2.5rem', lineHeight: '1.1', marginBottom: '1.4rem' },
-            h2: { fontSize: '2rem', lineHeight: '1.2', marginBottom: '1.3rem' },
-            h3: { fontSize: '1.75rem', lineHeight: '1.3', marginBottom: '1.2rem' },
-            h4: { fontSize: '1.5rem', lineHeight: '1.4', marginBottom: '1rem' },
-            marginBottom: '1.5rem',
-          },
-        },
-        lg: {
-          css: {
-            h1: { fontSize: '3.75rem', lineHeight: '1', marginBottom: '1.5rem' },
-            h2: { fontSize: '2.75rem', lineHeight: '1.1', marginBottom: '1.3rem' },
-            h3: { fontSize: '2rem', lineHeight: '1.2', marginBottom: '1.2rem' },
-            h4: { fontSize: '1.75rem', lineHeight: '1.3', marginBottom: '1rem' },
-            marginBottom: '2rem',
-            blockquote: {
-              fontSize: '1.25rem',
-              padding: theme('spacing.12'),
-            },
-          },
-        },
-        xl: {
-          css: {
-            h1: { fontSize: '5rem', lineHeight: '1' },
-            h2: { fontSize: '3.5rem', lineHeight: '1.1' },
-            h3: { fontSize: '2.5rem', lineHeight: '1.2' },
-            h4: { fontSize: '2rem', lineHeight: '1.3' },
-            marginBottom: '2.5rem',
-          },
-        },
-        '2xl': {
-          css: {
-            h1: {
-              fontSize: '6.25rem',
-              lineHeight: '1',
-              marginBottom: '2rem',
-            },
-            h2: {
-              fontSize: '4.125rem',
-              lineHeight: '1.1',
-              marginBottom: '1.75rem',
-            },
-            h3: {
-              fontSize: '3rem',
-              lineHeight: '1.2',
-              marginBottom: '1.5rem',
-            },
-            h4: {
-              fontSize: '2.25rem',
-              lineHeight: '1.3',
-              marginBottom: '1.25rem',
-            },
-            marginBottom: '3rem',
-          },
-        },
-      }),
+      typography: typographyConfig,
+      // typography: ({ theme }: { theme: (path: string) => string }) => ({
+      //   DEFAULT: {
+      //     css: {
+      //       fontWeight: 300,
+      //       'h1, h2, h3, h4, h5, h6': {
+      //         fontWeight: 300,
+      //         fontStyle: 'italic',
+      //       },
+      //       a: {
+      //         fontWeight: 400,
+      //       },
+      //       maxWidth: '62.5rem',
+      //       blockquote: {
+      //         backgroundColor: 'hsl(var(--background-light))',
+      //         borderLeftWidth: '0',
+      //         borderRadius: theme('borderRadius.lg'),
+      //         padding: theme('spacing.5'),
+      //         margin: `${theme('spacing.8')} 0`,
+      //         color: 'hsl(var(--foreground))',
+      //         fontWeight: '300',
+      //         fontSize: '1.125rem', // 18px
+      //         'p:first-of-type::before': {
+      //           content: 'none',
+      //         },
+      //         'p:last-of-type::after': {
+      //           content: 'none',
+      //         },
+      //       },
+      //     },
+      //   },
+      //   invert: {
+      //     css: {
+      //       blockquote: {
+      //         backgroundColor: 'hsl(var(--background-light))',
+      //         color: 'hsl(var(--foreground))',
+      //       },
+      //     },
+      //   },
+      //   xs: {
+      //     css: {
+      //       h1: { fontSize: '2rem', lineHeight: '1.1' },
+      //       h2: { fontSize: '1.5rem', lineHeight: '1.2' },
+      //       h3: { fontSize: '1.25rem', lineHeight: '1.3' },
+      //       h4: { fontSize: '1.125rem', lineHeight: '1.4' },
+      //       marginBottom: '1.125rem',
+      //       blockquote: {
+      //         fontSize: '1.125rem',
+      //         padding: theme('spacing.5'),
+      //       },
+      //     },
+      //   },
+      //   sm: {
+      //     css: {
+      //       h1: { fontSize: '2.25rem', lineHeight: '1.1' },
+      //       h2: { fontSize: '1.75rem', lineHeight: '1.2' },
+      //       h3: { fontSize: '1.5rem', lineHeight: '1.3' },
+      //       h4: { fontSize: '1.25rem', lineHeight: '1.4' },
+      //     },
+      //   },
+      //   md: {
+      //     css: {
+      //       h1: { fontSize: '2.5rem', lineHeight: '1.1', marginBottom: '1.4rem' },
+      //       h2: { fontSize: '2rem', lineHeight: '1.2', marginBottom: '1.3rem' },
+      //       h3: { fontSize: '1.75rem', lineHeight: '1.3', marginBottom: '1.2rem' },
+      //       h4: { fontSize: '1.5rem', lineHeight: '1.4', marginBottom: '1rem' },
+      //       marginBottom: '1.5rem',
+      //     },
+      //   },
+      //   lg: {
+      //     css: {
+      //       h1: { fontSize: '3.75rem', lineHeight: '1', marginBottom: '1.5rem' },
+      //       h2: { fontSize: '2.75rem', lineHeight: '1.1', marginBottom: '1.3rem' },
+      //       h3: { fontSize: '2rem', lineHeight: '1.2', marginBottom: '1.2rem' },
+      //       h4: { fontSize: '1.75rem', lineHeight: '1.3', marginBottom: '1rem' },
+      //       marginBottom: '2rem',
+      //       blockquote: {
+      //         fontSize: '1.25rem',
+      //         padding: theme('spacing.12'),
+      //       },
+      //     },
+      //   },
+      //   xl: {
+      //     css: {
+      //       h1: { fontSize: '5rem', lineHeight: '1' },
+      //       h2: { fontSize: '3.5rem', lineHeight: '1.1' },
+      //       h3: { fontSize: '2.5rem', lineHeight: '1.2' },
+      //       h4: { fontSize: '2rem', lineHeight: '1.3' },
+      //       marginBottom: '2.5rem',
+      //     },
+      //   },
+      //   '2xl': {
+      //     css: {
+      //       h1: {
+      //         fontSize: '6.25rem',
+      //         lineHeight: '1',
+      //         marginBottom: '2rem',
+      //       },
+      //       h2: {
+      //         fontSize: '4.125rem',
+      //         lineHeight: '1.1',
+      //         marginBottom: '1.75rem',
+      //       },
+      //       h3: {
+      //         fontSize: '3rem',
+      //         lineHeight: '1.2',
+      //         marginBottom: '1.5rem',
+      //       },
+      //       h4: {
+      //         fontSize: '2.25rem',
+      //         lineHeight: '1.3',
+      //         marginBottom: '1.25rem',
+      //       },
+      //       marginBottom: '3rem',
+      //     },
+      //   },
+      // }),
       keyframes: {
         'accordion-down': {
           from: { height: '0' },

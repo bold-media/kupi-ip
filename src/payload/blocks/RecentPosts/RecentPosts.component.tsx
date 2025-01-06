@@ -25,12 +25,7 @@ export const RecentPosts = async (props: RecentPostsBlock) => {
 
   return (
     <BackgroundField {...background}>
-      <RichText
-        data={prefix}
-        size="mdScale"
-        enableGutter={false}
-        className="mb-4 sm:mb-8 lg:mb-12"
-      />
+      <RichText data={prefix} enableGutter={false} className="mb-10 sm:mb-16 lg:mb-20" />
       {recentPosts?.length > 0 ? (
         <Carousel
           opts={{ align: 'start', containScroll: 'trimSnaps', skipSnaps: false, dragFree: false }}

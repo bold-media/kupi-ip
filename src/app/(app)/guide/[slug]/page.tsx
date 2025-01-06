@@ -32,7 +32,7 @@ const GuidePage = async ({ params }: Props) => {
     <>
       <div className="container relative mt-header">
         {image && image?.url && image?.height && image?.width && (
-          <AspectRatio className="relative w-full" ratio={16 / 9}>
+          <AspectRatio className="relative w-full mb-[rem-convert(60px)]" ratio={16 / 9}>
             <Image
               src={image?.url}
               alt={image?.alt}
@@ -43,7 +43,10 @@ const GuidePage = async ({ params }: Props) => {
           </AspectRatio>
         )}
       </div>
-      <div className="prose prose-xs sm:prose-sm md:prose-md lg:prose-lg dark:prose-invert mt-6 xs:mt-8 sm:mt-12 italic mx-auto max-w-[62.5rem] px-4 md:px-6">
+      <div
+        // className="prose prose-xs sm:prose-sm md:prose-md lg:prose-lg dark:prose-invert mt-6 xs:mt-8 sm:mt-12 italic mx-auto max-w-[62.5rem] px-4 md:px-6"
+        className="px-4 prose prose-slate dark:prose-invert prose-blog-mobile sm:prose-blog-tablet lg:prose-blog-desktop max-w-[62.5rem] mx-auto"
+      >
         <h1>{title}</h1>
       </div>
       <article className="w-full overflow-x-hidden">
@@ -51,7 +54,7 @@ const GuidePage = async ({ params }: Props) => {
           data={content}
           enableGutter="empty"
           withPadding={true}
-          size="blog"
+          prose="blog"
           className="pb-8 xs:pb-12 sm:pb-20 mx-auto"
         />
       </article>

@@ -17,9 +17,8 @@ export const Tariffs = async (props: TariffsBlock) => {
         {withPrefix && (
           <RichText
             data={prefix}
-            size="mdScale"
             enableGutter={false}
-            className="text-center mb-4 sm:mb-8 lg:mb-12"
+            className="text-center md-text mb-10 sm:mb-16 lg:mb-20"
           />
         )}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

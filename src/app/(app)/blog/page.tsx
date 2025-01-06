@@ -26,10 +26,10 @@ const AllPostsPage = async ({ searchParams }: AllPostsPageProps) => {
 
   return (
     <>
-      <div className="container py-header min-h-svh">
-        <div className="text-center prose prose-md md:prose-lg prose-slate dark:prose-invert max-w-none mt-12 mb-10 sm:mt-20 sm:mb-16 md:mt-24 md:mb-20">
-          <h1>Статьи</h1>
-        </div>
+      <div className="container mt-header py-20 lg:py-[9.25rem] min-h-svh">
+        <h1 className="italic font-light lowercase text-center leading-[1] mb-8 text-[2rem] sm:text-[3.25rem] lg:text-[4.5625rem]">
+          Статьи
+        </h1>
         <PostCategories categories={categories} />
         {posts && Array.isArray(posts?.docs) && (
           <div className="grid sm:grid-cols-2 gap-4">

@@ -8,7 +8,7 @@ export const Image = (props: ImageBlock) => {
   if (!image || typeof image !== 'object' || !image?.url) return null
 
   return (
-    <AspectRatio className="not-prose w-full relative" ratio={16 / 9}>
+    <AspectRatio className="not-prose w-full relative my-10" ratio={16 / 9}>
       <NextImage
         src={image?.url}
         alt={image?.alt}

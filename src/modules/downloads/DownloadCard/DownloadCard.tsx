@@ -25,7 +25,9 @@ export const DownloadCard = ({
       <div className="grid grid-cols-1 md:grid-cols-2 h-full relative z-10">
         <div className="p-8 md:p-12 flex flex-col gap-16 min-h-[rem-convert(500px)] justify-between">
           <div>
-            <h2 className="text-3xl md:text-5xl font-light">{name}</h2>
+            <h2 className="text-[2.5rem sm:text-[3.125rem] lg:text-[3.75rem] font-light leading-[1.2]">
+              {name}
+            </h2>
             <div className="flex gap-x-3 mt-2 flex-wrap">
               {platforms?.map((platform) => (
                 <span key={platform} className="text-muted-foreground">
@@ -34,7 +36,9 @@ export const DownloadCard = ({
               ))}
             </div>
           </div>
-          <p className="text-xl md:text-2xl font-light">{previewText}</p>
+          <p className="text-[1.25rem] sm:text-[1.5rem] lg:text-[1.7rem] font-light leading-[1.2]">
+            {previewText}
+          </p>
           <div>
             <Button className="w-full md:w-auto" asChild>
               <Link href={`/download/${slug}`}>СКАЧАТЬ</Link>

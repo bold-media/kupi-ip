@@ -25,7 +25,7 @@ export const PostBreadcrumbs = ({ title }: PostBreadcrumbsProps) => {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage className="truncate max-w-24">{title}</BreadcrumbPage>
+          <BreadcrumbPage className="truncate max-w-48">{title}</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>

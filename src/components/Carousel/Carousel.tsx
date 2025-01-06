@@ -137,13 +137,27 @@ export const Carousel = ({
 }
 Carousel.displayName = 'Carousel'
 
-export const CarouselContent = ({ className, ...props }: ComponentPropsWithRef<'div'>) => {
+type CarouselContentProps = ComponentPropsWithRef<'div'> & {
+  gap?: 'default' | 'small'
+}
+
+export const CarouselContent = ({ className, gap = 'default', ...props }: CarouselContentProps) => {
   const { carouselRef, orientation } = useCarousel()
 
   return (
     <div ref={carouselRef}>
       <div
-        className={cn('flex', orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', className)}
+        className={cn(
+          'flex',
+          orientation === 'horizontal'
+            ? gap === 'small'
+              ? '-ml-3'
+              : '-ml-4'
+            : gap === 'small'
+              ? '-mt-3 flex-col'
+              : '-mt-4 flex-col',
+          className,
+        )}
         {...props}
       />
     </div>
@@ -151,7 +165,7 @@ export const CarouselContent = ({ className, ...props }: ComponentPropsWithRef<'
 }
 CarouselContent.displayName = 'CarouselContent'
 
-export const CarouselItem = ({ className, ...props }: ComponentPropsWithRef<'div'>) => {
+export const CarouselItem = ({ className, gap = 'default', ...props }: CarouselContentProps) => {
   const { orientation } = useCarousel()
 
   return (
@@ -160,7 +174,13 @@ export const CarouselItem = ({ className, ...props }: ComponentPropsWithRef<'div
       aria-roledescription="slide"
       className={cn(
         'min-w-0 shrink-0 grow-0 basis-full',
-        orientation === 'horizontal' ? 'pl-4' : 'pt-4',
+        orientation === 'horizontal'
+          ? gap === 'small'
+            ? 'pl-3'
+            : 'pl-4'
+          : gap === 'small'
+            ? 'pt-3'
+            : 'pt-4',
         className,
       )}
       {...props}

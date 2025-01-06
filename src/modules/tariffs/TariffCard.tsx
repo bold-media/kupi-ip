@@ -25,16 +25,19 @@ export const TariffCard = ({
     <BrandCard className={cn('flex flex-col gap-7 px-5 py-12 md:px-10', className)} {...props}>
       <div className="flex flex-col items-center justify-center gap-2">
         <h3 className="text-3xl md:text-4xl font-light italic text-center leading-none">{term}</h3>
-        <p className="text-sm font-medium text-center leading-none">{benefit}</p>
+        <p className="text-sm font-bold text-center leading-none">{benefit}</p>
       </div>
-      <p className="text-xl md:text-2xl font-light text-center ">{limit}</p>
+      <p className="text-xl sm:text-[rem-convert(24px)]  lg:text-[rem-convert(28px)] font-light text-center ">
+        {limit}
+      </p>
       <RichText
         data={description}
         enableGutter={false}
-        enableProse={false}
-        className="text-center font-regular text-base text-white/80"
+        className="text-center font-normal text-base leading-[1.3] text-white/80"
       />
-      <p className="text-center font-light text-4xl md:text-6xl">{price}</p>
+      <p className="text-center font-light text-[rem-convert(40px)] sm:text-[rem-convert(50px)] lg:text-6xl">
+        {price}
+      </p>
       <div className="flex flex-col items-stretch">
         {link && (
           <Button asChild>
