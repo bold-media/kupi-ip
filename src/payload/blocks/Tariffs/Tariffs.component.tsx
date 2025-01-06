@@ -26,7 +26,7 @@ export const Tariffs = async (props: TariffsBlock) => {
             <TariffCard variant="flareVertical" {...settings?.tariffs?.month} />
           </div>
           <div className="lg:order-3 lg:self-center">
-            <TariffCard variant="verticalDoubleFlare" {...settings?.tariffs?.quarter} />
+            <TariffCard variant="flareVertical" {...settings?.tariffs?.quarter} />
           </div>
           <div className="sm:col-span-2 lg:col-span-1 lg:order-2">
             <TariffCard
