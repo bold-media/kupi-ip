@@ -10,6 +10,7 @@ type PayloadMetadata =
       title?: string | null
       description?: string | null
       image?: Media | string | null | undefined
+      noIndex?: boolean | null | undefined
     }
   | string
   | undefined
@@ -57,5 +58,17 @@ export const generateMeta = async (args: {
       images: ogImage ? [{ url: ogImage }] : fallback?.openGraph?.images,
       url: pathname ? `${process.env.NEXT_PUBLIC_APP_URL}${pathname}` : undefined,
     }),
+    robots: seo?.noIndex
+      ? {
+          index: false,
+          follow: false,
+          nocache: true,
+          googleBot: {
+            index: false,
+            follow: false,
+            noimageindex: true,
+          },
+        }
+      : undefined,
   }
 }

@@ -279,6 +279,20 @@ export const Settings: GlobalConfig = {
                       titlePath: 'seo.default.title',
                       descriptionPath: 'seo.default.description',
                     }),
+                    {
+                      name: 'noIndex',
+                      label: {
+                        en: 'Do not index',
+                        ru: 'Не индексировать',
+                      },
+                      type: 'checkbox',
+                      admin: {
+                        description: {
+                          en: 'Checking this box will add metatags to the page, asking search engines not to index this page.',
+                          ru: 'При установке этого флажка к странице будут добавлены метатеги, запрашивающие поисковые системы не индексировать эту страницу.',
+                        },
+                      },
+                    },
                   ],
                 },
               ],
@@ -345,6 +359,20 @@ export const Settings: GlobalConfig = {
                       titlePath: 'seo.posts.title',
                       descriptionPath: 'seo.posts.description',
                     }),
+                    {
+                      name: 'noIndex',
+                      label: {
+                        en: 'Do not index',
+                        ru: 'Не индексировать',
+                      },
+                      type: 'checkbox',
+                      admin: {
+                        description: {
+                          en: 'Checking this box will add metatags to the page, asking search engines not to index this page.',
+                          ru: 'При установке этого флажка к странице будут добавлены метатеги, запрашивающие поисковые системы не индексировать эту страницу.',
+                        },
+                      },
+                    },
                   ],
                 },
               ],
@@ -411,6 +439,20 @@ export const Settings: GlobalConfig = {
                       titlePath: 'seo.downloads.title',
                       descriptionPath: 'seo.downloads.description',
                     }),
+                    {
+                      name: 'noIndex',
+                      label: {
+                        en: 'Do not index',
+                        ru: 'Не индексировать',
+                      },
+                      type: 'checkbox',
+                      admin: {
+                        description: {
+                          en: 'Checking this box will add metatags to the page, asking search engines not to index this page.',
+                          ru: 'При установке этого флажка к странице будут добавлены метатеги, запрашивающие поисковые системы не индексировать эту страницу.',
+                        },
+                      },
+                    },
                   ],
                 },
               ],

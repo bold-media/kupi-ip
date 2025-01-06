@@ -186,6 +186,21 @@ export const Guide: CollectionConfig = {
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),
+            {
+              name: 'noIndex',
+              label: {
+                en: 'Do not index',
+                ru: 'Не индексировать',
+              },
+              type: 'checkbox',
+              defaultValue: true,
+              admin: {
+                description: {
+                  en: 'Checking this box will add metatags to the page, asking search engines not to index this page.',
+                  ru: 'При установке этого флажка к странице будут добавлены метатеги, запрашивающие поисковые системы не индексировать эту страницу.',
+                },
+              },
+            },
           ],
         },
       ],

@@ -158,6 +158,10 @@ export interface Page {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
+    /**
+     * Checking this box will add metatags to the page, asking search engines not to index this page.
+     */
+    noIndex?: boolean | null;
   };
   breadcrumbs?:
     | {
@@ -575,6 +579,10 @@ export interface Post {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
+    /**
+     * Checking this box will add metatags to the page, asking search engines not to index this page.
+     */
+    noIndex?: boolean | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -648,6 +656,10 @@ export interface Download {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
+    /**
+     * Checking this box will add metatags to the page, asking search engines not to index this page.
+     */
+    noIndex?: boolean | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -698,6 +710,10 @@ export interface Guide {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
+    /**
+     * Checking this box will add metatags to the page, asking search engines not to index this page.
+     */
+    noIndex?: boolean | null;
   };
   slug?: string | null;
   updatedAt: string;
@@ -874,6 +890,7 @@ export interface PageSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        noIndex?: T;
       };
   breadcrumbs?:
     | T
@@ -1100,6 +1117,7 @@ export interface PostSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        noIndex?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1151,6 +1169,7 @@ export interface DownloadSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        noIndex?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1182,6 +1201,7 @@ export interface GuideSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        noIndex?: T;
       };
   slug?: T;
   updatedAt?: T;
@@ -1437,6 +1457,10 @@ export interface Settings {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      /**
+       * Checking this box will add metatags to the page, asking search engines not to index this page.
+       */
+      noIndex?: boolean | null;
     };
     /**
      * For the page "/blog"
@@ -1448,6 +1472,10 @@ export interface Settings {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      /**
+       * Checking this box will add metatags to the page, asking search engines not to index this page.
+       */
+      noIndex?: boolean | null;
     };
     /**
      * For the page "/download"
@@ -1459,6 +1487,10 @@ export interface Settings {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      /**
+       * Checking this box will add metatags to the page, asking search engines not to index this page.
+       */
+      noIndex?: boolean | null;
     };
   };
   updatedAt?: string | null;
@@ -1613,6 +1645,7 @@ export interface SettingsSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              noIndex?: T;
             };
         posts?:
           | T
@@ -1620,6 +1653,7 @@ export interface SettingsSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              noIndex?: T;
             };
         downloads?:
           | T
@@ -1627,6 +1661,7 @@ export interface SettingsSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              noIndex?: T;
             };
       };
   updatedAt?: T;
