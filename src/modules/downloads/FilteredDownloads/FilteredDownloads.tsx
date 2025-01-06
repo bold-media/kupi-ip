@@ -20,8 +20,11 @@ export const FilteredDownloads = ({ data }: FilteredDownloadsProps) => {
 
   return (
     <div className="w-full overflow-hidden">
-      <section className="container">
-        <OSFilters filter={filter} setFilter={setFilter} />
+      <section>
+        <div className="container">
+          <OSFilters filter={filter} setFilter={setFilter} />
+        </div>
+
         <DownloadsCarousel data={downloads} />
       </section>
     </div>
