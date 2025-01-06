@@ -13,7 +13,7 @@ const AllDownloadsPage = async () => {
   const downloads = await getAllDownloads()
 
   return (
-    <div className="min-h-svh mt-header py-20 lg:py-[9.25rem]">
+    <div className="min-h-svh mt-header py-20 lg:py-[9.25rem] w-full overflow-x-hidden">
       <div className="container">
         {settings?.downloads?.content && (
           <RichText

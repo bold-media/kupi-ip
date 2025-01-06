@@ -17,7 +17,10 @@ export const DownloadCard = ({
 }: ComponentPropsWithRef<typeof Card> & { data: Download }) => {
   const { name, platforms, previewText, slug, mockup } = data
   return (
-    <Card className={cn(' overflow-hidden relative border-0 border-glow', className)} {...props}>
+    <Card
+      className={cn(' overflow-hidden relative border-0 border-glow h-full', className)}
+      {...props}
+    >
       <div className={cn(classes.background, 'w-full h-full absolute top-0 left-0 z-0')} />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1280px] min-w-[1280px] mix-blend-soft-light">
         <GridFloor className="w-full  contrast-75" />
