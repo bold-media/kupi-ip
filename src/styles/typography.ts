@@ -10,7 +10,7 @@ export const typographyConfig = ({ theme }: any) => ({
   DEFAULT: {
     css: {
       fontWeight: 300,
-      maxWidth: 'none',
+      maxWidth: rem(1200),
       '.font-normal p': {
         fontWeight: 400,
       },
@@ -28,8 +28,26 @@ export const typographyConfig = ({ theme }: any) => ({
         marginRight: 'auto',
         color: 'hsl(0 0% 80%)',
       },
+      '.p-full p': {
+        maxWidth: rem(1200),
+      },
+      ol: {
+        color: 'hsl(0 0% 80%)',
+        '& ::marker': {
+          color: 'hsl(0 0% 80%)',
+        },
+      },
+      ul: {
+        color: 'hsl(0 0% 80%)',
+        '& ::marker': {
+          color: 'hsl(0 0% 80%)',
+        },
+      },
       li: {
         color: 'hsl(0 0% 80%)',
+        '&::marker': {
+          color: 'hsl(0 0% 80%)',
+        },
       },
       strong: {
         color: 'hsl(0 0% 80%)',
@@ -181,6 +199,7 @@ export const typographyConfig = ({ theme }: any) => ({
   'blog-mobile': {
     css: {
       fontWeight: 400,
+      maxWidth: rem(1000),
       p: {
         fontSize: rem(16),
         lineHeight: '1.3',
@@ -207,6 +226,7 @@ export const typographyConfig = ({ theme }: any) => ({
   },
   'blog-tablet': {
     css: {
+      maxWidth: rem(1000),
       p: {
         fontSize: rem(16),
         lineHeight: '1.3',
@@ -232,6 +252,7 @@ export const typographyConfig = ({ theme }: any) => ({
   },
   'blog-desktop': {
     css: {
+      maxWidth: rem(1000),
       h1: {
         fontSize: rem(60),
         lineHeight: 1,

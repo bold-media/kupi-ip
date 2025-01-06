@@ -17,7 +17,7 @@ interface DownloadsCarouselProps {
 export const DownloadsCarousel = ({ data }: DownloadsCarouselProps) => {
   if (!data || (Array.isArray(data) && data?.length < 1)) return null
   return (
-    <Carousel opts={{ loop: false }} className="container !w-full ">
+    <Carousel opts={{ loop: false, align: 'center' }} className="!w-full px-2 md:px-0">
       <CarouselContent className="!overflow-visible">
         {data?.map((item) => (
           <CarouselItem key={item.id} className="basis-full">

@@ -36,7 +36,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
 })
 
 export const RichText = (props: RichTextProps) => {
-  const { className, enableGutter = true, withPadding, prose, data, ...rest } = props
+  const { className, enableGutter = true, prose, data, ...rest } = props
 
   if (!data) return null
 
@@ -47,7 +47,6 @@ export const RichText = (props: RichTextProps) => {
       className={cn(
         richTextVariants({
           enableGutter,
-          withPadding,
           prose,
         }),
         className,

@@ -8,7 +8,7 @@ export const Content = (props: ContentBlock) => {
 
   return (
     <BackgroundField {...background}>
-      <RichText data={richText} enableGutter={false} withPadding={true} />
+      <RichText data={richText} enableGutter={false} className="p-full" />
     </BackgroundField>
   )
 }

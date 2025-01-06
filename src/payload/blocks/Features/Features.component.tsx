@@ -10,7 +10,7 @@ export const Features = (props: FeaturesBlock) => {
   return (
     <BackgroundField {...background} containerClassName="flex flex-col justify-center items-center">
       <RichText data={prefix} enableGutter={false} className="mb-4 sm:mb-8 lg:mb-12 md-text" />
-      <Sphere className="w-56 h-56 mb-4 sm:mb-8 md:mb-12" />
+      <Sphere className="w-[rem-convert(134px)] h-[rem-convert(134px)] sm:w-[rem-convert(172px)] sm:h-[rem-convert(172px)] lg:w-56 lg:h-56 mb-4 sm:mb-8 md:mb-12" />
       <FeaturesCarousel features={features} />
     </BackgroundField>
   )

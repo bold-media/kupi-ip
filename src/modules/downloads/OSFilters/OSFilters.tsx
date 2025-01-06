@@ -88,7 +88,7 @@ export const OSFilters = ({ filter, setFilter }: OSFiltersProps) => {
   }, [setFilter, isLoading, os, emblaApi, isScrollable])
 
   return (
-    <div className="overflow-hidden w-full pb-4" ref={viewportRef}>
+    <div className="overflow-x-visible sm:overflow-hidden w-full pb-4" ref={viewportRef}>
       <div className="w-full" ref={emblaRef}>
         <div className={`flex gap-2 ${!isScrollable ? 'md:justify-center md:flex-wrap' : ''}`}>
           {filterOptions?.map((option) => {

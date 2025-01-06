@@ -49,13 +49,12 @@ const GuidePage = async ({ params }: Props) => {
       >
         <h1>{title}</h1>
       </div>
-      <article className="w-full overflow-x-hidden">
+      <article className="container overflow-x-hidden relative">
         <RichText
           data={content}
-          enableGutter="empty"
-          withPadding={true}
           prose="blog"
-          className="pb-8 xs:pb-12 sm:pb-20 max-w-[62.5rem] mx-auto"
+          enableGutter={false}
+          className="pb-8 xs:pb-12 sm:pb-20 mx-auto"
         />
       </article>
       <RenderBlocks blocks={guide?.blocks} />

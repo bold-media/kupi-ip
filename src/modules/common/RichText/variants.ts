@@ -9,10 +9,6 @@ export const richTextVariants = cva('', {
       false: 'max-w-none',
       empty: '',
     },
-    withPadding: {
-      true: 'px-4',
-      false: '',
-    },
     prose: {
       standard:
         'prose prose-slate dark:prose-invert prose-mobile sm:prose-tablet lg:prose-desktop mx-auto',
@@ -23,7 +19,6 @@ export const richTextVariants = cva('', {
   defaultVariants: {
     enableGutter: true,
     prose: 'standard',
-    withPadding: false,
   },
 })
 

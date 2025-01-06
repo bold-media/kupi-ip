@@ -32,12 +32,12 @@ const PostPage = async ({ params }: Props) => {
   return (
     <>
       <div className="container relative mt-header">
-        <div className="max-w-[62.5rem] mx-auto px-4">
+        <div className="max-w-[62.5rem] mx-auto">
           <PostBreadcrumbs title={title} />
         </div>
 
         {image && image?.url && image?.height && image?.width && (
-          <AspectRatio className="relative w-full mb-[rem-convert(60px)]" ratio={16 / 9}>
+          <AspectRatio className="relative w-full mb-[rem-convert(60px)] h-full" ratio={16 / 9}>
             <Image
               src={image?.url}
               alt={image?.alt}
@@ -47,20 +47,20 @@ const PostPage = async ({ params }: Props) => {
             />
           </AspectRatio>
         )}
+        <div
+          // className="prose prose-xs sm:prose-sm md:prose-md lg:prose-lg dark:prose-invert mt-6 xs:mt-8 sm:mt-12 italic mx-auto max-w-[62.5rem] px-4 md:px-6"
+          className="prose prose-slate dark:prose-invert prose-blog-mobile sm:prose-blog-tablet lg:prose-blog-desktop max-w-[62.5rem] mx-auto mt-[rem-convert(60px)]"
+        >
+          <h1>{title}</h1>
+        </div>
       </div>
-      <div
-        // className="prose prose-xs sm:prose-sm md:prose-md lg:prose-lg dark:prose-invert mt-6 xs:mt-8 sm:mt-12 italic mx-auto max-w-[62.5rem] px-4 md:px-6"
-        className="px-4 prose prose-slate dark:prose-invert prose-blog-mobile sm:prose-blog-tablet lg:prose-blog-desktop max-w-[62.5rem] mx-auto"
-      >
-        <h1>{title}</h1>
-      </div>
-      <article className="w-full overflow-x-hidden relative">
+
+      <article className="container overflow-x-hidden relative">
         <RichText
           data={article}
-          enableGutter="empty"
-          withPadding={true}
           prose="blog"
-          className="pb-8 xs:pb-12 sm:pb-20 max-w-[62.5rem] mx-auto"
+          enableGutter={false}
+          className="pb-8 xs:pb-12 sm:pb-20 mx-auto"
         />
       </article>
       <RenderBlocks blocks={post?.blocks} />

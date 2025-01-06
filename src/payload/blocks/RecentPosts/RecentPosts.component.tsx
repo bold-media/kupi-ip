@@ -13,8 +13,7 @@ import { getRecentPosts } from '@/modules/post/data'
 import { PostPreviewCard } from '@/modules/post/PostPreviewCard'
 import { BackgroundField } from '@/payload/fields/background/Background.component'
 import { RecentPostsBlock } from '@payload-types'
-import { ArrowRight, FileQuestion } from 'lucide-react'
-import NextLink from 'next/link'
+import { FileQuestion } from 'lucide-react'
 
 export const RecentPosts = async (props: RecentPostsBlock) => {
   const { background, prefix, settings } = props
@@ -27,35 +26,46 @@ export const RecentPosts = async (props: RecentPostsBlock) => {
     <BackgroundField {...background}>
       <RichText data={prefix} enableGutter={false} className="mb-10 sm:mb-16 lg:mb-20" />
       {recentPosts?.length > 0 ? (
-        <Carousel
-          opts={{ align: 'start', containScroll: 'trimSnaps', skipSnaps: false, dragFree: false }}
-        >
-          <div className="relative">
-            <CarouselContent>
-              {recentPosts &&
-                Array.isArray(recentPosts) &&
-                recentPosts?.map((post) => (
-                  <CarouselItem key={post?.id} className="basis-full sm:basis-1/2">
-                    <PostPreviewCard {...post} />
-                  </CarouselItem>
-                ))}
-            </CarouselContent>
-            <CarouselControls className="hidden sm:flex">
-              <CarouselPrevious />
-              <CarouselNext />
-            </CarouselControls>
+        <>
+          {/* Mobile stacked view */}
+          <div className="flex flex-col gap-4 sm:hidden">
+            {recentPosts &&
+              Array.isArray(recentPosts) &&
+              recentPosts?.map((post) => (
+                <div key={post?.id}>
+                  <PostPreviewCard {...post} />
+                </div>
+              ))}
           </div>
-          {/* <div className="mt-6 md:mt-8 flex justify-center">
-            <Button variant="ghost" asChild>
-              <NextLink href="/blog">
-                Смотреть все
-                <Icon>
-                  <ArrowRight />
-                </Icon>
-              </NextLink>
-            </Button>
-          </div> */}
-        </Carousel>
+
+          {/* Tablet/Desktop carousel view */}
+          <div className="hidden sm:block">
+            <Carousel
+              opts={{
+                align: 'start',
+                containScroll: 'trimSnaps',
+                skipSnaps: false,
+                dragFree: false,
+              }}
+            >
+              <div className="relative">
+                <CarouselContent>
+                  {recentPosts &&
+                    Array.isArray(recentPosts) &&
+                    recentPosts?.map((post) => (
+                      <CarouselItem key={post?.id} className="basis-1/2">
+                        <PostPreviewCard {...post} />
+                      </CarouselItem>
+                    ))}
+                </CarouselContent>
+                <CarouselControls className="flex">
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </CarouselControls>
+              </div>
+            </Carousel>
+          </div>
+        </>
       ) : (
         <div className="text-center text-lg md:text-xl flex flex-col items-center gap-2 my-12 md:my-24">
           <Icon className="opacity-80 w-16 h-16 stroke-1">

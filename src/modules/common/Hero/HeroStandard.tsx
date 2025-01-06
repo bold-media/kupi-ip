@@ -4,7 +4,7 @@ import { RichText } from '../RichText'
 import { cva, VariantProps } from 'class-variance-authority'
 import { cn } from '@/utils/cn'
 
-const heroStandardVariants = cva('container mt-header pt-20 lg:pt-[9.25rem]', {
+const heroStandardVariants = cva('mt-header pt-20 lg:pt-[9.25rem]', {
   variants: {
     paddingBottom: {
       none: '',
@@ -32,12 +32,7 @@ export const HeroStandard = ({ className, ...props }: HeroStandardComponentProps
     <div
       className={cn(heroStandardVariants({ paddingBottom: settings?.paddingBottom }), className)}
     >
-      <RichText
-        data={richText}
-        prose="standard"
-        enableGutter={false}
-        className="md-text small-header"
-      />
+      <RichText data={richText} prose="standard" className="md-text small-header" />
     </div>
   )
 }

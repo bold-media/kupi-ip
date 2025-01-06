@@ -22,8 +22,8 @@ const AllDownloadsPage = async () => {
             className="text-center md-text small-header mb-10 sm:mb-16 lg:mb-20"
           />
         )}
+        <FilteredDownloads data={downloads} />
       </div>
-      <FilteredDownloads data={downloads} />
     </div>
   )
 }

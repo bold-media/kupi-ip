@@ -35,9 +35,7 @@ export const TariffCard = ({
         enableGutter={false}
         className="text-center font-normal text-base leading-[1.3] text-white/80"
       />
-      <p className="text-center font-light text-[rem-convert(40px)] sm:text-[rem-convert(50px)] lg:text-6xl">
-        {price}
-      </p>
+      <p className="text-center font-light text-[2.5rem] sm:text-[3.125rem] lg:text-6xl">{price}</p>
       <div className="flex flex-col items-stretch">
         {link && (
           <Button asChild>

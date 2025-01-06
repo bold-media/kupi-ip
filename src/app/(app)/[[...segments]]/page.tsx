@@ -26,7 +26,7 @@ const Pages = async ({ params }: Props) => {
   }
 
   return (
-    <div className="min-h-svh">
+    <div className="pb-20 lg:pb-[9.25rem]">
       <Hero {...page.hero} />
       <RenderBlocks blocks={page.blocks} />
     </div>
