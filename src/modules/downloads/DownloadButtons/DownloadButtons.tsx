@@ -30,11 +30,11 @@ export const DownloadButtons = ({ name, platforms, links, buyLink }: Props) => {
     if (isLoading || !os || os === OperatingSystem.Unknown) return
     if (!platforms?.includes(os.toLowerCase() as 'windows' | 'macos' | 'linux' | 'android' | 'ios'))
       return
-    if (currentOS === os) return
 
     setCurrentOS(os)
-  }, [isLoading, os, currentOS, setCurrentOS, platforms])
+  }, [isLoading, os, platforms])
 
+  if (!platforms?.length) return null
   return (
     <div className="flex flex-col items-center gap-4">
       {Array.isArray(platforms) && platforms?.length > 0 && (
@@ -47,7 +47,7 @@ export const DownloadButtons = ({ name, platforms, links, buyLink }: Props) => {
                 key={platform}
                 variant="ghost"
                 size="icon"
-                onClick={() => setCurrentOS(platform as any)}
+                onClick={() => setCurrentOS(platform as OperatingSystem)}
                 className="w-20 h-20 flex-col normal-case"
               >
                 <Icon className="w-8 h-8" active={platform === currentOS} />
