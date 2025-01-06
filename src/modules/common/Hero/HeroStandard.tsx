@@ -21,7 +21,6 @@ const heroStandardVariants = cva('mt-header pt-20 lg:pt-[9.25rem]', {
 })
 
 type HeroStandardComponentProps = {
-  children: React.ReactNode
   className?: string
 } & VariantProps<typeof heroStandardVariants> &
   Page['hero']
