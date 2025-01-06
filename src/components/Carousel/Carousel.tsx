@@ -206,12 +206,12 @@ export const CarouselPrevious = ({
     <Button
       variant={variant}
       size={size}
-      className={cn('h-8 w-8 rounded-full', className)}
+      className={cn('h-10 w-10 rounded-full border-brand-tertiary', className)}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
     >
-      <ChevronsLeft className="h-4 w-4 text-brand-tertiary" />
+      <ChevronsLeft className="h-6 w-6 text-brand-tertiary" />
       <span className="sr-only">Previous slide</span>
     </Button>
   )
@@ -243,12 +243,12 @@ export const CarouselNext = ({
     <Button
       variant={variant}
       size={size}
-      className={cn('h-8 w-8 rounded-full', className)}
+      className={cn('h-10 w-10 rounded-full border-brand-tertiary', className)}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
     >
-      <ChevronsRight className="h-4 w-4 text-brand-tertiary" />
+      <ChevronsRight className="h-6 w-6 text-brand-tertiary" />
       <span className="sr-only">Next slide</span>
     </Button>
   )

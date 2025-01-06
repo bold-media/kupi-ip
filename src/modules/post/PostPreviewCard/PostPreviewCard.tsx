@@ -16,8 +16,8 @@ export const PostPreviewCard = (props: PostPreviewCardProps) => {
   const { title, cover, excerpt, slug, type = 'post' } = props
 
   return (
-    <Card className="flex flex-col h-full">
-      <NextLink href={`/${type === 'post' ? 'post' : 'guide'}/${slug}`}>
+    <NextLink href={`/${type === 'post' ? 'post' : 'guide'}/${slug}`}>
+      <Card className="group flex flex-col h-full border-none bg-background-light/0 hover:bg-background-light/100 transition-colors duration-300">
         <AspectRatio ratio={16 / 9}>
           {cover && typeof cover === 'object' && typeof cover?.url === 'string' ? (
             <Image
@@ -35,22 +35,19 @@ export const PostPreviewCard = (props: PostPreviewCardProps) => {
             </div>
           )}
         </AspectRatio>
-      </NextLink>
-      <CardHeader className="flex items-start">
-        <NextLink href={`/${type === 'post' ? 'post' : 'guide'}/${slug}`}>
-          <CardTitle className="line-clamp-2 text-xl md:text-2xl">{title}</CardTitle>
-        </NextLink>
-      </CardHeader>
-      <CardContent className="flex flex-col flex-1 gap-4">
-        <p className="line-clamp-3 text-muted-foreground">{excerpt}</p>
-        <Button variant="ghost" size="icon" className="mt-auto">
-          <NextLink href={`/${type === 'post' ? 'post' : 'guide'}/${slug}`}>
-            <Icon size="xl">
-              <ArrowUpRight />
-            </Icon>
-          </NextLink>
-        </Button>
-      </CardContent>
-    </Card>
+
+        <CardHeader className="flex items-start p-5 pb-3">
+          <CardTitle className="line-clamp-2 text-xl md:text-3xl font-light leading-normal pr-1">
+            {title}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col flex-1 gap-3">
+          <p className="line-clamp-3 font-normal leading-[1.3]">{excerpt}</p>
+          <Icon size="xl" className="transition-transform duration-300 group-hover:rotate-45">
+            <ArrowUpRight />
+          </Icon>
+        </CardContent>
+      </Card>
+    </NextLink>
   )
 }

@@ -7,7 +7,9 @@ export const Footer = ({ data }: { data: NonNullable<Settings['navigation']>['fo
   return (
     <footer className="w-full py-12 md:py-16 bg-background-light">
       <div className="container flex flex-col gap-4 items-center">
-        {data?.copyText && <div className="text-lg text-center">{data?.copyText}</div>}
+        {data?.copyText && (
+          <div className="text-base font-normal text-center">{data?.copyText}</div>
+        )}
         <div className="flex flex-col text-center md:flex-row gap-2 md:gap-4">
           {data?.links &&
             Array.isArray(data?.links) &&
@@ -15,12 +17,13 @@ export const Footer = ({ data }: { data: NonNullable<Settings['navigation']>['fo
               <Link
                 key={id}
                 {...getLinkProps(link)}
-                className="transition-colors text-slate-400 hover:text-slate-100 active-class"
+                className="transition-colors text-white/80 hover:text-white/100 leading-[1.3] font-light text-sm active-class"
               >
                 {link?.label}
               </Link>
             ))}
         </div>
+        <p className="text-white/80 font-light text-sm">Дизайн: alexpyriev</p>
       </div>
     </footer>
   )

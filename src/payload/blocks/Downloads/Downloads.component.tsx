@@ -13,7 +13,7 @@ export const Downloads = async (props: DownloadsBlock) => {
   if (!downloads || downloads?.length < 1) return null
 
   return (
-    <BackgroundField {...background}>
+    <BackgroundField {...background} className="overflow-hidden">
       <RichText data={prefix} enableGutter={false} className="md-text mb-10 sm:mb-16 lg:mb-20" />
       <FilteredDownloads data={downloads} />
     </BackgroundField>

@@ -13,7 +13,7 @@ export const Card = ({ className, ...props }: ComponentPropsWithRef<'div'>) => (
 Card.displayName = 'Card'
 
 export const CardHeader = ({ className, ...props }: ComponentPropsWithRef<'div'>) => (
-  <div className={cn('flex flex-col space-y-1.5 p-6', className)} {...props} />
+  <div className={cn('flex flex-col space-y-1.5 p-5', className)} {...props} />
 )
 CardHeader.displayName = 'CardHeader'
 
@@ -28,11 +28,11 @@ export const CardDescription = ({ className, ...props }: ComponentPropsWithRef<'
 CardDescription.displayName = 'CardDescription'
 
 export const CardContent = ({ className, ...props }: ComponentPropsWithRef<'div'>) => (
-  <div className={cn('p-6 pt-0', className)} {...props} />
+  <div className={cn('p-5 pt-0', className)} {...props} />
 )
 CardContent.displayName = 'CardContent'
 
 export const CardFooter = ({ className, ...props }: ComponentPropsWithRef<'div'>) => (
-  <div className={cn('flex items-center p-6 pt-0', className)} {...props} />
+  <div className={cn('flex items-center p-5 pt-0', className)} {...props} />
 )
 CardFooter.displayName = 'CardFooter'
