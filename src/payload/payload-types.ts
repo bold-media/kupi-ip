@@ -138,6 +138,9 @@ export interface Page {
       };
       [k: string]: unknown;
     } | null;
+    settings: {
+      paddingBottom: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    };
   };
   blocks?:
     | (
@@ -871,6 +874,11 @@ export interface PageSelect<T extends boolean = true> {
     | {
         type?: T;
         richText?: T;
+        settings?:
+          | T
+          | {
+              paddingBottom?: T;
+            };
       };
   blocks?:
     | T
