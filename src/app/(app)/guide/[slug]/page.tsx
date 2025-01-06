@@ -30,7 +30,7 @@ const GuidePage = async ({ params }: Props) => {
 
   return (
     <>
-      <div className="container relative mt-header">
+      <div className="container relative mt-header pt-20 lg:pt-[9.25rem]">
         {image && image?.url && image?.height && image?.width && (
           <AspectRatio className="relative w-full mb-[rem-convert(60px)]" ratio={16 / 9}>
             <Image
@@ -55,7 +55,7 @@ const GuidePage = async ({ params }: Props) => {
           enableGutter="empty"
           withPadding={true}
           prose="blog"
-          className="pb-8 xs:pb-12 sm:pb-20 mx-auto"
+          className="pb-8 xs:pb-12 sm:pb-20 max-w-[62.5rem] mx-auto"
         />
       </article>
       <RenderBlocks blocks={guide?.blocks} />
