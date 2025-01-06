@@ -24,12 +24,12 @@ const DownloadPage = async ({ params }: Props) => {
   const { name, intro, icon, content, platforms, links, buyLink } = download
   return (
     <>
-      <div className="container relative mt-header py-12 sm:py-20 md:py-24 min-h-svh">
+      <div className="container relative mt-header py-20 lg:py-[9.25rem] min-h-svh">
         <div className="flex flex-col gap-10 md:gap-20">
           <RichText
             data={intro}
-            size="pageTitle"
-            className="text-center"
+            prose="standard"
+            className="text-center md-text"
             // className="text-center prose-md md:prose-lg lg:prose-xl xl:prose-2xl !mb-0"
           />
           {icon && typeof icon === 'object' && icon?.url && (
@@ -43,7 +43,7 @@ const DownloadPage = async ({ params }: Props) => {
               sizes="(min-width: 64em) 144px, (min-width: 48em) 96px, 64px"
             />
           )}
-          <RichText data={content} className="text-lg md:text-2xl text-center" />
+          <RichText data={content} className="text-center md-text" />
           <DownloadButtons name={name} platforms={platforms} links={links} buyLink={buyLink} />
         </div>
       </div>
