@@ -218,7 +218,7 @@ export const Header = ({
             <Hamburger
               isOpen={isOpen}
               onClick={() => setIsOpen((prev) => !prev)}
-              className="-mr-4 md:hidden"
+              className="-mr-2 md:hidden"
               aria-expanded={isOpen}
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
             />
