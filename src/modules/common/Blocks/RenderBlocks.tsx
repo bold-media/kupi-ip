@@ -1,5 +1,6 @@
 import { Accordion } from '@/payload/blocks/Accordion/Accordion.component'
 import { CallToAction } from '@/payload/blocks/CallToAction/CallToAction.component'
+import { Content } from '@/payload/blocks/Content/Content.component'
 import { Downloads } from '@/payload/blocks/Downloads/Downloads.component'
 import { Features } from '@/payload/blocks/Features/Features.component'
 import { RecentPosts } from '@/payload/blocks/RecentPosts/RecentPosts.component'
@@ -8,6 +9,7 @@ import { Tariffs } from '@/payload/blocks/Tariffs/Tariffs.component'
 import {
   AccordionBlock,
   CallToActionBlock,
+  ContentBlock,
   DownloadsBlock,
   FeaturesBlock,
   RecentPostsBlock,
@@ -19,6 +21,7 @@ import React, { Fragment } from 'react'
 type Block =
   | AccordionBlock
   | CallToActionBlock
+  | ContentBlock
   | DownloadsBlock
   | FeaturesBlock
   | StepsBlock
@@ -46,6 +49,8 @@ export const RenderBlocks = ({ blocks }: { blocks?: Array<Block> | null }) => {
             return <Tariffs key={block.id ?? index} {...(block as TariffsBlock)} />
           case 'steps':
             return <Steps key={block.id ?? index} {...(block as StepsBlock)} />
+          case 'content':
+            return <Content key={block.id ?? index} {...(block as ContentBlock)} />
           default:
             return null
         }

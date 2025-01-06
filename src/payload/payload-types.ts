@@ -143,6 +143,7 @@ export interface Page {
     | (
         | AccordionBlock
         | CallToActionBlock
+        | ContentBlock
         | DownloadsBlock
         | FeaturesBlock
         | StepsBlock
@@ -176,8 +177,8 @@ export interface Page {
  */
 export interface AccordionBlock {
   background: {
-    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingTop: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
   };
   prefix?: ('none' | 'smiley' | 'richText') | null;
@@ -242,8 +243,8 @@ export interface AccordionBlock {
  */
 export interface CallToActionBlock {
   background: {
-    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingTop: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
   };
   content?: {
@@ -297,12 +298,41 @@ export interface CallToActionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlock".
+ */
+export interface ContentBlock {
+  background: {
+    paddingTop: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
+  };
+  richText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'content';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "DownloadsBlock".
  */
 export interface DownloadsBlock {
   background: {
-    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingTop: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
   };
   prefix?: {
@@ -330,8 +360,8 @@ export interface DownloadsBlock {
  */
 export interface FeaturesBlock {
   background: {
-    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingTop: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
   };
   prefix?: {
@@ -393,8 +423,8 @@ export interface FeaturesBlock {
  */
 export interface StepsBlock {
   background: {
-    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingTop: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
   };
   withPrefix?: boolean | null;
@@ -430,8 +460,8 @@ export interface StepsBlock {
  */
 export interface TariffsBlock {
   background: {
-    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingTop: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
   };
   withPrefix?: boolean | null;
@@ -460,8 +490,8 @@ export interface TariffsBlock {
  */
 export interface RecentPostsBlock {
   background: {
-    paddingTop: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    paddingBottom: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingTop: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
   };
   prefix?: {
@@ -831,6 +861,7 @@ export interface PageSelect<T extends boolean = true> {
     | {
         accordion?: T | AccordionBlockSelect<T>;
         callToAction?: T | CallToActionBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
         downloads?: T | DownloadsBlockSelect<T>;
         features?: T | FeaturesBlockSelect<T>;
         steps?: T | StepsBlockSelect<T>;
@@ -919,6 +950,22 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
         url?: T;
         label?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlock_select".
+ */
+export interface ContentBlockSelect<T extends boolean = true> {
+  background?:
+    | T
+    | {
+        paddingTop?: T;
+        paddingBottom?: T;
+        type?: T;
+      };
+  richText?: T;
   id?: T;
   blockName?: T;
 }

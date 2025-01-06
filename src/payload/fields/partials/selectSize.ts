@@ -1,12 +1,19 @@
 import { deepMerge } from '@/utils/deepMerge'
 import { SelectField } from 'payload'
 
-export type SizeVariants = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type SizeVariants = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 export const variantOptions: Record<
   SizeVariants,
   { label: { en: string; ru: string }; value: string }
 > = {
+  none: {
+    label: {
+      en: 'None',
+      ru: 'Нет',
+    },
+    value: 'none',
+  },
   xs: {
     label: {
       en: 'XS',
@@ -63,6 +70,7 @@ export const selectSize: SizeType = ({ variants, overrides = {} } = {}) => {
   }
 
   let variantsToUse = [
+    variantOptions.none,
     variantOptions.xs,
     variantOptions.sm,
     variantOptions.md,

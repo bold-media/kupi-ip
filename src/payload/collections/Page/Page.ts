@@ -23,6 +23,7 @@ import { Downloads } from '@/payload/blocks/Downloads/Downloads.config'
 import { Features } from '@/payload/blocks/Features/Features.config'
 import { Tariffs } from '@/payload/blocks/Tariffs/Tariffs.config'
 import { Steps } from '@/payload/blocks/Steps/Steps.config'
+import { Content } from '@/payload/blocks/Content/Content.config'
 
 export const Page: CollectionConfig = {
   slug: 'page',
@@ -141,7 +142,16 @@ export const Page: CollectionConfig = {
                   ru: ru.common.block.plural,
                 },
               },
-              blocks: [Accordion, CallToAction, Downloads, Features, Steps, Tariffs, RecentPosts],
+              blocks: [
+                Accordion,
+                CallToAction,
+                Content,
+                Downloads,
+                Features,
+                Steps,
+                Tariffs,
+                RecentPosts,
+              ],
             },
           ],
         },
