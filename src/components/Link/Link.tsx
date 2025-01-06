@@ -4,9 +4,11 @@ import NextLink from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { canUseDOM } from '@/utils/canUseDOM'
 
-type LinkProps = ComponentProps<typeof NextLink>
+type LinkProps = ComponentProps<typeof NextLink> & {
+  onClose?: () => void
+}
 
-export const Link = ({ href = '/', onClick, ...props }: LinkProps) => {
+export const Link = ({ href = '/', onClick, onClose, ...props }: LinkProps) => {
   const router = useRouter()
   const pathname = usePathname()
 
@@ -22,10 +24,21 @@ export const Link = ({ href = '/', onClick, ...props }: LinkProps) => {
       } else {
         window.location.hash = href
       }
+
+      onClose?.()
     }
 
     return <NextLink href={href} onClick={handleClick} {...props} />
   }
 
-  return <NextLink href={href} onClick={onClick} {...props} />
+  return (
+    <NextLink
+      href={href}
+      onClick={(e) => {
+        onClick?.(e)
+        onClose?.()
+      }}
+      {...props}
+    />
+  )
 }
