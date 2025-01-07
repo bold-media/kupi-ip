@@ -11,8 +11,6 @@ type CSSVariableStyles = Record<`--${string}`, string>
 export const ButtonBlock = (props: ButtonBlockProps) => {
   const { links, settings } = props
 
-  if (!links || !Array.isArray(links) || links?.length < 1) return null
-
   const responsiveStyles = useMemo(() => {
     const styles: CSSVariableStyles = {}
     const addVariable = (name: string, value?: number | null | string) => {
@@ -64,6 +62,8 @@ export const ButtonBlock = (props: ButtonBlockProps) => {
 
     return styles
   }, [settings])
+
+  if (!links || !Array.isArray(links) || links?.length < 1) return null
 
   return (
     <div className={cn('not-prose flex flex-wrap gap-3', classes.button)} style={responsiveStyles}>
