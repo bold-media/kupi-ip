@@ -55,5 +55,10 @@ export const ru = {
       singular: 'Изображение',
       plural: 'Изображения',
     },
+    mobile: 'Мобильный',
+    tablet: 'Планшет',
+    desktop: 'Десктоп',
+    marginTop: 'Отступ сверху',
+    marginBottom: 'Отступ снизу',
   },
 }

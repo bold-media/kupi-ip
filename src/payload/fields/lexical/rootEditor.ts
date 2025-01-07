@@ -1,3 +1,4 @@
+import { Button } from '@/payload/blocks/Button/Button.config'
 import { YellowText } from '@/payload/inlineBlocks/YellowText'
 import {
   AlignFeature,
@@ -39,6 +40,7 @@ export const rootEditor = lexicalEditor({
       InlineToolbarFeature(),
       BlocksFeature({
         inlineBlocks: [YellowText],
+        blocks: [Button],
       }),
     ]
   },

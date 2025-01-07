@@ -275,16 +275,29 @@ export interface CallToActionBlock {
         link: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
-          reference?: {
-            relationTo: 'page';
-            value: string | Page;
-          } | null;
+          reference?:
+            | ({
+                relationTo: 'page';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'post';
+                value: string | Post;
+              } | null)
+            | ({
+                relationTo: 'download';
+                value: string | Download;
+              } | null)
+            | ({
+                relationTo: 'guide';
+                value: string | Guide;
+              } | null);
           url?: string | null;
           label: string;
           /**
            * Choose how the link should be rendered
            */
-          appearance?: ('default' | 'secondary' | 'outline' | 'ghost' | 'link') | null;
+          appearance?: ('default' | 'secondary' | 'tertiary' | 'outline' | 'ghost' | 'link') | null;
         };
         id?: string | null;
       }[]
@@ -293,10 +306,23 @@ export interface CallToActionBlock {
   sublink?: {
     type?: ('reference' | 'custom') | null;
     newTab?: boolean | null;
-    reference?: {
-      relationTo: 'page';
-      value: string | Page;
-    } | null;
+    reference?:
+      | ({
+          relationTo: 'page';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'post';
+          value: string | Post;
+        } | null)
+      | ({
+          relationTo: 'download';
+          value: string | Download;
+        } | null)
+      | ({
+          relationTo: 'guide';
+          value: string | Guide;
+        } | null);
     url?: string | null;
     label: string;
   };
@@ -306,15 +332,19 @@ export interface CallToActionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentBlock".
+ * via the `definition` "post".
  */
-export interface ContentBlock {
-  background: {
-    paddingTop: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    paddingBottom: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
-  };
-  richText?: {
+export interface Post {
+  id: string;
+  slug?: string | null;
+  categories?: (string | Category)[] | null;
+  title: string;
+  cover?: (string | null) | Media;
+  /**
+   * A short preview of the content, typically shown in lists and search results.
+   */
+  excerpt?: string | null;
+  article?: {
     root: {
       type: string;
       children: {
@@ -329,9 +359,43 @@ export interface ContentBlock {
     };
     [k: string]: unknown;
   } | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'content';
+  blocks?:
+    | (
+        | AccordionBlock
+        | CallToActionBlock
+        | DownloadsBlock
+        | FeaturesBlock
+        | StepsBlock
+        | TariffsBlock
+        | RecentPostsBlock
+      )[]
+    | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    /**
+     * Checking this box will add metatags to the page, asking search engines not to index this page.
+     */
+    noIndex?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "category".
+ */
+export interface Category {
+  id: string;
+  name?: string | null;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -528,73 +592,6 @@ export interface RecentPostsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "category".
- */
-export interface Category {
-  id: string;
-  name?: string | null;
-  slug?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "post".
- */
-export interface Post {
-  id: string;
-  slug?: string | null;
-  categories?: (string | Category)[] | null;
-  title: string;
-  cover?: (string | null) | Media;
-  /**
-   * A short preview of the content, typically shown in lists and search results.
-   */
-  excerpt?: string | null;
-  article?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  blocks?:
-    | (
-        | AccordionBlock
-        | CallToActionBlock
-        | DownloadsBlock
-        | FeaturesBlock
-        | StepsBlock
-        | TariffsBlock
-        | RecentPostsBlock
-      )[]
-    | null;
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    /**
-     * Checking this box will add metatags to the page, asking search engines not to index this page.
-     */
-    noIndex?: boolean | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "download".
  */
 export interface Download {
@@ -648,10 +645,23 @@ export interface Download {
   buyLink?: {
     type?: ('reference' | 'custom') | null;
     newTab?: boolean | null;
-    reference?: {
-      relationTo: 'page';
-      value: string | Page;
-    } | null;
+    reference?:
+      | ({
+          relationTo: 'page';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'post';
+          value: string | Post;
+        } | null)
+      | ({
+          relationTo: 'download';
+          value: string | Download;
+        } | null)
+      | ({
+          relationTo: 'guide';
+          value: string | Guide;
+        } | null);
     url?: string | null;
   };
   meta?: {
@@ -724,6 +734,35 @@ export interface Guide {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlock".
+ */
+export interface ContentBlock {
+  background: {
+    paddingTop: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    paddingBottom: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
+  };
+  richText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'content';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1298,19 +1337,45 @@ export interface Settings {
       link?: {
         type?: ('reference' | 'custom') | null;
         newTab?: boolean | null;
-        reference?: {
-          relationTo: 'page';
-          value: string | Page;
-        } | null;
+        reference?:
+          | ({
+              relationTo: 'page';
+              value: string | Page;
+            } | null)
+          | ({
+              relationTo: 'post';
+              value: string | Post;
+            } | null)
+          | ({
+              relationTo: 'download';
+              value: string | Download;
+            } | null)
+          | ({
+              relationTo: 'guide';
+              value: string | Guide;
+            } | null);
         url?: string | null;
       };
       trialLink?: {
         type?: ('reference' | 'custom') | null;
         newTab?: boolean | null;
-        reference?: {
-          relationTo: 'page';
-          value: string | Page;
-        } | null;
+        reference?:
+          | ({
+              relationTo: 'page';
+              value: string | Page;
+            } | null)
+          | ({
+              relationTo: 'post';
+              value: string | Post;
+            } | null)
+          | ({
+              relationTo: 'download';
+              value: string | Download;
+            } | null)
+          | ({
+              relationTo: 'guide';
+              value: string | Guide;
+            } | null);
         url?: string | null;
       };
     };
@@ -1337,19 +1402,45 @@ export interface Settings {
       link?: {
         type?: ('reference' | 'custom') | null;
         newTab?: boolean | null;
-        reference?: {
-          relationTo: 'page';
-          value: string | Page;
-        } | null;
+        reference?:
+          | ({
+              relationTo: 'page';
+              value: string | Page;
+            } | null)
+          | ({
+              relationTo: 'post';
+              value: string | Post;
+            } | null)
+          | ({
+              relationTo: 'download';
+              value: string | Download;
+            } | null)
+          | ({
+              relationTo: 'guide';
+              value: string | Guide;
+            } | null);
         url?: string | null;
       };
       trialLink?: {
         type?: ('reference' | 'custom') | null;
         newTab?: boolean | null;
-        reference?: {
-          relationTo: 'page';
-          value: string | Page;
-        } | null;
+        reference?:
+          | ({
+              relationTo: 'page';
+              value: string | Page;
+            } | null)
+          | ({
+              relationTo: 'post';
+              value: string | Post;
+            } | null)
+          | ({
+              relationTo: 'download';
+              value: string | Download;
+            } | null)
+          | ({
+              relationTo: 'guide';
+              value: string | Guide;
+            } | null);
         url?: string | null;
       };
     };
@@ -1376,19 +1467,45 @@ export interface Settings {
       link?: {
         type?: ('reference' | 'custom') | null;
         newTab?: boolean | null;
-        reference?: {
-          relationTo: 'page';
-          value: string | Page;
-        } | null;
+        reference?:
+          | ({
+              relationTo: 'page';
+              value: string | Page;
+            } | null)
+          | ({
+              relationTo: 'post';
+              value: string | Post;
+            } | null)
+          | ({
+              relationTo: 'download';
+              value: string | Download;
+            } | null)
+          | ({
+              relationTo: 'guide';
+              value: string | Guide;
+            } | null);
         url?: string | null;
       };
       trialLink?: {
         type?: ('reference' | 'custom') | null;
         newTab?: boolean | null;
-        reference?: {
-          relationTo: 'page';
-          value: string | Page;
-        } | null;
+        reference?:
+          | ({
+              relationTo: 'page';
+              value: string | Page;
+            } | null)
+          | ({
+              relationTo: 'post';
+              value: string | Post;
+            } | null)
+          | ({
+              relationTo: 'download';
+              value: string | Download;
+            } | null)
+          | ({
+              relationTo: 'guide';
+              value: string | Guide;
+            } | null);
         url?: string | null;
       };
     };
@@ -1400,10 +1517,23 @@ export interface Settings {
             link: {
               type?: ('reference' | 'custom') | null;
               newTab?: boolean | null;
-              reference?: {
-                relationTo: 'page';
-                value: string | Page;
-              } | null;
+              reference?:
+                | ({
+                    relationTo: 'page';
+                    value: string | Page;
+                  } | null)
+                | ({
+                    relationTo: 'post';
+                    value: string | Post;
+                  } | null)
+                | ({
+                    relationTo: 'download';
+                    value: string | Download;
+                  } | null)
+                | ({
+                    relationTo: 'guide';
+                    value: string | Guide;
+                  } | null);
               url?: string | null;
               label: string;
             };
@@ -1414,10 +1544,23 @@ export interface Settings {
       supportLink?: {
         type?: ('reference' | 'custom') | null;
         newTab?: boolean | null;
-        reference?: {
-          relationTo: 'page';
-          value: string | Page;
-        } | null;
+        reference?:
+          | ({
+              relationTo: 'page';
+              value: string | Page;
+            } | null)
+          | ({
+              relationTo: 'post';
+              value: string | Post;
+            } | null)
+          | ({
+              relationTo: 'download';
+              value: string | Download;
+            } | null)
+          | ({
+              relationTo: 'guide';
+              value: string | Guide;
+            } | null);
         url?: string | null;
         label: string;
       };
@@ -1429,10 +1572,23 @@ export interface Settings {
             link: {
               type?: ('reference' | 'custom') | null;
               newTab?: boolean | null;
-              reference?: {
-                relationTo: 'page';
-                value: string | Page;
-              } | null;
+              reference?:
+                | ({
+                    relationTo: 'page';
+                    value: string | Page;
+                  } | null)
+                | ({
+                    relationTo: 'post';
+                    value: string | Post;
+                  } | null)
+                | ({
+                    relationTo: 'download';
+                    value: string | Download;
+                  } | null)
+                | ({
+                    relationTo: 'guide';
+                    value: string | Guide;
+                  } | null);
               url?: string | null;
               label: string;
             };
@@ -1679,6 +1835,64 @@ export interface SettingsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ButtonBlockProps".
+ */
+export interface ButtonBlockProps {
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'page';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'post';
+                value: string | Post;
+              } | null)
+            | ({
+                relationTo: 'download';
+                value: string | Download;
+              } | null)
+            | ({
+                relationTo: 'guide';
+                value: string | Guide;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered
+           */
+          appearance?: ('default' | 'secondary' | 'tertiary' | 'outline' | 'ghost' | 'link') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  settings?: {
+    marginTop?: {
+      mobile?: number | null;
+      tablet?: number | null;
+      desktop?: number | null;
+    };
+    marginBottom?: {
+      mobile?: number | null;
+      tablet?: number | null;
+      desktop?: number | null;
+    };
+    align?: {
+      mobile?: ('none' | 'left' | 'center' | 'right' | 'fullWidth') | null;
+      tablet?: ('none' | 'left' | 'center' | 'right' | 'fullWidth') | null;
+      desktop?: ('none' | 'left' | 'center' | 'right' | 'fullWidth') | null;
+    };
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'button';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

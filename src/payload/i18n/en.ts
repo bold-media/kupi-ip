@@ -56,5 +56,10 @@ export const en = {
       singular: 'Image',
       plural: 'Images',
     },
+    mobile: 'Mobile',
+    tablet: 'Tablet',
+    desktop: 'Desktop',
+    marginTop: 'Margin Top',
+    marginBottom: 'Margin Bottom',
   },
 }

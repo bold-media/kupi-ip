@@ -37,8 +37,10 @@ export const getLinkProps = (link: LinkProps): ReturnLinkProps => {
           typeof value === 'string'
             ? `/download/${value}`
             : `/download/${(value as Download)?.slug}`
+        break
       case 'guide':
         url = typeof value === 'string' ? `/guide/${value}` : `/guide/${(value as Guide)?.slug}`
+        break
       default:
         url = '/'
     }

@@ -1,7 +1,7 @@
 import type { Field } from 'payload'
 import { deepMerge } from '@/utils/deepMerge'
 
-export type LinkAppearances = 'default' | 'secondary' | 'outline' | 'ghost' | 'link'
+export type LinkAppearances = 'default' | 'secondary' | 'tertiary' | 'outline' | 'ghost' | 'link'
 
 export const appearanceOptions: Record<
   LinkAppearances,
@@ -20,6 +20,13 @@ export const appearanceOptions: Record<
       ru: 'Второстепенная',
     },
     value: 'secondary',
+  },
+  tertiary: {
+    label: {
+      en: 'Tertiary',
+      ru: 'Третичная',
+    },
+    value: 'tertiary',
   },
   outline: {
     label: {
@@ -125,7 +132,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
         en: 'Document to link to',
         ru: 'Ссылка на',
       },
-      relationTo: ['page'],
+      relationTo: ['page', 'post', 'download', 'guide'],
       required: true,
     },
     {
@@ -178,6 +185,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
     let appearanceOptionsToUse = [
       appearanceOptions.default,
       appearanceOptions.secondary,
+      appearanceOptions.tertiary,
       appearanceOptions.outline,
       appearanceOptions.ghost,
       appearanceOptions.link,
