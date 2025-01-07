@@ -23,7 +23,7 @@ export const Carousel = (props: CarouselBlock & ComponentPropsWithRef<'div'>) =>
             images?.map((image) => {
               if (typeof image === 'object' && image?.url) {
                 return (
-                  <CarouselItem key={image?.id}>
+                  <CarouselItem key={image?.id} className="basis-[97%] lg:basis-full">
                     <AspectRatio ratio={16 / 9}>
                       <Image
                         src={image?.url}
