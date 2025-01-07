@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from '@/components/Button'
 import type { ButtonProps } from '@/components/Button'
 import { cn } from '@/utils/cn'
-import { Page } from '@payload-types'
+import { Download, Guide, Page, Post } from '@payload-types'
 import { getLinkProps } from '@/utils/getLinkProps'
 import { Link } from '@/components/Link'
 
@@ -13,8 +13,8 @@ type PayloadLinkType = {
   label?: string
   newTab?: boolean | null
   reference?: {
-    relationTo: 'page'
-    value: string | Page
+    relationTo: 'page' | 'post' | 'download' | 'guide'
+    value: string | Page | Post | Download | Guide
   } | null
   size?: ButtonProps['size'] | null
   type?: 'custom' | 'reference' | null
