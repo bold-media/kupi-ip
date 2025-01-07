@@ -22,11 +22,17 @@ export const typographyConfig = ({ theme }: any) => ({
         marginRight: '0',
       },
       p: {
-        maxWidth: rem(1000),
+        maxWidth: rem(1200),
         marginBottom: '0',
         marginLeft: 'auto',
         marginRight: 'auto',
         color: 'hsl(0 0% 80%)',
+        ':where(p[style*="text-align: center"], p[style*="text-align:center"])': {
+          maxWidth: rem(1000),
+        },
+      },
+      'p[style*="text-align:center"], .text-center p': {
+        maxWidth: rem(1000),
       },
       '.p-full p': {
         maxWidth: rem(1200),

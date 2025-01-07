@@ -37,7 +37,13 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <html lang="ru">
-      <body className={cn(roboto.variable, robotoMono.variable, 'font-sans antialiased dark')}>
+      <body
+        className={cn(
+          roboto.variable,
+          robotoMono.variable,
+          'font-sans antialiased dark overflow-x-hidden',
+        )}
+      >
         <YandexMetrika>
           {draft && (
             <>

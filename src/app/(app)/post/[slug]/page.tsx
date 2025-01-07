@@ -30,7 +30,7 @@ const PostPage = async ({ params }: Props) => {
   const image = typeof cover === 'object' ? cover : null
 
   return (
-    <>
+    <div>
       <div className="container relative mt-header">
         <div className="max-w-[62.5rem] mx-auto">
           <PostBreadcrumbs title={title} />
@@ -55,16 +55,16 @@ const PostPage = async ({ params }: Props) => {
         </div>
       </div>
 
-      <article className="container overflow-x-hidden relative">
+      <article className="container overflow-x-visible relative">
         <RichText
           data={article}
           prose="blog"
           enableGutter={false}
-          className="pb-8 xs:pb-12 sm:pb-20 mx-auto"
+          className="pb-8 xs:pb-12 sm:pb-20 mx-auto !overflow-x-visible"
         />
       </article>
       <RenderBlocks blocks={post?.blocks} />
-    </>
+    </div>
   )
 }
 

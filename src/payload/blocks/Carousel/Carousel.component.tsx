@@ -17,7 +17,7 @@ export const Carousel = (props: CarouselBlock & ComponentPropsWithRef<'div'>) =>
   return (
     <div className={cn('not-prose my-10 !max-w-none !w-full', className)}>
       <BaseCarousel>
-        <CarouselContent className="!overflow-visible ">
+        <CarouselContent>
           {images &&
             Array.isArray(images) &&
             images?.map((image) => {
