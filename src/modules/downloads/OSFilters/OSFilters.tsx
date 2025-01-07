@@ -96,7 +96,6 @@ export const OSFilters = ({ filter, setFilter }: OSFiltersProps) => {
               <Button
                 key={option.value ?? 'all'}
                 size="xs"
-                uppercase={false}
                 variant={filter === option.value ? 'tertiary' : 'outline'}
                 onClick={() => filter !== option.value && setFilter(option?.value)}
               >

@@ -76,7 +76,7 @@ export const DownloadButtons = ({ name, platforms, links, buyLink }: Props) => {
           </NextLink>
         </Button>
         {buyLink && (
-          <Button variant="link" uppercase={false} asChild>
+          <Button variant="link" asChild>
             <Link {...getLinkProps(buyLink)}>Купить ключ для {name}</Link>
           </Button>
         )}

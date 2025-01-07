@@ -16,7 +16,7 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default: [
-          'relative text-primary-foreground shadow',
+          'relative text-primary-foreground shadow uppercase border-none overflow-hidden',
           'before:absolute before:inset-0 before:transition-opacity before:duration-150 before:-z-10',
           'before:bg-gradient-to-b before:brand-gradient-active before:opacity-0',
           'hover:before:opacity-100',
@@ -26,7 +26,7 @@ export const buttonVariants = cva(
           '[&>*:not(.spinner-container)]:z-10 [&>*:not(.spinner-container)]:relative',
         ],
         secondary: [
-          'relative text-foreground shadow',
+          'relative text-foreground shadow uppercase',
           'before:absolute before:inset-0 before:transition-opacity before:duration-150 before:-z-10',
           'before:bg-gradient-to-b before:brand-gradient-secondary-active before:opacity-0',
           'hover:before:opacity-100',
@@ -36,12 +36,12 @@ export const buttonVariants = cva(
           '[&>*:not(.spinner-container)]:z-10 [&>*:not(.spinner-container)]:relative',
         ],
         tertiary: [
-          'bg-brand-tertiary text-brand-tertiary-foreground hover:bg-brand-tertiary-active',
+          'bg-brand-tertiary text-brand-tertiary-foreground hover:bg-brand-tertiary-active uppercase',
         ],
         outline:
-          'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-brand-tertiary underline-offset-4 decoration-[0.5px] underline hover:text-brand-tertiary-active italic font-light !h-auto !px-1',
+          'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground uppercase',
+        ghost: 'hover:bg-accent hover:text-accent-foreground uppercase',
+        link: 'text-brand-tertiary underline-offset-4 decoration-[0.5px] decoration-inherit underline hover:text-brand-tertiary-active italic font-light !h-auto !px-1',
       },
       size: {
         xs: 'text-md h-[1.75rem] px-4 font-regular',
@@ -57,16 +57,11 @@ export const buttonVariants = cva(
         md: 'rounded-md',
         lg: 'rounded-lg',
       },
-      uppercase: {
-        true: 'uppercase',
-        false: '',
-      },
     },
     defaultVariants: {
       variant: 'default',
       size: 'default',
       radius: 'md',
-      uppercase: true,
     },
   },
 )
@@ -107,7 +102,6 @@ export const Button = ({
   className,
   variant,
   size,
-  uppercase,
   children,
   asChild = false,
   disabled,
@@ -118,7 +112,7 @@ export const Button = ({
 
   return (
     <Comp
-      className={cn(buttonVariants({ variant, uppercase, size, className }), {
+      className={cn(buttonVariants({ variant, size, className }), {
         'disabled:pointer-events-none text-transparent relative select-none': loading,
         'disabled:pointer-events-none disabled:opacity-50': disabled && !loading,
       })}

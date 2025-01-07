@@ -47,6 +47,9 @@ const config = {
       spacing: {
         header: 'var(--header-height)',
       },
+      lineHeight: {
+        normal: 'normal',
+      },
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],

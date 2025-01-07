@@ -43,7 +43,7 @@ export const TariffCard = ({
         {trialLink && (
           <Button
             variant="link"
-            className="text-slate-50/80 hover:text-slate-50/100 self-center mt-3"
+            className="text-slate-50/80 hover:text-slate-50/100 self-center mt-3 decoration-inherit"
             asChild
           >
             <NextLink {...getLinkProps(trialLink)}>Протестировать бесплатно</NextLink>

@@ -50,7 +50,6 @@ export const PostCategories = ({ categories }: PostCategoriesProps) => {
         <div className={`flex gap-2 ${!isScrollable ? 'md:justify-center md:flex-wrap' : ''}`}>
           <Button
             size="xs"
-            uppercase={false}
             variant={category === '' ? 'tertiary' : 'outline'}
             onClick={() => (category !== '' ? setQuery({ category: '', page: 1 }) : undefined)}
             className="shrink-0"
@@ -69,7 +68,6 @@ export const PostCategories = ({ categories }: PostCategoriesProps) => {
                     : undefined
                 }
                 size="xs"
-                uppercase={false}
                 className="shrink-0"
               >
                 {item?.name}

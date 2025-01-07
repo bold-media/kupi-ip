@@ -30,7 +30,7 @@ export const StepCard = ({
     >
       <div className="flex justify-between">
         <h3
-          className={cn('text-2xl md:text-3xl font-light p-5 leading-normal', {
+          className={cn('text-2xl italic md:text-3xl font-light p-5 leading-normal', {
             'text-slate-900': highlighted === false,
           })}
         >

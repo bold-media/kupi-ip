@@ -64,12 +64,6 @@ export const typographyConfig = ({ theme }: any) => ({
       'p:not(:last-child)': {
         marginBottom: rem(16),
       },
-      'p br': {
-        display: 'block',
-        marginBottom: rem(8),
-        content: '""',
-        height: rem(8),
-      },
       'h1, h2, h3, h4, h5, h6': {
         fontWeight: 300,
         fontStyle: 'italic',

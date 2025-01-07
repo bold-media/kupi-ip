@@ -28,7 +28,9 @@ export const AccordionTrigger = ({
       )}
       {...props}
     >
-      <h3 className="font-light text-lg md:text-xl lg:text-2xl">{children}</h3>
+      <h3 className="font-light text-[1.5rem] sm:text-[1.688rem] lg:text-[1.875rem] leading-normal">
+        {children}
+      </h3>
 
       <ArrowUpRight className="h-6 w-6 stroke-[1.5] shrink-0 text-slate-100 transition-transform duration-200" />
     </AccordionPrimitive.Trigger>
