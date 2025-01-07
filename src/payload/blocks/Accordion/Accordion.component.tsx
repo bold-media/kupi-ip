@@ -92,7 +92,7 @@ export const Accordion = (props: AccordionBlock) => {
                       <RichText
                         data={item?.content}
                         enableGutter={false}
-                        className="text-slate-100 text-left"
+                        className="text-slate-100 text-left max-w-[71.875rem] ml-0"
                       />
                     </div>
                   </AccordionContent>

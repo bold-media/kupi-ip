@@ -138,7 +138,8 @@ export interface Page {
       };
       [k: string]: unknown;
     } | null;
-    settings: {
+    settings?: {
+      paddingTop: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
       paddingBottom: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     };
   };
@@ -371,6 +372,7 @@ export interface FeaturesBlock {
     paddingBottom: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     type: 'none' | 'darkBlue' | 'blue' | 'flare' | 'doubleFlare';
   };
+  variant?: ('sphere' | 'grid') | null;
   prefix?: {
     root: {
       type: string;
@@ -877,6 +879,7 @@ export interface PageSelect<T extends boolean = true> {
         settings?:
           | T
           | {
+              paddingTop?: T;
               paddingBottom?: T;
             };
       };
@@ -1022,6 +1025,7 @@ export interface FeaturesBlockSelect<T extends boolean = true> {
         paddingBottom?: T;
         type?: T;
       };
+  variant?: T;
   prefix?: T;
   features?:
     | T

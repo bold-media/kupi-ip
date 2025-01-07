@@ -37,7 +37,7 @@ const PostPage = async ({ params }: Props) => {
         </div>
 
         {image && image?.url && image?.height && image?.width && (
-          <AspectRatio className="relative w-full mb-[rem-convert(60px)] h-full" ratio={16 / 9}>
+          <AspectRatio className="relative w-full mb-[3.75rem] h-full" ratio={16 / 9}>
             <Image
               src={image?.url}
               alt={image?.alt}
@@ -47,10 +47,7 @@ const PostPage = async ({ params }: Props) => {
             />
           </AspectRatio>
         )}
-        <div
-          // className="prose prose-xs sm:prose-sm md:prose-md lg:prose-lg dark:prose-invert mt-6 xs:mt-8 sm:mt-12 italic mx-auto max-w-[62.5rem] px-4 md:px-6"
-          className="prose prose-slate dark:prose-invert prose-blog-mobile sm:prose-blog-tablet lg:prose-blog-desktop max-w-[62.5rem] mx-auto mt-[rem-convert(60px)]"
-        >
+        <div className="prose prose-slate dark:prose-invert prose-blog-mobile sm:prose-blog-tablet lg:prose-blog-desktop max-w-[62.5rem] mx-auto mt-[3.75rem]">
           <h1>{title}</h1>
         </div>
       </div>

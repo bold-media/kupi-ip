@@ -5,48 +5,11 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/Carousel'
 import { iconMap } from '@/modules/common/iconMap'
 import { RichText } from '@/modules/common/RichText'
 import { cn } from '@/utils/cn'
+import { FeaturesBlock } from '@payload-types'
 import { useMediaQuery } from '@react-hookz/web'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
-export const FeaturesCarousel = ({
-  features,
-}: {
-  features:
-    | {
-        icon?:
-          | (
-              | 'globe'
-              | 'rocketship'
-              | 'signal'
-              | 'smiley'
-              | 'shield'
-              | 'battery'
-              | 'piggyBank'
-              | 'lightning'
-              | 'documentShield'
-            )
-          | null
-        text?: string | null
-        id?: string | null
-        content?: {
-          root: {
-            type: string
-            children: {
-              type: string
-              version: number
-              [k: string]: unknown
-            }[]
-            direction: ('ltr' | 'rtl') | null
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
-            indent: number
-            version: number
-          }
-          [k: string]: unknown
-        } | null
-      }[]
-    | null
-    | undefined
-}) => {
+export const FeaturesCarousel = ({ features }: { features: FeaturesBlock['features'] }) => {
   const [mounted, setMounted] = useState(false)
   const alignStart = useMediaQuery('(min-width: 80em)')
   const [selectedIndex, setSelectedIndex] = useState(0)

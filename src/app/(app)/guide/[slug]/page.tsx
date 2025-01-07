@@ -32,7 +32,7 @@ const GuidePage = async ({ params }: Props) => {
     <>
       <div className="container relative mt-header pt-20 lg:pt-[9.25rem]">
         {image && image?.url && image?.height && image?.width && (
-          <AspectRatio className="relative w-full mb-[rem-convert(60px)]" ratio={16 / 9}>
+          <AspectRatio className="relative w-full mb-[3.75rem]" ratio={16 / 9}>
             <Image
               src={image?.url}
               alt={image?.alt}

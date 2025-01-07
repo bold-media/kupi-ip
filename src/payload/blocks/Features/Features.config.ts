@@ -21,6 +21,34 @@ export const Features: Block = {
   fields: [
     background(),
     {
+      name: 'variant',
+      type: 'select',
+      label: {
+        en: 'Variant',
+        ru: 'Вариант',
+      },
+      defaultValue: 'sphere',
+      admin: {
+        isClearable: false,
+      },
+      options: [
+        {
+          label: {
+            en: 'Sphere',
+            ru: 'Сфера',
+          },
+          value: 'sphere',
+        },
+        {
+          label: {
+            en: 'Grid',
+            ru: 'Сетка',
+          },
+          value: 'grid',
+        },
+      ],
+    },
+    {
       name: 'prefix',
       label: {
         en: 'Prefix',

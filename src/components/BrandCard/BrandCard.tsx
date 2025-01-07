@@ -3,7 +3,7 @@ import { Slot } from '@radix-ui/react-slot'
 import { cva, VariantProps } from 'class-variance-authority'
 import { ComponentPropsWithRef } from 'react'
 
-const borderGlowVariants = cva([], {
+const borderGlowVariants = cva(['w-full h-full'], {
   variants: {
     variant: {
       default: [

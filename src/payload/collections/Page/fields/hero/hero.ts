@@ -61,17 +61,35 @@ export const hero: Field = {
         en: en.common.setting.plural,
         ru: ru.common.setting.plural,
       },
+      admin: {
+        condition: (_, siblingData) => siblingData?.type === 'standard',
+      },
       fields: [
-        selectSize({
-          overrides: {
-            name: 'paddingBottom',
-            label: {
-              en: 'Padding Bottom',
-              ru: 'Отступ снизу',
-            },
-            admin: { width: '50%' },
-          },
-        }),
+        {
+          type: 'row',
+          fields: [
+            selectSize({
+              overrides: {
+                name: 'paddingTop',
+                label: {
+                  en: 'Padding Top',
+                  ru: 'Отступ сверху',
+                },
+                admin: { width: '50%' },
+              },
+            }),
+            selectSize({
+              overrides: {
+                name: 'paddingBottom',
+                label: {
+                  en: 'Padding Bottom',
+                  ru: 'Отступ снизу',
+                },
+                admin: { width: '50%' },
+              },
+            }),
+          ],
+        },
       ],
     },
   ],

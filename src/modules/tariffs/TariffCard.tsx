@@ -27,9 +27,7 @@ export const TariffCard = ({
         <h3 className="text-3xl md:text-4xl font-light italic text-center leading-none">{term}</h3>
         <p className="text-sm font-bold text-center leading-none">{benefit}</p>
       </div>
-      <p className="text-xl sm:text-[rem-convert(24px)]  lg:text-[rem-convert(28px)] font-light text-center ">
-        {limit}
-      </p>
+      <p className="text-xl sm:text-[1.5rem]  lg:text-[1.75rem] font-light text-center ">{limit}</p>
       <RichText
         data={description}
         enableGutter={false}

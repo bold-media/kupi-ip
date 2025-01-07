@@ -46,8 +46,7 @@ export const buttonVariants = cva(
       size: {
         xs: 'text-md h-[1.75rem] px-4 font-regular',
         sm: 'h-8 px-3 text-xs xs:h-10 xs:px-4 text-sm',
-        default:
-          'h-[rem-convert(43px)] px-[rem-convert(36px)] lg:h-[rem-convert(53px)] lg:px-[rem-convert(36px)] text-base lg:text-lg',
+        default: 'h-[2.688rem] px-9 lg:h-[3.313rem] lg:px-9 text-base lg:text-lg',
         lg: 'h-11 px-5 xs:h-14 xs:px-8',
         xl: 'h-11 px-10',
         icon: 'h-9 w-9',

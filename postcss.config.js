@@ -1,7 +1,7 @@
 export default {
   plugins: {
+    'postcss-rem': {},
     autoprefixer: {},
     tailwindcss: {},
-    'postcss-rem': {},
   },
 }
