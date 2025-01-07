@@ -1,10 +1,12 @@
 import { cn } from '@/utils/cn'
 import React, { ComponentPropsWithRef } from 'react'
 import classes from './StepCard.module.css'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import { RichText } from '@/modules/common/RichText'
 
 interface Props extends Omit<ComponentPropsWithRef<'div'>, 'title'> {
   title?: string | null | undefined
-  description?: string | null | undefined
+  description?: SerializedEditorState | null | undefined
   number?: number
   highlighted?: boolean
 }
@@ -24,6 +26,7 @@ export const StepCard = ({
         highlighted
           ? 'bg-gradient-radial from-[#1010BC] to-[#2C2CF7]'
           : 'bg-gradient-radial from-[#A7BDF6] to-[#C8D7FF]',
+        { light: highlighted === false },
         className,
       )}
       {...props}
@@ -31,7 +34,7 @@ export const StepCard = ({
       <div className="flex justify-between">
         <h3
           className={cn('text-2xl italic md:text-3xl font-light p-5 leading-normal', {
-            'text-slate-900': highlighted === false,
+            'text-[#000013]': highlighted === false,
           })}
         >
           {title}
@@ -45,9 +48,12 @@ export const StepCard = ({
           </div>
         </div>
       </div>
-      <p className={cn('p-5 leading-[1.3]', { 'text-slate-900': highlighted === false })}>
-        {description}
-      </p>
+      <RichText
+        data={description}
+        enableGutter={false}
+        center={false}
+        className={cn('p-5 prose-p:font-normal')}
+      />
     </div>
   )
 }

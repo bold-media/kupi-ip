@@ -10,15 +10,19 @@ export const richTextVariants = cva('', {
       empty: '',
     },
     prose: {
-      standard:
-        'prose prose-slate dark:prose-invert prose-mobile sm:prose-tablet lg:prose-desktop mx-auto',
+      standard: 'prose prose-slate dark:prose-invert prose-mobile sm:prose-tablet lg:prose-desktop',
       blog: 'prose prose-slate dark:prose-invert prose-blog-mobile sm:prose-blog-tablet lg:prose-blog-desktop mx-auto',
+      false: '',
+    },
+    center: {
+      true: 'mx-auto',
       false: '',
     },
   },
   defaultVariants: {
     enableGutter: true,
     prose: 'standard',
+    center: true,
   },
 })
 

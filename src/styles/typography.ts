@@ -27,6 +27,9 @@ export const typographyConfig = ({ theme }: any) => ({
         marginLeft: 'auto',
         marginRight: 'auto',
         color: 'hsl(0 0% 80%)',
+        '.light &': {
+          color: 'hsl(0 0% 20%)',
+        },
         ':where(p[style*="text-align: center"], p[style*="text-align:center"])': {
           maxWidth: rem(1000),
         },
@@ -39,24 +42,45 @@ export const typographyConfig = ({ theme }: any) => ({
       },
       ol: {
         color: 'hsl(0 0% 80%)',
+        '.light &': {
+          color: 'hsl(0 0% 20%)',
+        },
         '& ::marker': {
           color: 'hsl(0 0% 80%)',
+          '.light &': {
+            color: 'hsl(0 0% 20%)',
+          },
         },
       },
       ul: {
         color: 'hsl(0 0% 80%)',
+        '.light &': {
+          color: 'hsl(0 0% 20%)',
+        },
         '& ::marker': {
           color: 'hsl(0 0% 80%)',
+          '.light &': {
+            color: 'hsl(0 0% 20%)',
+          },
         },
       },
       li: {
         color: 'hsl(0 0% 80%)',
+        '.light &': {
+          color: 'hsl(0 0% 20%)',
+        },
         '&::marker': {
           color: 'hsl(0 0% 80%)',
+          '.light &': {
+            color: 'hsl(0 0% 20%)',
+          },
         },
       },
       strong: {
         color: 'hsl(0 0% 80%)',
+        '.light &': {
+          color: 'hsl(0 0% 20%)',
+        },
       },
       'p + p': {
         marginTop: rem(16),
