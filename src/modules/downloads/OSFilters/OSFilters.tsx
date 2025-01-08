@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useResizeObserver } from '@react-hookz/web'
 import { Button } from '@/components/Button'
+import { cn } from '@/utils/cn'
 
 interface OSFiltersProps {
   filter: '' | OperatingSystem
@@ -97,6 +98,7 @@ export const OSFilters = ({ filter, setFilter }: OSFiltersProps) => {
                 key={option.value ?? 'all'}
                 size="xs"
                 variant={filter === option.value ? 'tertiary' : 'outline'}
+                className={cn(filter === option.value && 'border border-transparent')}
                 onClick={() => filter !== option.value && setFilter(option?.value)}
               >
                 {option.label}

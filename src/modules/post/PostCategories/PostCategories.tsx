@@ -6,6 +6,7 @@ import { postParsers } from '@/app/(app)/blog/searchParams'
 import { Button } from '@/components/Button'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useResizeObserver } from '@react-hookz/web'
+import { cn } from '@/utils/cn'
 
 interface PostCategoriesProps {
   categories: Pick<Category, 'id' | 'name' | 'slug'>[]
@@ -52,7 +53,7 @@ export const PostCategories = ({ categories }: PostCategoriesProps) => {
             size="xs"
             variant={category === '' ? 'tertiary' : 'outline'}
             onClick={() => (category !== '' ? setQuery({ category: '', page: 1 }) : undefined)}
-            className="shrink-0"
+            className={cn('shrink-0', category === '' && 'border border-transparent')}
           >
             Все
           </Button>
@@ -68,7 +69,7 @@ export const PostCategories = ({ categories }: PostCategoriesProps) => {
                     : undefined
                 }
                 size="xs"
-                className="shrink-0"
+                className={cn('shrink-0', category === '' && 'border border-transparent')}
               >
                 {item?.name}
               </Button>

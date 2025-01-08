@@ -10,7 +10,7 @@ export const buttonVariants = cva(
     'text-sm font-regular transition-colors active-class',
     'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
     '[&_svg]:pointer-events-none [&_svg]:shrink-0',
-    'shrink-0 border border-transparent',
+    'shrink-0',
   ],
   {
     variants: {
