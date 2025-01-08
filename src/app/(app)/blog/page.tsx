@@ -25,7 +25,7 @@ const AllPostsPage = async ({ searchParams }: AllPostsPageProps) => {
   })
 
   return (
-    <>
+    <div className="overflow-x-hidden">
       <div className="container mt-header py-20 lg:py-[9.25rem] min-h-svh">
         <h1 className="italic font-light lowercase text-center leading-[1] mb-8 text-[2rem] sm:text-[3.25rem] lg:text-[4.5625rem]">
           Статьи
@@ -46,7 +46,7 @@ const AllPostsPage = async ({ searchParams }: AllPostsPageProps) => {
           />
         )}
       </div>
-    </>
+    </div>
   )
 }
 

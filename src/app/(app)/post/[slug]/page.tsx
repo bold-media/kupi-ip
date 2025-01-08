@@ -30,7 +30,7 @@ const PostPage = async ({ params }: Props) => {
   const image = typeof cover === 'object' ? cover : null
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <div className="container relative mt-header">
         <div className="max-w-[62.5rem] mx-auto">
           <PostBreadcrumbs title={title} />
@@ -47,7 +47,7 @@ const PostPage = async ({ params }: Props) => {
             />
           </AspectRatio>
         )}
-        <div className="prose prose-slate dark:prose-invert prose-blog-mobile sm:prose-blog-tablet lg:prose-blog-desktop max-w-[62.5rem] mx-auto mt-[3.75rem]">
+        <div className="prose prose-slate dark:prose-invert prose-blog-mobile sm:prose-blog-tablet lg:prose-blog-desktop max-w-[62.5rem] mx-auto pt-[3.75rem]">
           <h1>{title}</h1>
         </div>
       </div>

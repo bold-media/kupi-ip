@@ -41,7 +41,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
         className={cn(
           roboto.variable,
           robotoMono.variable,
-          'font-sans antialiased dark overflow-x-hidden',
+          'font-sans antialiased dark relative overflow-x-hidden',
         )}
       >
         <YandexMetrika>

@@ -26,7 +26,7 @@ const Pages = async ({ params }: Props) => {
   }
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Hero {...page.hero} />
       <RenderBlocks blocks={page.blocks} />
     </div>

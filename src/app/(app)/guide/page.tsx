@@ -22,7 +22,7 @@ const AllGuidesPage = async ({ searchParams }: AllGuidesPageProps) => {
 
   return (
     <>
-      <div className="container py-header min-h-svh">
+      <div className="container py-header min-h-svh overflow-x-hidden">
         <div className="text-center prose prose-md md:prose-lg prose-slate dark:prose-invert max-w-none mt-12 mb-10 sm:mt-20 sm:mb-16 md:mt-24 md:mb-20">
           <h1>Инструкции</h1>
         </div>

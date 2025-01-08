@@ -23,7 +23,7 @@ const DownloadPage = async ({ params }: Props) => {
 
   const { name, intro, icon, content, platforms, links, buyLink } = download
   return (
-    <>
+    <div className="overflow-x-hidden">
       <div className="container relative mt-header py-20 lg:py-[9.25rem]">
         <div className="flex flex-col gap-10 md:gap-20">
           <RichText
@@ -47,7 +47,7 @@ const DownloadPage = async ({ params }: Props) => {
           <DownloadButtons name={name} platforms={platforms} links={links} buyLink={buyLink} />
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
