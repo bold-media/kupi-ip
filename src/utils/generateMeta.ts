@@ -70,5 +70,18 @@ export const generateMeta = async (args: {
           },
         }
       : undefined,
+    manifest: '/site.webmanifest',
+    icons: {
+      icon: [
+        { rel: 'icon', url: '/favicon.ico' },
+        { rel: 'icon', url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+        { rel: 'icon', url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      ],
+      apple: [{ rel: 'apple-touch-icon', url: '/apple-touch-icon.png' }],
+      other: [
+        { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+        { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+      ],
+    },
   }
 }
